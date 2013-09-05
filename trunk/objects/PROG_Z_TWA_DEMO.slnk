@@ -15,13 +15,14 @@
 
 *--------------------------------------------------------------------*
 *
-* Twibap: The ABAP Twitter API
-* Copyright (C) 2010 SAP Developer Network members
+* Twibap
+* The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer
 *
-* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+* Project home: https://github.com/se38/twibap
 *
-* Published under the Terms of use of SAP Code Exchange:
-* http://www.sdn.sap.com/irj/sdn/code-exchange
+* Published under Apache License, Version 2.0
+* http://www.apache.org/licenses/LICENSE-2.0.html
 *
 *--------------------------------------------------------------------*
 

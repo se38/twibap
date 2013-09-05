@@ -1,67 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CLAS CLSNAME="ZCL_TWA_DM_RES" VERSION="1" LANGU="E" DESCRIPT="Twitter API Direct Messages" UUID="000C293B231B1EE28D94CFFBD76911ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
- <publicSection>*----------------------------------------------------------------------*
-*       CLASS ZCL_TWA_DM_RES DEFINITION
-*----------------------------------------------------------------------*
-*
-*----------------------------------------------------------------------*
-CLASS zcl_twa_dm_res DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
-
-*&quot;* public components of class ZCL_TWA_DM_RES
-*&quot;* do not include other source files here!!!
-  PUBLIC SECTION.
-
-    METHODS constructor .
-    METHODS direct_messages
-      IMPORTING
-        !since_id TYPE string OPTIONAL
-        !max_id TYPE string OPTIONAL
-        !count TYPE string OPTIONAL
-        !page TYPE string OPTIONAL
-        !include_entities TYPE string OPTIONAL
-      RETURNING
-        value(dms) TYPE zcl_twa_dm_t
-      RAISING
-        zcx_oauth_error .
-    METHODS sent
-      IMPORTING
-        !since_id TYPE string OPTIONAL
-        !max_id TYPE string OPTIONAL
-        !count TYPE string OPTIONAL
-        !page TYPE string OPTIONAL
-        !include_entities TYPE string OPTIONAL
-      RETURNING
-        value(dms) TYPE zcl_twa_dm_t
-      RAISING
-        zcx_oauth_error .
-    METHODS new
-      IMPORTING
-        !screen_name TYPE string OPTIONAL
-        !user_id TYPE string OPTIONAL
-        !text TYPE string
-        !include_entities TYPE string OPTIONAL
-      RETURNING
-        value(dm) TYPE REF TO zcl_twa_dm
-      RAISING
-        zcx_oauth_error .
-    METHODS destroy
-      IMPORTING
-        !id TYPE string
-      RAISING
-        zcx_oauth_error .
-*&quot;* protected components of class ZCL_TWA_DIRECT_MES
-*&quot;* do not include other source files here!!!</publicSection>
- <protectedSection>PROTECTED SECTION.
-*&quot;* private components of class ZCL_TWA_DIRECT_MES
-*&quot;* do not include other source files here!!!</protectedSection>
- <privateSection>PRIVATE SECTION.
-
-    DATA oauth TYPE REF TO zcl_oauth .
-
-    CLASS-METHODS copyright .</privateSection>
+<CLAS CLSNAME="ZCL_TWA_DM_RES" VERSION="1" LANGU="E" DESCRIPT="Twitter API Direct Messages" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
  <localImplementation>*&quot;* local class implementation for public class
 *&quot;* use this source file for the implementation part of
 *&quot;* local helper classes</localImplementation>
@@ -83,17 +21,18 @@ CLASS zcl_twa_dm_res DEFINITION
 
 *--------------------------------------------------------------------*
 *
-* Twibap: The ABAP Twitter API
-* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+* Twibap
+* The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer
 *
-* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+* Project home: https://github.com/se38/twibap
 *
-* Published under the Terms of use of SAP Code Exchange:
-* http://www.sdn.sap.com/irj/sdn/code-exchange
+* Published under Apache License, Version 2.0
+* http://www.apache.org/licenses/LICENSE-2.0.html
 *
 *--------------------------------------------------------------------*
 
-  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ENDMETHOD.                    &quot;COPYRIGHT</source>
  </method>
  <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DESTROY" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/post/direct_messages/destroy/:" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
   <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DESTROY" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>

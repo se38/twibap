@@ -1,105 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CLAS CLSNAME="ZCL_TWA_DM" VERSION="1" LANGU="E" DESCRIPT="Twitter Direct Message" UUID="000C293B231B1EE28D94CFFBD769D1ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
- <publicSection>*----------------------------------------------------------------------*
-*       CLASS ZCL_TWA_DM  DEFINITIO
-*----------------------------------------------------------------------*
-*
-*----------------------------------------------------------------------*
-CLASS zcl_twa_dm DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
-
-*&quot;* public components of class ZCL_TWA_DM
-*&quot;* do not include other source files here!!!
-  PUBLIC SECTION.
-
-    METHODS constructor
-      IMPORTING
-        !created_at TYPE string OPTIONAL
-        !sender_screen_name TYPE string OPTIONAL
-        !sender TYPE REF TO zcl_twa_user OPTIONAL
-        !text TYPE string OPTIONAL
-        !recipient_screen_name TYPE string OPTIONAL
-        !id TYPE string OPTIONAL
-        !recipient TYPE REF TO zcl_twa_user OPTIONAL
-        !recipient_id TYPE string OPTIONAL
-        !sender_id TYPE string OPTIONAL .
-    CLASS-METHODS newfromjson
-      IMPORTING
-        !json TYPE string
-      RETURNING
-        value(dm) TYPE REF TO zcl_twa_dm .
-    METHODS getcreatedat
-      RETURNING
-        value(created_at) TYPE string.
-    METHODS setcreatedat
-    IMPORTING
-      !created_at TYPE string .
-    METHODS getsenderscreenname
-  RETURNING
-    value(sender_screen_name) TYPE string.
-    METHODS setsenderscreenname
-    IMPORTING
-      !sender_screen_name TYPE string .
-    METHODS getsender
-  RETURNING
-    value(sender) TYPE REF TO zcl_twa_user.
-    METHODS setsender
-    IMPORTING
-      !sender TYPE REF TO zcl_twa_user.
-    METHODS gettext
-  RETURNING
-    value(text) TYPE string.
-    METHODS settext
-    IMPORTING
-      !text TYPE string .
-    METHODS getrecipientscreenname
-  RETURNING
-    value(recipient_screen_name) TYPE string.
-    METHODS setrecipientscreenname
-    IMPORTING
-      !recipient_screen_name TYPE string .
-    METHODS getid
-  RETURNING
-    value(id) TYPE string.
-    METHODS setid
-    IMPORTING
-      !id TYPE string .
-    METHODS getrecipient
-  RETURNING
-    value(recipient) TYPE REF TO zcl_twa_user.
-    METHODS setrecipient
-    IMPORTING
-      !recipient TYPE REF TO zcl_twa_user.
-    METHODS getrecipientid
-  RETURNING
-    value(recipient_id) TYPE string.
-    METHODS setrecipientid
-    IMPORTING
-      !recipient_id TYPE string .
-    METHODS getsenderid
-  RETURNING
-    value(sender_id) TYPE string.
-    METHODS setsenderid
-    IMPORTING
-      !sender_id TYPE string .</publicSection>
- <protectedSection>PROTECTED SECTION.
-*&quot;* private components of class ZCL_TWA_DM
-*&quot;* do not include other source files here!!!</protectedSection>
- <privateSection>PRIVATE SECTION.
-
-    DATA created_at TYPE string .
-    DATA sender_screen_name TYPE string .
-    DATA sender TYPE REF TO zcl_twa_user .
-    DATA text TYPE string .
-    DATA recipient_screen_name TYPE string .
-    DATA id TYPE string .
-    DATA recipient TYPE REF TO zcl_twa_user .
-    DATA recipient_id TYPE string .
-    DATA sender_id TYPE string .
-
-    CLASS-METHODS copyright .</privateSection>
+<CLAS CLSNAME="ZCL_TWA_DM" VERSION="1" LANGU="E" DESCRIPT="Twitter Direct Message" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
  <localImplementation>*&quot;* local class implementation for public class
 *&quot;* use this source file for the implementation part of
 *&quot;* local helper classes</localImplementation>
@@ -146,17 +46,18 @@ CLASS zcl_twa_dm DEFINITION
 
 *--------------------------------------------------------------------*
 *
-* Twibap: The ABAP Twitter API
-* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+* Twibap
+* The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer
 *
-* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+* Project home: https://github.com/se38/twibap
 *
-* Published under the Terms of use of SAP Code Exchange:
-* http://www.sdn.sap.com/irj/sdn/code-exchange
+* Published under Apache License, Version 2.0
+* http://www.apache.org/licenses/LICENSE-2.0.html
 *
 *--------------------------------------------------------------------*
 
-  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ENDMETHOD.                    &quot;COPYRIGHT</source>
  </method>
  <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETCREATEDAT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
   <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETCREATEDAT" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>

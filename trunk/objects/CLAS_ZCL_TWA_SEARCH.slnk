@@ -1,107 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CLAS CLSNAME="ZCL_TWA_SEARCH" VERSION="1" LANGU="E" DESCRIPT="Twitter Search result" UUID="000C293B231B1EE28D94CFFBD76851ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
- <publicSection>*----------------------------------------------------------------------*
-*       CLASS ZCL_TWA_SEARCH DEFINITION
-*----------------------------------------------------------------------*
-*
-*----------------------------------------------------------------------*
-CLASS zcl_twa_search DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
-
-*&quot;* public components of class ZCL_TWA_SEARCH
-*&quot;* do not include other source files here!!!
-  PUBLIC SECTION.
-
-    METHODS constructor
-      IMPORTING
-        !max_id TYPE string OPTIONAL
-        !since_id TYPE string OPTIONAL
-        !refresh_url TYPE string OPTIONAL
-        !next_page TYPE string OPTIONAL
-        !results_per_page TYPE i OPTIONAL
-        !page TYPE i OPTIONAL
-        !completed_in TYPE string OPTIONAL
-        !query TYPE string OPTIONAL
-        !results TYPE zcl_twa_status_t OPTIONAL .
-    CLASS-METHODS newfromjson
-      IMPORTING
-        !json TYPE string
-      RETURNING
-        value(search) TYPE REF TO zcl_twa_search .
-    METHODS getmaxid
-      RETURNING
-        value(max_id) TYPE string .
-    METHODS getsinceid
-      RETURNING
-        value(since_id) TYPE string .
-    METHODS getrefreshurl
-      RETURNING
-        value(refresh_url) TYPE string .
-    METHODS getresultsperpage
-      RETURNING
-        value(results_per_page) TYPE i .
-    METHODS getpage
-      RETURNING
-        value(page) TYPE i .
-    METHODS getcompletedin
-      RETURNING
-        value(completed_in) TYPE string .
-    METHODS getquery
-      RETURNING
-        value(query) TYPE string .
-    METHODS getresults
-      RETURNING
-        value(results) TYPE zcl_twa_status_t .
-    METHODS setmaxid
-      IMPORTING
-        !max_id TYPE string .
-    METHODS setsinceid
-      IMPORTING
-        !since_id TYPE string .
-    METHODS setrefreshurl
-      IMPORTING
-        !refresh_url TYPE string .
-    METHODS setresultsperpage
-      IMPORTING
-        !results_per_page TYPE i .
-    METHODS setpage
-      IMPORTING
-        !page TYPE i .
-    METHODS setcompletedin
-      IMPORTING
-        !completed_in TYPE string .
-    METHODS setquery
-      IMPORTING
-        !query TYPE string .
-    METHODS setresults
-      IMPORTING
-        !results TYPE zcl_twa_status_t .
-    METHODS setnextpage
-      IMPORTING
-        !next_page TYPE string .
-    METHODS getnextpage
-      RETURNING
-        value(next_page) TYPE string .
-*&quot;* protected components of class ZCL_TWA_SEARCH
-*&quot;* do not include other source files here!!!</publicSection>
- <protectedSection>PROTECTED SECTION.
-*&quot;* private components of class ZCL_TWA_SEARCH
-*&quot;* do not include other source files here!!!</protectedSection>
- <privateSection>PRIVATE SECTION.
-
-    DATA max_id TYPE string .
-    DATA since_id TYPE string .
-    DATA refresh_url TYPE string .
-    DATA next_page TYPE string .
-    DATA results_per_page TYPE i .
-    DATA page TYPE i .
-    DATA completed_in TYPE string .
-    DATA query TYPE string .
-    DATA results TYPE zcl_twa_status_t .
-
-    CLASS-METHODS copyright .</privateSection>
+<CLAS CLSNAME="ZCL_TWA_SEARCH" VERSION="1" LANGU="E" DESCRIPT="Twitter Search result" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
  <localImplementation>*&quot;* local class implementation for public class
 *&quot;* use this source file for the implementation part of
 *&quot;* local helper classes</localImplementation>
@@ -148,17 +46,18 @@ CLASS zcl_twa_search DEFINITION
 
 *--------------------------------------------------------------------*
 *
-* Twibap: The ABAP Twitter API
-* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+* Twibap
+* The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer
 *
-* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+* Project home: https://github.com/se38/twibap
 *
-* Published under the Terms of use of SAP Code Exchange:
-* http://www.sdn.sap.com/irj/sdn/code-exchange
+* Published under Apache License, Version 2.0
+* http://www.apache.org/licenses/LICENSE-2.0.html
 *
 *--------------------------------------------------------------------*
 
-  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ENDMETHOD.                    &quot;COPYRIGHT</source>
  </method>
  <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETCOMPLETEDIN" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
   <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETCOMPLETEDIN" SCONAME="COMPLETED_IN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>

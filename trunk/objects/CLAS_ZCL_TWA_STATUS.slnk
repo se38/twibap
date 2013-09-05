@@ -1,147 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CLAS CLSNAME="ZCL_TWA_STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" UUID="000C293B231B1EE28D94CFFBD766D1ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
- <publicSection>*----------------------------------------------------------------------*
-*       CLASS ZCL_TWA_STATUS DEFINITION
-*----------------------------------------------------------------------*
-*
-*----------------------------------------------------------------------*
-CLASS zcl_twa_status DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
-
-*&quot;* public components of class ZCL_TWA_STATUS
-*&quot;* do not include other source files here!!!
-  PUBLIC SECTION.
-
-    METHODS constructor
-      IMPORTING
-        !coordinates TYPE string OPTIONAL
-        !truncated TYPE string OPTIONAL
-        !contributors TYPE string OPTIONAL
-        !source TYPE string OPTIONAL
-        !created_at TYPE string OPTIONAL
-        !geo TYPE string OPTIONAL
-        !in_reply_to_screen_name TYPE string OPTIONAL
-        !favorited TYPE string OPTIONAL
-        !in_reply_to_status_id TYPE string OPTIONAL
-        !place TYPE string OPTIONAL
-        !id TYPE string OPTIONAL
-        !in_reply_to_user_id TYPE string OPTIONAL
-        !text TYPE string OPTIONAL
-        !user TYPE REF TO zcl_twa_user OPTIONAL .
-    CLASS-METHODS newfromjson
-      IMPORTING
-        !json TYPE string
-      RETURNING
-        value(status) TYPE REF TO zcl_twa_status .
-    METHODS getcoordinates
-      RETURNING
-        value(coordinates) TYPE string .
-    METHODS setcoordinates
-      IMPORTING
-        !coordinates TYPE string .
-    METHODS gettruncated
-      RETURNING
-        value(truncated) TYPE string .
-    METHODS settruncated
-      IMPORTING
-        !truncated TYPE string .
-    METHODS getcontributors
-      RETURNING
-        value(contributors) TYPE string .
-    METHODS setcontributors
-      IMPORTING
-        !contributors TYPE string .
-    METHODS getsource
-      RETURNING
-        value(source) TYPE string .
-    METHODS setsource
-      IMPORTING
-        !source TYPE string .
-    METHODS getcreatedat
-      RETURNING
-        value(created_at) TYPE string .
-    METHODS setcreatedat
-      IMPORTING
-        !created_at TYPE string .
-    METHODS getgeo
-      RETURNING
-        value(geo) TYPE string .
-    METHODS setgeo
-      IMPORTING
-        !geo TYPE string .
-    METHODS getinreplytoscreenname
-      RETURNING
-        value(in_reply_to_screen_name) TYPE string .
-    METHODS setinreplytoscreenname
-      IMPORTING
-        !in_reply_to_screen_name TYPE string .
-    METHODS getfavorited
-      RETURNING
-        value(favorited) TYPE string .
-    METHODS setfavorited
-      IMPORTING
-        !favorited TYPE string .
-    METHODS getinreplytostatusid
-      RETURNING
-        value(in_reply_to_status_id) TYPE string .
-    METHODS setinreplytostatusid
-      IMPORTING
-        !in_reply_to_status_id TYPE string .
-    METHODS getplace
-      RETURNING
-        value(place) TYPE string .
-    METHODS setplace
-      IMPORTING
-        !place TYPE string .
-    METHODS getid
-      RETURNING
-        value(id) TYPE string .
-    METHODS setid
-      IMPORTING
-        !id TYPE string .
-    METHODS getinreplytouserid
-      RETURNING
-        value(in_reply_to_user_id) TYPE string .
-    METHODS setinreplytouserid
-      IMPORTING
-        !in_reply_to_user_id TYPE string .
-    METHODS gettext
-      RETURNING
-        value(text) TYPE string .
-    METHODS settext
-      IMPORTING
-        !text TYPE string .
-    METHODS getuser
-      RETURNING
-        value(user) TYPE REF TO zcl_twa_user .
-    METHODS setuser
-      IMPORTING
-        !user TYPE REF TO zcl_twa_user .
-*&quot;* protected components of class ZCL_TWA_STATUS
-*&quot;* do not include other source files here!!!</publicSection>
- <protectedSection>PROTECTED SECTION.
-*&quot;* private components of class ZCL_TWA_STATUS
-*&quot;* do not include other source files here!!!</protectedSection>
- <privateSection>PRIVATE SECTION.
-
-    DATA coordinates TYPE string .
-    DATA truncated TYPE string .
-    DATA contributors TYPE string .
-    DATA source TYPE string .
-    DATA created_at TYPE string .
-    DATA geo TYPE string .
-    DATA in_reply_to_screen_name TYPE string .
-    DATA favorited TYPE string .
-    DATA in_reply_to_status_id TYPE string .
-    DATA place TYPE string .
-    DATA id TYPE string .
-    DATA in_reply_to_user_id TYPE string .
-    DATA text TYPE string .
-    DATA user TYPE REF TO zcl_twa_user .
-
-    CLASS-METHODS copyright .</privateSection>
+<CLAS CLSNAME="ZCL_TWA_STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
  <localImplementation>*&quot;* local class implementation for public class
 *&quot;* use this source file for the implementation part of
 *&quot;* local helper classes</localImplementation>
@@ -203,17 +61,18 @@ CLASS zcl_twa_status DEFINITION
 
 *--------------------------------------------------------------------*
 *
-* Twibap: The ABAP Twitter API
-* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+* Twibap
+* The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer
 *
-* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+* Project home: https://github.com/se38/twibap
 *
-* Published under the Terms of use of SAP Code Exchange:
-* http://www.sdn.sap.com/irj/sdn/code-exchange
+* Published under Apache License, Version 2.0
+* http://www.apache.org/licenses/LICENSE-2.0.html
 *
 *--------------------------------------------------------------------*
 
-  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ENDMETHOD.                    &quot;COPYRIGHT</source>
  </method>
  <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCONTRIBUTORS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
   <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCONTRIBUTORS" SCONAME="CONTRIBUTORS" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>

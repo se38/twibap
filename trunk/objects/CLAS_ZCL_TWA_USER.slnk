@@ -1,203 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CLAS CLSNAME="ZCL_TWA_USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" UUID="000C293B231B1EE28D94CF3B9DCFF1ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
- <publicSection>*----------------------------------------------------------------------*
-*       CLASS ZCL_TWA_USER DEFINITION
-*----------------------------------------------------------------------*
-*
-*----------------------------------------------------------------------*
-CLASS zcl_twa_user DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
-
-*&quot;* public components of class ZCL_TWA_USER
-*&quot;* do not include other source files here!!!
-  PUBLIC SECTION.
-
-    METHODS constructor
-      IMPORTING
-        !id TYPE string OPTIONAL
-        !name TYPE string OPTIONAL
-        !screen_name TYPE string OPTIONAL
-        !location TYPE string OPTIONAL
-        !description TYPE string OPTIONAL
-        !profile_image_url TYPE string OPTIONAL
-        !profile_background_tile TYPE string OPTIONAL
-        !profile_background_image_url TYPE string OPTIONAL
-        !profile_sidebar_fill_color TYPE string OPTIONAL
-        !profile_background_color TYPE string OPTIONAL
-        !profile_link_color TYPE string OPTIONAL
-        !profile_text_color TYPE string OPTIONAL
-        !protected TYPE string OPTIONAL
-        !utc_offset TYPE i OPTIONAL
-        !time_zone TYPE string OPTIONAL
-        !followers_count TYPE i OPTIONAL
-        !friends_count TYPE i OPTIONAL
-        !statuses_count TYPE i OPTIONAL
-        !favourites_count TYPE i OPTIONAL
-        !url TYPE string OPTIONAL
-        !status TYPE REF TO zcl_twa_status OPTIONAL .
-    CLASS-METHODS newfromjson
-      IMPORTING
-        !json TYPE string
-      RETURNING
-        value(user) TYPE REF TO zcl_twa_user .
-    METHODS getid
-      RETURNING
-        value(id) TYPE string .
-    METHODS setid
-      IMPORTING
-        !id TYPE string .
-    METHODS getname
-      RETURNING
-        value(name) TYPE string .
-    METHODS setname
-      IMPORTING
-        !name TYPE string .
-    METHODS getscreenname
-      RETURNING
-        value(screen_name) TYPE string .
-    METHODS setscreenname
-      IMPORTING
-        !screen_name TYPE string .
-    METHODS getlocation
-      RETURNING
-        value(location) TYPE string .
-    METHODS setlocation
-      IMPORTING
-        !location TYPE string .
-    METHODS getdescription
-      RETURNING
-        value(description) TYPE string .
-    METHODS setdescription
-      IMPORTING
-        !description TYPE string .
-    METHODS geturl
-      RETURNING
-        value(url) TYPE string .
-    METHODS seturl
-      IMPORTING
-        !url TYPE string .
-    METHODS getprofileimageurl
-      RETURNING
-        value(profile_image_url) TYPE string .
-    METHODS setprofileimageurl
-      IMPORTING
-        !profile_image_url TYPE string .
-    METHODS getprofilebackgroundtile
-      RETURNING
-        value(profile_background_tile) TYPE string .
-    METHODS setprofilebackgroundtile
-      IMPORTING
-        !profile_background_tile TYPE string .
-    METHODS getprofilebackgroundimageurl
-      RETURNING
-        value(profile_background_image_url) TYPE string .
-    METHODS setprofilebackgroundimageurl
-      IMPORTING
-        !profile_background_image_url TYPE string .
-    METHODS getprofilesidebarfillcolor
-      RETURNING
-        value(profile_sidebar_fill_color) TYPE string .
-    METHODS setprofilesidebarfillcolor
-      IMPORTING
-        !profile_sidebar_fill_color TYPE string .
-    METHODS getprofilebackgroundcolor
-      RETURNING
-        value(profile_background_color) TYPE string .
-    METHODS setprofilebackgroundcolor
-      IMPORTING
-        !profile_background_color TYPE string .
-    METHODS getprofilelinkcolor
-      RETURNING
-        value(profile_link_color) TYPE string .
-    METHODS setprofilelinkcolor
-      IMPORTING
-        !profile_link_color TYPE string .
-    METHODS getprofiletextcolor
-      RETURNING
-        value(profile_text_color) TYPE string .
-    METHODS setprofiletextcolor
-      IMPORTING
-        !profile_text_color TYPE string .
-    METHODS getprotected
-      RETURNING
-        value(protected) TYPE string .
-    METHODS setprotected
-      IMPORTING
-        !protected TYPE string .
-    METHODS getutcoffset
-      RETURNING
-        value(utc_offset) TYPE i .
-    METHODS setutcoffset
-      IMPORTING
-        !utc_offset TYPE i .
-    METHODS gettimezone
-      RETURNING
-        value(time_zone) TYPE string .
-    METHODS settimezone
-      IMPORTING
-        !time_zone TYPE string .
-    METHODS getstatus
-      RETURNING
-        value(status) TYPE REF TO zcl_twa_status .
-    METHODS setstatus
-      IMPORTING
-        !status TYPE REF TO zcl_twa_status .
-    METHODS getfriendscount
-      RETURNING
-        value(friends_count) TYPE i .
-    METHODS setfriendscount
-      IMPORTING
-        !friends_count TYPE i .
-    METHODS getfollowerscount
-      RETURNING
-        value(followers_count) TYPE i .
-    METHODS setfollowerscount
-      IMPORTING
-        !followers_count TYPE i .
-    METHODS getstatusescount
-      RETURNING
-        value(statuses_count) TYPE i .
-    METHODS setstatusescount
-      IMPORTING
-        !statuses_count TYPE i .
-    METHODS getfavouritescount
-      RETURNING
-        value(favourites_count) TYPE i .
-    METHODS setfavouritescount
-      IMPORTING
-        !favourites_count TYPE i .
-*&quot;* protected components of class ZCL_TWA_USER
-*&quot;* do not include other source files here!!!</publicSection>
- <protectedSection>PROTECTED SECTION.
-*&quot;* private components of class ZCL_TWA_USER
-*&quot;* do not include other source files here!!!</protectedSection>
- <privateSection>PRIVATE SECTION.
-
-    DATA id TYPE string .
-    DATA name TYPE string .
-    DATA screen_name TYPE string .
-    DATA location TYPE string .
-    DATA description TYPE string .
-    DATA profile_image_url TYPE string .
-    DATA profile_background_tile TYPE string .
-    DATA profile_background_image_url TYPE string .
-    DATA profile_sidebar_fill_color TYPE string .
-    DATA profile_background_color TYPE string .
-    DATA profile_link_color TYPE string .
-    DATA profile_text_color TYPE string .
-    DATA protected TYPE string .
-    DATA utc_offset TYPE string .
-    DATA time_zone TYPE string .
-    DATA followers_count TYPE i .
-    DATA friends_count TYPE i .
-    DATA statuses_count TYPE i .
-    DATA favourites_count TYPE i .
-    DATA url TYPE string .
-    DATA status TYPE REF TO zcl_twa_status .
-
-    CLASS-METHODS copyright .</privateSection>
+<CLAS CLSNAME="ZCL_TWA_USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
  <localImplementation>*&quot;* local class implementation for public class
 *&quot;* use this source file for the implementation part of
 *&quot;* local helper classes</localImplementation>
@@ -280,17 +82,18 @@ CLASS zcl_twa_user DEFINITION
 
 *--------------------------------------------------------------------*
 *
-* Twibap: The ABAP Twitter API
-* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+* Twibap
+* The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer
 *
-* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+* Project home: https://github.com/se38/twibap
 *
-* Published under the Terms of use of SAP Code Exchange:
-* http://www.sdn.sap.com/irj/sdn/code-exchange
+* Published under Apache License, Version 2.0
+* http://www.apache.org/licenses/LICENSE-2.0.html
 *
 *--------------------------------------------------------------------*
 
-  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ENDMETHOD.                    &quot;COPYRIGHT</source>
  </method>
  <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETDESCRIPTION" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="11 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
   <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETDESCRIPTION" SCONAME="DESCRIPTION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
