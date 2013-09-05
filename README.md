@@ -19,7 +19,7 @@ URL Shortener Service (by @roelvdberge)
 * Activate all inactive objects (ignore errors, there are recursive implementations)
 
 ## Usage
-see wiki ( https://github.com/se38/zJSON/wiki )
+see wiki ( https://github.com/se38/twibap/wiki )
 
 ## License
 This software is published under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
