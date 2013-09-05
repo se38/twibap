@@ -1,0 +1,2202 @@
+<?xml version="1.0" encoding="utf-16"?>
+<nugget name="OAUTH-0.1.2">
+ <CLAS CLSNAME="ZCL_OAUTH" VERSION="1" LANGU="E" DESCRIPT="OAuth + HTTP helper" UUID="F7F06C4CD79F3C0CE1000000C0A8263A" CATEGORY="00" EXPOSURE="0" STATE="1" RELEASE="0" AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" CHGDANYON="00000000" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" R3RELEASE="701" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+  <publicSection>class ZCL_OAUTH definition
+  public
+  final
+  create private .
+
+*&quot;* public components of class ZCL_OAUTH
+*&quot;* do not include other source files here!!!
+public section.
+
+  class-methods GET_INSTANCE
+    importing
+      !CONSUMER_NAME type ZOAUTH_CONSUMER_NAME optional
+      !SCREEN_NAME type STRING optional
+      !PASSWORD type STRING optional
+    returning
+      value(RO_OAUTH) type ref to ZCL_OAUTH
+    raising
+      ZCX_OAUTH_ERROR .
+  class-methods SET_CONSUMER_PERS
+    importing
+      !CONSUMER_NAME type ZOAUTH_CONSUMER_NAME optional
+      !OAUTH_CONSUMER_KEY type ZOAUTH_CONSUMER_KEY
+      !OAUTH_CONSUMER_SECRET type ZOAUTH_CONSUMER_SECRET
+      !SIGNATURE_METHOD type ZOAUTH_SIGNATURE_METHOD
+      !API_HOST type ZOAUTH_API_HOST
+      !API_PROTOCOL type ZOAUTH_API_PROTOCOL .
+  methods READ_CONSUMER_PERS
+    importing
+      !CONSUMER_NAME type ZOAUTH_CONSUMER_NAME optional
+    raising
+      ZCX_OAUTH_ERROR .
+  methods GET_CONSUMER_KEY
+    returning
+      value(OAUTH_CONSUMER_KEY) type STRING .
+  methods GET_CONSUMER_SECRET
+    returning
+      value(OAUTH_CONSUMER_SECRET) type STRING .
+  methods GET_SIGNATURE_METHOD
+    returning
+      value(SIGNATURE_METHOD) type ZOAUTH_SIGNATURE_METHOD .
+  methods GET_API_HOST
+    returning
+      value(API_HOST) type ZOAUTH_API_HOST .
+  methods SET_API_HOST
+    importing
+      !API_HOST type STRING .
+  methods GET_API_PROTOCOL
+    returning
+      value(API_PROTOCOL) type ZOAUTH_API_PROTOCOL .
+  methods SIGN_MESSAGE
+    importing
+      !METHOD type STRING default &apos;POST&apos; .
+  methods SET_OAUTH_URL
+    importing
+      !OAUTH_URL type STRING .
+  methods GET_OAUTH_URL
+    returning
+      value(OAUTH_URL) type STRING .
+  methods SET_OAUTH_SECRET
+    importing
+      !OAUTH_SECRET type STRING .
+  methods GET_OAUTH_SECRET
+    returning
+      value(OAUTH_SECRET) type STRING .
+  methods SET_PARAMETERS
+    importing
+      !PARAMETERS type ZOAUTH_KEY_VALUE_T .
+  methods GET_PARAMETERS
+    returning
+      value(PARAMETERS) type ZOAUTH_KEY_VALUE_T .
+  methods GET_OAUTH_SIGNATURE
+    returning
+      value(OAUTH_SIGNATURE) type STRING .
+  methods GET_OAUTH_TOKEN
+    returning
+      value(OAUTH_TOKEN) type STRING .
+  methods SET_OAUTH_TOKEN
+    importing
+      !OAUTH_TOKEN type STRING .
+  methods GET_OAUTH_TOKEN_SECRET
+    returning
+      value(OAUTH_TOKEN_SECRET) type STRING .
+  methods SET_OAUTH_TOKEN_SECRET
+    importing
+      !OAUTH_TOKEN_SECRET type STRING .
+  methods SET_USER_PERS
+    importing
+      !CONSUMER_NAME type ZOAUTH_CONSUMER_NAME optional
+      !SCREEN_NAME type STRING
+      !PASSWORD type STRING optional
+      !OAUTH_TOKEN type STRING
+      !OAUTH_TOKEN_SECRET type STRING .
+  methods READ_USER_PERS
+    importing
+      !CONSUMER_NAME type ZOAUTH_CONSUMER_NAME optional
+      !SCREEN_NAME type STRING
+      !PASSWORD type STRING optional
+    raising
+      ZCX_OAUTH_ERROR .
+  methods APPEND_OAUTH_PARAMETERS .
+  methods FETCHURL
+    importing
+      !HOST type STRING optional
+      !URL type STRING
+      !METHOD type STRING default &apos;POST&apos;
+      !ACCEPT_XML type BOOLEAN optional
+      !CONTENT_TYPE_XML type BOOLEAN optional
+      !CDATA type STRING optional
+    returning
+      value(RESPONSE_DATA) type STRING
+    raising
+      ZCX_OAUTH_ERROR .
+  methods IS_AUTHORIZED
+    returning
+      value(RESULT) type BOOLEAN .
+  methods CREATE_TIMESTAMP
+    returning
+      value(TIMESTAMP) type STRING .
+  methods CREATE_NONCE
+    importing
+      !LENGTH type I
+    returning
+      value(NONCE) type STRING .
+  methods CREATE_BASESTRING
+    importing
+      !METHOD type STRING default &apos;POST&apos;
+    returning
+      value(BASESTRING) type STRING .
+  methods PERCENT_ENCODE
+    importing
+      !UNESCAPED type STRING
+    returning
+      value(ESCAPED) type STRING .
+  methods CREATE_HTTP_BODY .
+  methods SIGN_MESSAGE_700
+    importing
+      !METHOD type STRING default &apos;POST&apos; .
+  methods CHECK_RESPONSE
+    importing
+      !RESPONSE type STRING
+    raising
+      ZCX_OAUTH_ERROR .</publicSection>
+  <protectedSection>*&quot;* protected components of class ZCL_TWA_OATH
+*&quot;* do not include other source files here!!!
+protected section.</protectedSection>
+  <privateSection>*&quot;* private components of class ZCL_OAUTH
+*&quot;* do not include other source files here!!!
+private section.
+
+  class-data OAUTH type ref to ZCL_OAUTH .
+  data OAUTH_CONSUMER_KEY type STRING .
+  data OAUTH_CONSUMER_SECRET type STRING .
+  data SIGNATURE_METHOD type ZOAUTH_SIGNATURE_METHOD .
+  data API_HOST type ZOAUTH_API_HOST .
+  data API_PROTOCOL type ZOAUTH_API_PROTOCOL .
+  data OAUTH_URL type STRING .
+  data OAUTH_SECRET type STRING .
+  data OAUTH_TOKEN type STRING .
+  data OAUTH_SIGNATURE type STRING .
+  data PARAMETERS type ZOAUTH_KEY_VALUE_T .
+  data OAUTH_TOKEN_SECRET type STRING .
+  data JS_SOURCE type STRING .
+  data SCREEN_NAME type STRING .
+  data HTTP_BODY type STRING .
+
+  class-methods COPYRIGHT .
+  methods CONSTRUCTOR
+    importing
+      !CONSUMER_NAME type ZOAUTH_CONSUMER_NAME optional
+      !SCREEN_NAME type STRING optional
+      !PASSWORD type STRING optional
+    preferred parameter SCREEN_NAME
+    raising
+      ZCX_OAUTH_ERROR .
+  methods PREPARE_JAVASCRIPT_SOURCE .</privateSection>
+  <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+  <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+  <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="API_HOST" VERSION="1" LANGU="E" DESCRIPT="OAuth: API host" EXPOSURE="0" STATE="1" EDITORDER="5 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ZOAUTH_API_HOST" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="API_PROTOCOL" VERSION="1" LANGU="E" DESCRIPT="OAuth: API protocol" EXPOSURE="0" STATE="1" EDITORDER="6 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDON="00000000" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ZOAUTH_API_PROTOCOL" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="HTTP_BODY" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="15 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="JS_SOURCE" VERSION="1" LANGU="E" DESCRIPT="Javascript source (obsolet)" EXPOSURE="0" STATE="1" EDITORDER="13 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH" VERSION="1" LANGU="E" DESCRIPT="OAuth + HTTP helper" EXPOSURE="0" STATE="1" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" ATTDECLTYP="1" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OAUTH" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_CONSUMER_KEY" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="2 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_CONSUMER_SECRET" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="3 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_SECRET" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="8 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_SIGNATURE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="10 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_TOKEN" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="9 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_TOKEN_SECRET" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="12 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="OAUTH_URL" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="7 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="PARAMETERS" VERSION="1" LANGU="E" DESCRIPT="OAuth: HTTP Parameter table" EXPOSURE="0" STATE="1" EDITORDER="11 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ZOAUTH_KEY_VALUE_T" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="SCREEN_NAME" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="14 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCL_OAUTH" CMPNAME="SIGNATURE_METHOD" VERSION="1" LANGU="E" DESCRIPT="OAuth: Signature Method" EXPOSURE="0" STATE="1" EDITORDER="4 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ZOAUTH_SIGNATURE_METHOD" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="APPEND_OAUTH_PARAMETERS" VERSION="1" LANGU="E" DESCRIPT="Append obligatory OAuth parameters" EXPOSURE="2" STATE="1" EDITORDER="24 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD append_oauth_parameters.
+
+  FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value.
+
+  INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+  &lt;parameter&gt;-key = &apos;oauth_consumer_key&apos;.                   &quot;#EC NOTEXT
+  &lt;parameter&gt;-value = get_consumer_key( ).
+
+  INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+  &lt;parameter&gt;-key = &apos;oauth_nonce&apos;.                          &quot;#EC NOTEXT
+  &lt;parameter&gt;-value = create_nonce( 8 ).
+
+  INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+  &lt;parameter&gt;-key = &apos;oauth_signature_method&apos;.               &quot;#EC NOTEXT
+  CASE get_signature_method( ).
+    WHEN 0.
+      &lt;parameter&gt;-value = &apos;PLAINTEXT&apos;.                      &quot;#EC NOTEXT
+    WHEN 1.
+      &lt;parameter&gt;-value = &apos;HMAC-SHA1&apos;.                      &quot;#EC NOTEXT
+    WHEN OTHERS.
+  ENDCASE.
+
+  INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+  &lt;parameter&gt;-key = &apos;oauth_timestamp&apos;.                      &quot;#EC NOTEXT
+  &lt;parameter&gt;-value = create_timestamp( ).
+
+  INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+  &lt;parameter&gt;-key = &apos;oauth_token&apos;.                          &quot;#EC NOTEXT
+  &lt;parameter&gt;-value = get_oauth_token( ).
+
+  INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+  &lt;parameter&gt;-key = &apos;oauth_version&apos;.                        &quot;#EC NOTEXT
+  &lt;parameter&gt;-value = &apos;1.0&apos;.                                &quot;#EC NOTEXT
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="CHECK_RESPONSE" VERSION="1" LANGU="E" DESCRIPT="Check response" EXPOSURE="2" STATE="1" EDITORDER="33 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CHECK_RESPONSE" SCONAME="RESPONSE" VERSION="1" LANGU="E" DESCRIPT="JSON Key/Value pairs (hashed)" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <exception CLSNAME="ZCL_OAUTH" CMPNAME="CHECK_RESPONSE" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+   <source>METHOD CHECK_RESPONSE.
+
+  DATA: simplejson TYPE REF TO zcl_json
+      , error_text TYPE string
+      .
+
+  simplejson = zcl_json=&gt;get_parser( ).
+  simplejson-&gt;parse_object( response ).
+  error_text = simplejson-&gt;get_value( &apos;error&apos; ).
+
+  IF error_text IS NOT INITIAL.
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid           = zcx_oauth_error=&gt;api_error
+        oauth_error_text = error_text.
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="0" STATE="1" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" MTDTYPE="2" MTDDECLTYP="0" MTDNEWEXC="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CONSTRUCTOR" SCONAME="CONSUMER_NAME" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Name" CMPTYPE="1" MTDTYPE="2" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100820" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_NAME" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CONSTRUCTOR" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X" PARPREFERD="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CONSTRUCTOR" SCONAME="PASSWORD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <exception CLSNAME="ZCL_OAUTH" CMPNAME="CONSTRUCTOR" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="2" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+   <source>METHOD constructor.
+
+*  prepare_javascript_source( ).          &quot;&lt; 7.01
+
+  &quot;*--- use OAuth ---*
+  IF screen_name IS NOT INITIAL.
+
+    &quot;*--- get consumer credentials ---*
+    read_consumer_pers( consumer_name ).
+
+    &quot;*--- get user credentials ---*
+    read_user_pers(
+      EXPORTING
+        consumer_name = consumer_name
+        screen_name   = screen_name
+        password      = password
+        ).
+
+    me-&gt;screen_name = screen_name.
+
+  ELSE.
+    &quot;*--- set default values ---*
+    me-&gt;api_protocol = 1.     &quot;http
+
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100820" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="1" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD COPYRIGHT.
+
+*--------------------------------------------------------------------*
+*
+* The OAuth library (Part of &quot;Twibap: The ABAP Twitter API&quot;)
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: http://twibap.googlecode.com
+*
+* Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*--------------------------------------------------------------------*
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_BASESTRING" VERSION="1" LANGU="E" DESCRIPT="Create basestring" EXPOSURE="2" STATE="1" EDITORDER="29 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_BASESTRING" SCONAME="METHOD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PARVALUE="&apos;POST&apos;"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_BASESTRING" SCONAME="BASESTRING" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD create_basestring.
+
+  DATA: key_value TYPE string
+      , url       TYPE string
+      .
+
+  FIELD-SYMBOLS: &lt;parameter&gt; TYPE LINE OF zoauth_key_value_t.
+
+  url = percent_encode( me-&gt;oauth_url ).
+
+  CONCATENATE
+    method
+    &apos;&amp;&apos;
+    url
+    &apos;&amp;&apos;
+  INTO basestring.
+
+  LOOP AT me-&gt;parameters
+    ASSIGNING &lt;parameter&gt;.
+
+    CONCATENATE
+      &lt;parameter&gt;-key
+      &apos;=&apos;
+      &lt;parameter&gt;-value
+    INTO key_value.
+
+    IF sy-tabix &lt;&gt; LINES( me-&gt;parameters ).
+      CONCATENATE
+        key_value
+        &apos;&amp;&apos;
+      INTO key_value.
+    ENDIF.
+
+    key_value = percent_encode( key_value ).
+
+    CONCATENATE
+      basestring
+      key_value
+    INTO basestring.
+
+  ENDLOOP.
+
+ENDMETHOD.                    &quot;CREATE_BASESTRING</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_HTTP_BODY" VERSION="1" LANGU="E" DESCRIPT="Create http body" EXPOSURE="2" STATE="1" EDITORDER="31 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD create_http_body.
+
+  FIELD-SYMBOLS: &lt;parameter&gt; TYPE LINE OF zoauth_key_value_t.
+
+  LOOP AT me-&gt;parameters
+    ASSIGNING &lt;parameter&gt;.
+
+    CONCATENATE
+      me-&gt;http_body
+      &lt;parameter&gt;-key
+      &apos;=&apos;
+      &lt;parameter&gt;-value
+    INTO me-&gt;http_body.
+
+    IF sy-tabix &lt; LINES( me-&gt;parameters ).
+      CONCATENATE
+        me-&gt;http_body
+        &apos;&amp;&apos;
+      INTO me-&gt;http_body.
+    ENDIF.
+  ENDLOOP.
+
+  IF me-&gt;oauth_signature IS NOT INITIAL.
+    me-&gt;oauth_signature = percent_encode( me-&gt;oauth_signature ).
+
+    CONCATENATE
+      me-&gt;http_body
+      &apos;&amp;oauth_signature=&apos;
+      me-&gt;oauth_signature
+    INTO http_body.
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_NONCE" VERSION="1" LANGU="E" DESCRIPT="Create random nonce" EXPOSURE="2" STATE="1" EDITORDER="28 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_NONCE" SCONAME="LENGTH" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_NONCE" SCONAME="NONCE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD CREATE_NONCE.
+
+  CONSTANTS: chars TYPE string
+               VALUE &apos;0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz&apos;.
+
+  DATA: rnd TYPE i.
+
+  DO length TIMES.
+
+    CALL FUNCTION &apos;QF05_RANDOM_INTEGER&apos;
+      EXPORTING
+        ran_int_max = 60
+        ran_int_min = 0
+      IMPORTING
+        ran_int     = rnd.
+
+    CONCATENATE
+      nonce
+      chars+rnd(1)
+    INTO nonce.
+
+  ENDDO.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_TIMESTAMP" VERSION="1" LANGU="E" DESCRIPT="Create timestamp" EXPOSURE="2" STATE="1" EDITORDER="27 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="CREATE_TIMESTAMP" SCONAME="TIMESTAMP" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD CREATE_TIMESTAMP.
+
+  CONSTANTS: unix TYPE d VALUE &apos;19700101&apos;. &quot;Unix&apos; birthday
+
+  DATA: timestamp_i TYPE i
+      , diff TYPE i
+      .
+
+  GET TIME.
+  diff = sy-tzone.   &quot;diff to UTC in secs
+  IF sy-dayst = &apos;X&apos;. &quot;daylight saving active?
+    ADD 3600 TO diff.
+  ENDIF.
+
+  timestamp_i = ( sy-datum - unix ) * 86400   &quot;days in secs
+              +   sy-uzeit(2)       * 3600    &quot;hours in secs
+              +   sy-uzeit+2(2)     * 60      &quot;mins in secs
+              +   sy-uzeit+4(2)               &quot;secs
+              -   diff                        &quot;diff tu UTC in secs
+              .
+
+  timestamp = timestamp_i.
+  timestamp = timestamp(10). &quot;w/o sign (trailing space)
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" VERSION="1" LANGU="E" DESCRIPT="fetch URL data" EXPOSURE="2" STATE="1" EDITORDER="25 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="HOST" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="METHOD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PARVALUE="&apos;POST&apos;"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="ACCEPT_XML" VERSION="1" LANGU="E" DESCRIPT='Add &quot;Accept: application/xml&quot;' CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100827" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="BOOLEAN" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="CONTENT_TYPE_XML" VERSION="1" LANGU="E" DESCRIPT='Add &quot;Content-Type: application/xml&quot;' CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100901" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="BOOLEAN" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="CDATA" VERSION="1" LANGU="E" DESCRIPT="Optional CDATA" CMPTYPE="1" MTDTYPE="0" EDITORDER="6 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100901" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="RESPONSE_DATA" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="7 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <exception CLSNAME="ZCL_OAUTH" CMPNAME="FETCHURL" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+   <source>METHOD fetchurl.
+
+  DATA: client       TYPE REF TO if_http_client
+      , uri          TYPE string
+      , api_host     TYPE zoauth_api_host
+      , api_protocol TYPE zoauth_api_protocol
+      .
+
+  FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value.
+
+*--- create body from parameters ---*
+  create_http_body( ).
+
+*--- create HTTP client ---*
+  IF host IS INITIAL.
+    api_host = get_api_host( ).
+  ELSE.
+    api_host = host.
+  ENDIF.
+
+  api_protocol = get_api_protocol( ).
+
+  cl_http_client=&gt;create(
+    EXPORTING
+      host   = api_host
+      scheme = api_protocol
+    IMPORTING
+      client = client
+    EXCEPTIONS
+      argument_not_found = 1
+      plugin_not_active  = 2
+      internal_error     = 3
+      ).
+
+  IF sy-subrc &lt;&gt; 0.
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;http_communication_failure.
+  ENDIF.
+
+  IF method = &apos;POST&apos;
+  AND cdata IS INITIAL.
+    uri = url.
+  ELSE.
+    CONCATENATE
+      url
+      &apos;?&apos;
+      http_body
+    INTO uri.
+  ENDIF.
+
+  client-&gt;request-&gt;set_header_field(
+    name = &apos;~request_uri&apos;
+    value = uri
+    ).
+
+  client-&gt;request-&gt;set_header_field(
+    name  = &apos;~request_method&apos;
+    value = method
+    ).
+
+  IF content_type_xml IS NOT INITIAL.
+    client-&gt;request-&gt;set_header_field(
+      name = &apos;Content-Type&apos;
+      value = &apos;application/xml&apos;
+      ).
+  ELSE.
+    client-&gt;request-&gt;set_header_field(
+      name = &apos;Content-Type&apos;
+      value = &apos;application/x-www-form-urlencoded&apos;
+      ).
+  ENDIF.
+
+  IF accept_xml IS NOT INITIAL.
+    client-&gt;request-&gt;set_header_field(
+      name = &apos;Accept&apos;
+      value = &apos;application/xml&apos;
+      ).
+  ENDIF.
+
+  IF method = &apos;POST&apos;.
+    IF cdata IS NOT INITIAL.
+      client-&gt;request-&gt;set_cdata( cdata ).     &quot;send CDATA as body
+    ELSE.
+      client-&gt;request-&gt;set_cdata( http_body ). &quot;send parameters as body
+    ENDIF.
+  ENDIF.
+
+  client-&gt;send( EXCEPTIONS http_communication_failure = 8 ).
+
+  IF sy-subrc &lt;&gt; 0.
+    client-&gt;close( ).
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;http_communication_failure.
+  ENDIF.
+
+  client-&gt;receive( EXCEPTIONS http_communication_failure = 8 ).
+
+  IF sy-subrc &lt;&gt; 0.
+    client-&gt;close( ).
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;http_communication_failure.
+  ENDIF.
+
+  response_data = client-&gt;response-&gt;get_cdata( ).
+  client-&gt;close( ).
+
+  &quot;*--- trash ---*
+  CLEAR: me-&gt;http_body
+       , me-&gt;parameters
+       , me-&gt;oauth_signature
+       .
+
+  check_response( response_data ).
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_API_HOST" VERSION="1" LANGU="E" DESCRIPT="Get API host" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_API_HOST" SCONAME="API_HOST" VERSION="1" LANGU="E" DESCRIPT="OAuth: API host" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZOAUTH_API_HOST"/>
+   <source>METHOD get_api_host.
+
+  api_host = me-&gt;api_host.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_API_PROTOCOL" VERSION="1" LANGU="E" DESCRIPT="Get API protocol" EXPOSURE="2" STATE="1" EDITORDER="9 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_API_PROTOCOL" SCONAME="API_PROTOCOL" VERSION="1" LANGU="E" DESCRIPT="OAuth: API protocol" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZOAUTH_API_PROTOCOL"/>
+   <source>METHOD get_api_protocol.
+
+  api_protocol = me-&gt;api_protocol.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_CONSUMER_KEY" VERSION="1" LANGU="E" DESCRIPT="Get consumer key" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_CONSUMER_KEY" SCONAME="OAUTH_CONSUMER_KEY" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_CONSUMER_KEY.
+
+  oauth_consumer_key = me-&gt;oauth_consumer_key.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_CONSUMER_SECRET" VERSION="1" LANGU="E" DESCRIPT="Get consumer secret" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_CONSUMER_SECRET" SCONAME="OAUTH_CONSUMER_SECRET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_CONSUMER_SECRET.
+
+  oauth_consumer_secret = me-&gt;oauth_consumer_secret.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_INSTANCE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="1" MTDNEWEXC="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_INSTANCE" SCONAME="CONSUMER_NAME" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Name" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100820" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_NAME" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_INSTANCE" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_INSTANCE" SCONAME="PASSWORD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_INSTANCE" SCONAME="RO_OAUTH" VERSION="1" LANGU="E" DESCRIPT="OAuth + HTTP helper" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_OAUTH"/>
+   <exception CLSNAME="ZCL_OAUTH" CMPNAME="GET_INSTANCE" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+   <source>METHOD get_instance.
+
+  IF oauth IS INITIAL.
+    CREATE OBJECT oauth
+      EXPORTING
+        consumer_name = consumer_name
+        screen_name   = screen_name
+        password      = password.
+  ENDIF.
+
+  ro_oauth = oauth.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_SECRET" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="14 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_SECRET" SCONAME="OAUTH_SECRET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_OAUTH_SECRET.
+
+  oauth_secret = me-&gt;oauth_secret.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_SIGNATURE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="17 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_SIGNATURE" SCONAME="OAUTH_SIGNATURE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_OAUTH_SIGNATURE.
+
+  oauth_signature = me-&gt;oauth_signature.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_TOKEN" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="18 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_TOKEN" SCONAME="OAUTH_TOKEN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_OAUTH_TOKEN.
+
+  oauth_token = me-&gt;oauth_token.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_TOKEN_SECRET" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="20 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_TOKEN_SECRET" SCONAME="OAUTH_TOKEN_SECRET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_OAUTH_TOKEN_SECRET.
+
+  oauth_token_secret = me-&gt;oauth_token_secret.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_URL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="12 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_OAUTH_URL" SCONAME="OAUTH_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD GET_OAUTH_URL.
+
+  oauth_url = me-&gt;oauth_url.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_PARAMETERS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="16 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_PARAMETERS" SCONAME="PARAMETERS" VERSION="1" LANGU="E" DESCRIPT="OAuth: HTTP Parameter table" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZOAUTH_KEY_VALUE_T"/>
+   <source>METHOD GET_PARAMETERS.
+
+  parameters = me-&gt;parameters.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="GET_SIGNATURE_METHOD" VERSION="1" LANGU="E" DESCRIPT="Get Signature Method" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="GET_SIGNATURE_METHOD" SCONAME="SIGNATURE_METHOD" VERSION="1" LANGU="E" DESCRIPT="OAuth: Signature Method" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZOAUTH_SIGNATURE_METHOD"/>
+   <source>METHOD get_signature_method.
+
+  signature_method = me-&gt;signature_method.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="IS_AUTHORIZED" VERSION="1" LANGU="E" DESCRIPT="Is user authorization given?" EXPOSURE="2" STATE="1" EDITORDER="26 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="IS_AUTHORIZED" SCONAME="RESULT" VERSION="1" LANGU="E" DESCRIPT="boolsche Variable (X=true, -=false, space=unknown)" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="BOOLEAN"/>
+   <source>METHOD IS_AUTHORIZED.
+
+  IF screen_name IS NOT INITIAL.
+    result = &apos;X&apos;.
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="PERCENT_ENCODE" VERSION="1" LANGU="E" DESCRIPT="OAuth URL escaping" EXPOSURE="2" STATE="1" EDITORDER="30 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="PERCENT_ENCODE" SCONAME="UNESCAPED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="PERCENT_ENCODE" SCONAME="ESCAPED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD PERCENT_ENCODE.
+
+  escaped = cl_http_utility=&gt;escape_url( unescaped ).
+
+  &quot;OAuth dictates the only ones you can ignore are: - _ . ~
+  &quot;-&gt; these and only these have to stay unescaped
+  REPLACE ALL OCCURRENCES OF &apos;%2e&apos; IN escaped WITH &apos;.&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%7e&apos; IN escaped WITH &apos;~&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;(&apos; IN escaped WITH &apos;%28&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;)&apos; IN escaped WITH &apos;%29&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;+&apos; IN escaped WITH &apos;%20&apos;.
+
+  &quot;all codes to upper case
+  REPLACE ALL OCCURRENCES OF &apos;%2a&apos; IN escaped WITH &apos;%2A&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%2b&apos; IN escaped WITH &apos;%2B&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%2c&apos; IN escaped WITH &apos;%2C&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%2d&apos; IN escaped WITH &apos;%2D&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%2e&apos; IN escaped WITH &apos;%2E&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%2f&apos; IN escaped WITH &apos;%2F&apos;.
+
+  REPLACE ALL OCCURRENCES OF &apos;%3a&apos; IN escaped WITH &apos;%3A&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%3b&apos; IN escaped WITH &apos;%3B&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%3c&apos; IN escaped WITH &apos;%3C&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%3d&apos; IN escaped WITH &apos;%3D&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%3e&apos; IN escaped WITH &apos;%3E&apos;.
+  REPLACE ALL OCCURRENCES OF &apos;%3f&apos; IN escaped WITH &apos;%3F&apos;.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="PREPARE_JAVASCRIPT_SOURCE" VERSION="1" LANGU="E" DESCRIPT="Read Javascript source (&lt; 7.01)" EXPOSURE="0" STATE="1" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD PREPARE_JAVASCRIPT_SOURCE.
+
+*  DATA: sha1_source   TYPE string
+*      , twibap_source TYPE string
+*      , mime_url      TYPE string
+*      , mime_api      TYPE REF TO if_mr_api
+*      , mime_content  TYPE xstring
+*      .
+*
+**--- load Javascript sources from mime repository ---*
+*  mime_api = cl_mime_repository_api=&gt;get_api( ).
+*
+*  mime_url  = &apos;/SAP/PUBLIC/BC/ztwibap/sha1.js&apos;.
+*
+*  mime_api-&gt;get(
+*    EXPORTING
+*      i_url = mime_url
+*    IMPORTING
+*      e_content = mime_content
+*      ).
+*
+*  CALL FUNCTION &apos;ECATT_CONV_XSTRING_TO_STRING&apos;
+*    EXPORTING
+*      im_xstring = mime_content
+*    IMPORTING
+*      ex_string  = sha1_source.
+*
+*  mime_url  = &apos;/SAP/PUBLIC/BC/ztwibap/twibap.js&apos;.
+*
+*  mime_api-&gt;get(
+*    EXPORTING
+*      i_url = mime_url
+*    IMPORTING
+*      e_content = mime_content
+*      ).
+*
+*  CALL FUNCTION &apos;ECATT_CONV_XSTRING_TO_STRING&apos;
+*    EXPORTING
+*      im_xstring = mime_content
+*    IMPORTING
+*      ex_string  = twibap_source.
+*
+*  CONCATENATE
+*    sha1_source
+*    twibap_source
+*  INTO js_source SEPARATED BY cl_abap_char_utilities=&gt;cr_lf.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="READ_CONSUMER_PERS" VERSION="1" LANGU="E" DESCRIPT="Read consumer key and secret persistant" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="READ_CONSUMER_PERS" SCONAME="CONSUMER_NAME" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Name" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_NAME" PAROPTIONL="X"/>
+   <exception CLSNAME="ZCL_OAUTH" CMPNAME="READ_CONSUMER_PERS" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+   <source>METHOD read_consumer_pers.
+
+  DATA: consumer TYPE zoauth_consumer.
+
+  &quot;*--- get API keys from database                   ---*
+  &quot;*--- (entered with setup report Z_TWA_SETUP_1_API_KEY) ---*
+  SELECT SINGLE consumer_key
+                consumer_secret
+                signature_method
+                api_host
+                api_protocol
+    INTO (me-&gt;oauth_consumer_key,
+          me-&gt;oauth_consumer_secret,
+          me-&gt;signature_method,
+          me-&gt;api_host,
+          me-&gt;api_protocol)
+    FROM zoauth_consumer
+    WHERE consumer_name = consumer_name.
+
+  IF sy-subrc &lt;&gt; 0.
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;api_keys_not_found.
+  ENDIF.
+
+  IF oauth_consumer_key IS INITIAL.
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;consumer_key_empty.
+  ENDIF.
+
+  IF oauth_consumer_secret IS INITIAL.
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;consumer_secret_empty.
+  ENDIF.
+
+  &quot;*--- add dangling ampersand ---*
+  CONCATENATE
+    me-&gt;oauth_consumer_secret
+    &apos;&amp;&apos;
+  INTO me-&gt;oauth_consumer_secret.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="READ_USER_PERS" VERSION="1" LANGU="E" DESCRIPT="Set user credentials persistant" EXPOSURE="2" STATE="1" EDITORDER="23 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="READ_USER_PERS" SCONAME="CONSUMER_NAME" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Name" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_NAME" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="READ_USER_PERS" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="READ_USER_PERS" SCONAME="PASSWORD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <exception CLSNAME="ZCL_OAUTH" CMPNAME="READ_USER_PERS" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+   <source>METHOD read_user_pers.
+
+  DATA: password_hash  TYPE hash160
+      , password_hash2 TYPE hash160
+      .
+
+  &quot;*--- get user credentials ---*
+  &quot;*--- (created with setup report Z_OAuth_SETUP_2_REGISTER_USER) ---*
+  SELECT SINGLE password_hash token token_secret
+    INTO (password_hash, oauth_token, oauth_token_secret)
+    FROM zoauth_user
+    WHERE consumer_name = consumer_name
+    AND   user_name     = screen_name.
+
+  IF sy-subrc &lt;&gt; 0
+  OR oauth_token IS INITIAL
+  OR oauth_token_secret IS INITIAL.
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;user_not_registered.
+  ENDIF.
+
+*--- credentials protected with password? ---*
+  IF password_hash IS NOT INITIAL.
+
+    IF password IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;password_required.
+    ENDIF.
+
+    CALL FUNCTION &apos;CALCULATE_HASH_FOR_CHAR&apos;
+      EXPORTING
+        alg  = &apos;SHA1&apos;
+        data = password
+      IMPORTING
+        hash = password_hash2.
+
+    IF password_hash &lt;&gt; password_hash2.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid = zcx_oauth_error=&gt;wrong_password.
+    ENDIF.
+
+  ENDIF.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_API_HOST" VERSION="1" LANGU="E" DESCRIPT="Set API host" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100901" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_API_HOST" SCONAME="API_HOST" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100901" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD set_api_host.
+
+  me-&gt;api_host = api_host.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" VERSION="1" LANGU="E" DESCRIPT="Set consumer key and secret persistant" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="1" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" SCONAME="CONSUMER_NAME" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Name" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_NAME" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" SCONAME="OAUTH_CONSUMER_KEY" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Key" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_KEY"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" SCONAME="OAUTH_CONSUMER_SECRET" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Secret" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_SECRET"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" SCONAME="SIGNATURE_METHOD" VERSION="1" LANGU="E" DESCRIPT="OAuth: Signature Method" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_SIGNATURE_METHOD"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" SCONAME="API_HOST" VERSION="1" LANGU="E" DESCRIPT="OAuth: API host" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDBY="SE38_UWE" CHANGEDON="20100826" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_API_HOST"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_CONSUMER_PERS" SCONAME="API_PROTOCOL" VERSION="1" LANGU="E" DESCRIPT="OAuth: API protocol" CMPTYPE="1" MTDTYPE="0" EDITORDER="6 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100826" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_API_PROTOCOL"/>
+   <source>METHOD set_consumer_pers.
+
+  DATA: consumer TYPE zoauth_consumer.
+
+  consumer-consumer_name    = consumer_name.
+  consumer-consumer_key     = oauth_consumer_key.
+  consumer-consumer_secret  = oauth_consumer_secret.
+  consumer-signature_method = signature_method.
+  consumer-api_host         = api_host.
+  consumer-api_protocol     = api_protocol.
+
+  MODIFY zoauth_consumer FROM consumer.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_SECRET" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="13 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_SECRET" SCONAME="OAUTH_SECRET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD SET_OAUTH_SECRET.
+
+  me-&gt;oauth_secret = oauth_secret.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_TOKEN" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="19 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_TOKEN" SCONAME="OAUTH_TOKEN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD SET_OAUTH_TOKEN.
+
+  me-&gt;oauth_token = oauth_token.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_TOKEN_SECRET" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="21 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_TOKEN_SECRET" SCONAME="OAUTH_TOKEN_SECRET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD SET_OAUTH_TOKEN_SECRET.
+
+  me-&gt;oauth_token_secret = oauth_token_secret.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_URL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="11 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_OAUTH_URL" SCONAME="OAUTH_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD SET_OAUTH_URL.
+
+  me-&gt;oauth_url =  oauth_url.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_PARAMETERS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="15 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_PARAMETERS" SCONAME="PARAMETERS" VERSION="1" LANGU="E" DESCRIPT="OAuth: HTTP Parameter table" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_KEY_VALUE_T"/>
+   <source>METHOD SET_PARAMETERS.
+
+  me-&gt;parameters = parameters.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SET_USER_PERS" VERSION="1" LANGU="E" DESCRIPT="Set user credentials persistant" EXPOSURE="2" STATE="1" EDITORDER="22 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_USER_PERS" SCONAME="CONSUMER_NAME" VERSION="1" LANGU="E" DESCRIPT="OAuth: Consumer Name" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_CONSUMER_NAME" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_USER_PERS" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_USER_PERS" SCONAME="PASSWORD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_USER_PERS" SCONAME="OAUTH_TOKEN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SET_USER_PERS" SCONAME="OAUTH_TOKEN_SECRET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+   <source>METHOD set_user_pers.
+
+  DATA: password_hash TYPE hash160
+      , user          TYPE zoauth_user
+      .
+
+*--- protect credentials with password? ---*
+  IF password IS NOT INITIAL.
+
+    CALL FUNCTION &apos;CALCULATE_HASH_FOR_CHAR&apos;
+      EXPORTING
+        alg  = &apos;SHA1&apos;
+        data = password
+      IMPORTING
+        hash = password_hash.
+
+  ENDIF.
+
+  user-consumer_name = consumer_name.
+  user-user_name     = screen_name.
+  user-password_hash = password_hash.
+  user-token         = oauth_token.
+  user-token_secret  = oauth_token_secret.
+
+  MODIFY zoauth_user FROM user.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SIGN_MESSAGE" VERSION="1" LANGU="E" DESCRIPT="Sign message (using SecureStore, &gt;= 7.01)" EXPOSURE="2" STATE="1" EDITORDER="10 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SIGN_MESSAGE" SCONAME="METHOD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PARVALUE="&apos;POST&apos;"/>
+   <source>METHOD SIGN_MESSAGE.
+
+  DATA: hashx         TYPE hash160x
+      , secret_hashed TYPE xstring
+      , basestring    TYPE string
+      , signature     TYPE hash512_base_64
+      .
+
+  &quot;*--- FM &apos;SET_HMAC_KEY&apos; doesn&apos;t accept keys &gt; 81 chars ---*
+  IF STRLEN( me-&gt;oauth_secret ) &lt; 82.
+
+    &quot;*--- set secret to SecureStorage ---*
+    CALL FUNCTION &apos;SET_HMAC_KEY&apos;
+      EXPORTING
+        keycstr            = me-&gt;oauth_secret
+        client_independent = space.
+
+  ELSE.
+
+    &quot;*--- hash the secret ---*
+    CALL FUNCTION &apos;CALCULATE_HASH_FOR_CHAR&apos;
+      EXPORTING
+        data  = me-&gt;oauth_secret
+      IMPORTING
+        hashx = hashx.
+
+    secret_hashed = hashx.
+
+    &quot;*--- set hashed secret to SecureStorage ---*
+    CALL FUNCTION &apos;SET_HMAC_KEY&apos;
+      EXPORTING
+        keyxstr            = secret_hashed
+        client_independent = space.
+
+  ENDIF.
+
+  &quot;*--- calculate base64 signature ---*
+  basestring = create_basestring( method ).
+
+  CALL FUNCTION &apos;CALCULATE_HMAC_FOR_CHAR&apos;
+    EXPORTING
+      alg            = &apos;SHA1&apos;
+      data           = basestring
+      key_must_exist = &apos;X&apos;
+    IMPORTING
+      hmacbase64     = signature.
+
+  &quot;*--- clear secret in SecureStore ---*
+  CALL FUNCTION &apos;SET_HMAC_KEY&apos;
+    EXPORTING
+      keycstr            = &apos;void&apos;
+      client_independent = space.
+
+  me-&gt;oauth_signature = signature.
+
+ENDMETHOD.</source>
+  </method>
+  <method CLSNAME="ZCL_OAUTH" CMPNAME="SIGN_MESSAGE_700" VERSION="1" LANGU="E" DESCRIPT="Sign message (Javascript, &lt; 7.01)" EXPOSURE="2" STATE="1" EDITORDER="32 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100901" MTDTYPE="0" MTDDECLTYP="0" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCL_OAUTH" CMPNAME="SIGN_MESSAGE_700" SCONAME="METHOD" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PARVALUE="&apos;POST&apos;"/>
+   <source>METHOD SIGN_MESSAGE_700.
+
+*  DATA: js_processor TYPE REF TO cl_java_script
+*      , basestring   TYPE string
+*      , return_value TYPE string
+*      .
+*
+**--- compile source and bind variables ---*
+*  js_processor = cl_java_script=&gt;create( ).
+*
+*  js_processor-&gt;bind(
+*    EXPORTING
+*      name_obj  = &apos;abap&apos;
+*      name_prop = &apos;oauth_secret&apos;
+*    CHANGING
+*      data      = me-&gt;oauth_secret
+*      ).
+*
+*  basestring = create_basestring( method ).
+*
+*  js_processor-&gt;bind(
+*    EXPORTING
+*      name_obj  = &apos;abap&apos;
+*      name_prop = &apos;basestring&apos;
+*    CHANGING
+*      data      = basestring
+*      ).
+*
+*  js_processor-&gt;bind(
+*    EXPORTING
+*      name_obj  = &apos;abap&apos;
+*      name_prop = &apos;oauth_signature&apos;
+*    CHANGING
+*      data      = me-&gt;oauth_signature
+*      ).
+*
+*  return_value = js_processor-&gt;evaluate( js_source ).
+
+ENDMETHOD.</source>
+  </method>
+ </CLAS>
+ <CLAS CLSNAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="OAuth library Error" UUID="4E92694C9E473D0CE1000000C0A8263A" CATEGORY="40" EXPOSURE="2" STATE="1" RELEASE="0" AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="00000000" CHGDANYON="00000000" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" R3RELEASE="701" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 " REFCLSNAME="CX_STATIC_CHECK">
+  <implementing CLSNAME="ZCX_OAUTH_ERROR" REFCLSNAME="IF_T100_MESSAGE" VERSION="1" EXPOSURE="2" STATE="1" AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" RELTYPE="1"/>
+  <publicSection>class ZCX_OAUTH_ERROR definition
+  public
+  inheriting from CX_STATIC_CHECK
+  final
+  create public .
+
+*&quot;* public components of class ZCX_OAUTH_ERROR
+*&quot;* do not include other source files here!!!
+public section.
+
+  interfaces IF_T100_MESSAGE .
+
+  constants:
+    begin of API_ERROR,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;001&apos;,
+      attr1 type scx_attrname value &apos;OAUTH_ERROR_TEXT&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of API_ERROR .
+  constants:
+    begin of HTTP_COMMUNICATION_FAILURE,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;002&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of HTTP_COMMUNICATION_FAILURE .
+  constants:
+    begin of AUTHORIZATION_REQUIRED,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;003&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of AUTHORIZATION_REQUIRED .
+  constants:
+    begin of API_KEYS_NOT_FOUND,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;004&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of API_KEYS_NOT_FOUND .
+  constants:
+    begin of CONSUMER_KEY_EMPTY,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;005&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of CONSUMER_KEY_EMPTY .
+  constants:
+    begin of CONSUMER_SECRET_EMPTY,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;006&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of CONSUMER_SECRET_EMPTY .
+  constants:
+    begin of USER_NOT_REGISTERED,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;007&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of USER_NOT_REGISTERED .
+  constants:
+    begin of PASSWORD_REQUIRED,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;008&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of PASSWORD_REQUIRED .
+  constants:
+    begin of WRONG_PASSWORD,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;009&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of WRONG_PASSWORD .
+  data OAUTH_ERROR_TEXT type ZOAUTH_ERROR_TEXT .
+
+  methods CONSTRUCTOR
+    importing
+      !TEXTID like IF_T100_MESSAGE=&gt;T100KEY optional
+      !PREVIOUS like PREVIOUS optional
+      !OAUTH_ERROR_TEXT type ZOAUTH_ERROR_TEXT optional .</publicSection>
+  <protectedSection>*&quot;* protected components of class ZCX_TWA_ERROR
+*&quot;* do not include other source files here!!!
+protected section.</protectedSection>
+  <privateSection>*&quot;* private components of class ZCX_OAUTH_ERROR
+*&quot;* do not include other source files here!!!
+private section.
+
+  class-methods COPYRIGHT .</privateSection>
+  <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+  <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+  <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="API_ERROR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="1 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="14 " SRCCOLUMN1="4 " SRCROW2="21 " SRCCOLUMN2="19 " LOCKED="X" TYPESRC_LENG="304 " TYPESRC="begin of API_ERROR,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;001&apos;,
+      attr1 type scx_attrname value &apos;OAUTH_ERROR_TEXT&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of API_ERROR
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="API_KEYS_NOT_FOUND" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="4 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="41 " SRCCOLUMN1="4 " SRCROW2="48 " SRCCOLUMN2="28 " LOCKED="X" TYPESRC_LENG="306 " TYPESRC="begin of API_KEYS_NOT_FOUND,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;004&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of API_KEYS_NOT_FOUND
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="AUTHORIZATION_REQUIRED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="3 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="32 " SRCCOLUMN1="4 " SRCROW2="39 " SRCCOLUMN2="32 " LOCKED="X" TYPESRC_LENG="314 " TYPESRC="begin of AUTHORIZATION_REQUIRED,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;003&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of AUTHORIZATION_REQUIRED
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="CONSUMER_KEY_EMPTY" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="5 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="50 " SRCCOLUMN1="4 " SRCROW2="57 " SRCCOLUMN2="28 " LOCKED="X" TYPESRC_LENG="306 " TYPESRC="begin of CONSUMER_KEY_EMPTY,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;005&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of CONSUMER_KEY_EMPTY
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="CONSUMER_SECRET_EMPTY" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="6 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="59 " SRCCOLUMN1="4 " SRCROW2="66 " SRCCOLUMN2="31 " LOCKED="X" TYPESRC_LENG="312 " TYPESRC="begin of CONSUMER_SECRET_EMPTY,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;006&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of CONSUMER_SECRET_EMPTY
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="HTTP_COMMUNICATION_FAILURE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="2 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="23 " SRCCOLUMN1="4 " SRCROW2="30 " SRCCOLUMN2="36 " LOCKED="X" TYPESRC_LENG="322 " TYPESRC="begin of HTTP_COMMUNICATION_FAILURE,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;002&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of HTTP_COMMUNICATION_FAILURE
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="OAUTH_ERROR_TEXT" VERSION="1" LANGU="E" DESCRIPT="OAuth API Error Text" EXPOSURE="2" STATE="1" EDITORDER="10 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ZOAUTH_ERROR_TEXT" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " R3RELEASE="701" TYPESRC_LENG="0 "/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="PASSWORD_REQUIRED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="8 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="77 " SRCCOLUMN1="4 " SRCROW2="84 " SRCCOLUMN2="27 " LOCKED="X" TYPESRC_LENG="304 " TYPESRC="begin of PASSWORD_REQUIRED,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;008&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of PASSWORD_REQUIRED
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="USER_NOT_REGISTERED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="7 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="68 " SRCCOLUMN1="4 " SRCROW2="75 " SRCCOLUMN2="29 " LOCKED="X" TYPESRC_LENG="308 " TYPESRC="begin of USER_NOT_REGISTERED,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;007&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of USER_NOT_REGISTERED
+"/>
+  <attribute CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="WRONG_PASSWORD" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="9 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100819" ATTDECLTYP="2" ATTEXPVIRT="0" TYPTYPE="4" SRCROW1="86 " SRCCOLUMN1="4 " SRCROW2="93 " SRCCOLUMN2="24 " LOCKED="X" TYPESRC_LENG="298 " TYPESRC="begin of WRONG_PASSWORD,
+      msgid type symsgid value &apos;ZOAUTH&apos;,
+      msgno type symsgno value &apos;009&apos;,
+      attr1 type scx_attrname value &apos;&apos;,
+      attr2 type scx_attrname value &apos;&apos;,
+      attr3 type scx_attrname value &apos;&apos;,
+      attr4 type scx_attrname value &apos;&apos;,
+    end of WRONG_PASSWORD
+"/>
+  <inheritance CLSNAME="ZCX_OAUTH_ERROR" REFCLSNAME="CX_STATIC_CHECK" VERSION="1" STATE="1" AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000"/>
+  <method CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDON="00000000" MTDTYPE="2" MTDDECLTYP="0" LOCKED="X" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <parameter CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="CONSTRUCTOR" SCONAME="TEXTID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="1 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="0" TYPE="IF_T100_MESSAGE=&gt;T100KEY" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="CONSTRUCTOR" SCONAME="PREVIOUS" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="0" TYPE="PREVIOUS" PAROPTIONL="X"/>
+   <parameter CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="CONSTRUCTOR" SCONAME="OAUTH_ERROR_TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="3 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100819" CHANGEDBY="SE38_UWE" CHANGEDON="20100820" PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZOAUTH_ERROR_TEXT" PAROPTIONL="X"/>
+   <source>method CONSTRUCTOR.
+CALL METHOD SUPER-&gt;CONSTRUCTOR
+EXPORTING
+PREVIOUS = PREVIOUS
+.
+me-&gt;OAUTH_ERROR_TEXT = OAUTH_ERROR_TEXT .
+clear me-&gt;textid.
+if textid is initial and ME-&gt;IF_T100_MESSAGE~T100KEY IS INITIAL.
+  IF_T100_MESSAGE~T100KEY = IF_T100_MESSAGE=&gt;DEFAULT_TEXTID.
+else.
+  IF_T100_MESSAGE~T100KEY = TEXTID.
+endif.
+endmethod.</source>
+  </method>
+  <method CLSNAME="ZCX_OAUTH_ERROR" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="2 " DISPID="0 " AUTHOR="SE38_UWE" CREATEDON="20100820" CHANGEDON="00000000" MTDTYPE="0" MTDDECLTYP="1" R3RELEASE="701" BCMTDCAT="00" BCMTDSYN="0">
+   <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* The OAuth library (Part of &quot;Twibap: The ABAP Twitter API&quot;)
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: http://twibap.googlecode.com
+*
+* Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*--------------------------------------------------------------------*
+
+ENDMETHOD.</source>
+  </method>
+ </CLAS>
+ <DOMA DOMNAME="ZOAUTH_API_PROTOCOL" DDLANGUAGE="E" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" VALEXI="X" MASKLEN="0000" DDTEXT="OAuth: API protocol" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="134120">
+  <dd07v DOMNAME="ZOAUTH_API_PROTOCOL" VALPOS="0001" DDLANGUAGE="E" DOMVALUE_L="1" DDTEXT="HTTP"/>
+  <dd07v DOMNAME="ZOAUTH_API_PROTOCOL" VALPOS="0002" DDLANGUAGE="E" DOMVALUE_L="2" DDTEXT="HTTPS"/>
+ </DOMA>
+ <DOMA DOMNAME="ZOAUTH_CONSUMER_NAME" DDLANGUAGE="E" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" ENTITYTAB="ZOAUTH_CONSUMER" MASKLEN="0000" DDTEXT="OAuth: Consumer Name" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="164426"/>
+ <DOMA DOMNAME="ZOAUTH_SIGNATURE_METHOD" DDLANGUAGE="E" DATATYPE="NUMC" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASKLEN="0000" DDTEXT="OAuth: Signature Method" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="120757">
+  <dd07v DOMNAME="ZOAUTH_SIGNATURE_METHOD" VALPOS="0001" DDLANGUAGE="E" DOMVALUE_L="0" DDTEXT="PLAINTEXT"/>
+  <dd07v DOMNAME="ZOAUTH_SIGNATURE_METHOD" VALPOS="0002" DDLANGUAGE="E" DOMVALUE_L="1" DDTEXT="HMAC-SHA1"/>
+ </DOMA>
+ <DTEL ROLLNAME="ZOAUTH_USER_NAME" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="30" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: User Name" REPTEXT="User Name" SCRTEXT_S="User" SCRTEXT_M="User Name" SCRTEXT_L="User Name" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DTELMASTER="E" DATATYPE="CHAR" LENG="000030" DECIMALS="000000" OUTPUTLEN="000030">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_TOKEN_SECRET" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="12" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: Token Secret" REPTEXT="Token Secret" SCRTEXT_S="Secret" SCRTEXT_M="Token Secret" SCRTEXT_L="Token Secret" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DTELMASTER="E" DATATYPE="STRG" LENG="000000" DECIMALS="000000" OUTPUTLEN="000000">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_TOKEN" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="05" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: Token" REPTEXT="Token" SCRTEXT_S="Token" SCRTEXT_M="Token" SCRTEXT_L="Token" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DTELMASTER="E" DATATYPE="STRG" LENG="000000" DECIMALS="000000" OUTPUTLEN="000000">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_SIGNATURE_METHOD" DDLANGUAGE="E" DOMNAME="ZOAUTH_SIGNATURE_METHOD" ROUTPUTLEN="000000" HEADLEN="16" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: Signature Method" REPTEXT="Signature Method" SCRTEXT_S="SigMeth" SCRTEXT_M="Sig. Method" SCRTEXT_L="Signature Method" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="120853" DTELMASTER="E" DATATYPE="NUMC" LENG="000001" DECIMALS="000000" OUTPUTLEN="000001" VALEXI="X" REFKIND="D">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_ERROR_TEXT" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="05" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth API Error Text" REPTEXT="Error" SCRTEXT_S="Error" SCRTEXT_M="Error" SCRTEXT_L="Error" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DTELMASTER="E" DATATYPE="STRG" LENG="000000" DECIMALS="000000" OUTPUTLEN="000000">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_CONSUMER_SECRET" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="15" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: Consumer Secret" REPTEXT="Consumer Secret" SCRTEXT_S="Secret" SCRTEXT_M="Consumer Secret" SCRTEXT_L="Consumer Secret" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DTELMASTER="E" DATATYPE="STRG" LENG="000000" DECIMALS="000000" OUTPUTLEN="000000">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_CONSUMER_NAME" DDLANGUAGE="E" DOMNAME="ZOAUTH_CONSUMER_NAME" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: Consumer Name" REPTEXT="Consumer Name" SCRTEXT_S="Consumer" SCRTEXT_M="Consumer Name" SCRTEXT_L="Consumer Name" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="163500" DTELMASTER="E" DATATYPE="CHAR" LENG="000030" DECIMALS="000000" OUTPUTLEN="000030" ENTITYTAB="ZOAUTH_CONSUMER" REFKIND="D">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_CONSUMER_KEY" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="12" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: Consumer Key" REPTEXT="Consumer Key" SCRTEXT_S="Key" SCRTEXT_M="Consumer Key" SCRTEXT_L="Consumer Key" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DTELMASTER="E" DATATYPE="STRG" LENG="000000" DECIMALS="000000" OUTPUTLEN="000000">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_API_PROTOCOL" DDLANGUAGE="E" DOMNAME="ZOAUTH_API_PROTOCOL" ROUTPUTLEN="000000" HEADLEN="12" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: API protocol" REPTEXT="API Protocol" SCRTEXT_S="Protocol" SCRTEXT_M="API Protocol" SCRTEXT_L="API Protocol" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="134120" DTELMASTER="E" DATATYPE="INT4" LENG="000010" DECIMALS="000000" OUTPUTLEN="000011" VALEXI="X" REFKIND="D">
+  <tpara/>
+ </DTEL>
+ <DTEL ROLLNAME="ZOAUTH_API_HOST" DDLANGUAGE="E" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DDTEXT="OAuth: API host" REPTEXT="API host" SCRTEXT_S="API host" SCRTEXT_M="API host" SCRTEXT_L="API host" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="125113" DTELMASTER="E" DATATYPE="STRG" LENG="000000" DECIMALS="000000" OUTPUTLEN="000000">
+  <tpara/>
+ </DTEL>
+ <MSAG ARBGB="ZOAUTH" MASTERLANG="E" RESPUSER="SE38_UWE" LASTUSER="SE38_UWE" LDATE="20100819" LTIME="142446" STEXT="Twibap Twitter API">
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="001" TEXT="API Error: &amp;1"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="001" TEXT="API Error: &amp;1"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="002" TEXT="HTTP_COMMUNICATION_FAILURE"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="002" TEXT="HTTP_COMMUNICATION_FAILURE"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="003" TEXT="Authorization required"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="003" TEXT="Authorization required"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="004" TEXT="API Consumer key not found"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="004" TEXT="API Consumer key not found"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="005" TEXT="API Consumer key empty"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="005" TEXT="API Consumer key empty"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="006" TEXT="API Consumer secret empty"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="006" TEXT="API Consumer secret empty"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="007" TEXT="User not registered"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="007" TEXT="User not registered"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="008" TEXT="Password required"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="008" TEXT="Password required"/>
+  <t100 SPRSL="D" ARBGB="ZOAUTH" MSGNR="009" TEXT="Wrong password"/>
+  <t100 SPRSL="E" ARBGB="ZOAUTH" MSGNR="009" TEXT="Wrong password"/>
+  <t100t SPRSL="D" ARBGB="ZOAUTH" STEXT="OAuth library"/>
+  <t100t SPRSL="E" ARBGB="ZOAUTH" STEXT="OAuth library"/>
+ </MSAG>
+ <PROG NAME="Z_OAUTH_SETUP_1_API_KEY" VARCL="X" SUBC="1" CNAM="SE38_UWE" CDAT="20100819" UNAM="SE38_UWE" UDAT="20100826" VERN="000028" RMAND="001" RLOAD="E" FIXPT="X" SDATE="20100901" STIME="173646" IDATE="20100826" ITIME="134143" UCCHECK="X">
+  <textPool>
+   <language SPRAS="D">
+    <textElement ID="I" KEY="B01" ENTRY="Please enter Consumer data" LENGTH="56 "/>
+    <textElement ID="I" KEY="B02" ENTRY="Only needed for multiple consumer per system" LENGTH="89 "/>
+    <textElement ID="I" KEY="B03" ENTRY="HTTP Method" LENGTH="11 "/>
+    <textElement ID="I" KEY="B04" ENTRY="Signature Method" LENGTH="16 "/>
+    <textElement ID="I" KEY="M01" ENTRY="Keys stored successfully" LENGTH="24 "/>
+    <textElement ID="R" ENTRY="OAuth Setup Step 1: Register Consumer" LENGTH="70 "/>
+    <textElement ID="S" KEY="P_HMAC" ENTRY="        HMAC-SHA1 (e.g. Twitter)" LENGTH="32 "/>
+    <textElement ID="S" KEY="P_HTTP" ENTRY="        HTTP (e.g. Twitter)" LENGTH="27 "/>
+    <textElement ID="S" KEY="P_HTTPS" ENTRY="        HTTPS (e.g. Streamwork)" LENGTH="31 "/>
+    <textElement ID="S" KEY="P_NAME" ENTRY="        Consumer Name (optional)" LENGTH="32 "/>
+    <textElement ID="S" KEY="P_PLAIN" ENTRY="        PLAINTEXT (e.g. Streamwork)" LENGTH="35 "/>
+    <textElement ID="S" KEY="P_KEY" ENTRY="D       ." LENGTH="20 "/>
+    <textElement ID="S" KEY="P_SECRET" ENTRY="D       ." LENGTH="23 "/>
+   </language>
+   <language SPRAS="E">
+    <textElement ID="I" KEY="B01" ENTRY="Please enter Consumer data" LENGTH="56 "/>
+    <textElement ID="I" KEY="B02" ENTRY="Only needed for multiple consumer per system" LENGTH="89 "/>
+    <textElement ID="I" KEY="B03" ENTRY="API protocol" LENGTH="30 "/>
+    <textElement ID="I" KEY="B04" ENTRY="Signature Method" LENGTH="16 "/>
+    <textElement ID="I" KEY="M01" ENTRY="Keys stored successfully" LENGTH="24 "/>
+    <textElement ID="R" LENGTH="37 "/>
+    <textElement ID="S" KEY="P_HMAC" ENTRY="        HMAC-SHA1 (e.g. Twitter)" LENGTH="32 "/>
+    <textElement ID="S" KEY="P_HOST" ENTRY="D       ." LENGTH="16 "/>
+    <textElement ID="S" KEY="P_HTTP" ENTRY="        HTTP (e.g. Twitter)" LENGTH="27 "/>
+    <textElement ID="S" KEY="P_HTTPS" ENTRY="        HTTPS (e.g. Streamwork)" LENGTH="31 "/>
+    <textElement ID="S" KEY="P_KEY" ENTRY="D       ." LENGTH="20 "/>
+    <textElement ID="S" KEY="P_NAME" ENTRY="        Consumer Name (optional)" LENGTH="32 "/>
+    <textElement ID="S" KEY="P_PLAIN" ENTRY="        PLAINTEXT (e.g. Streamwork)" LENGTH="35 "/>
+    <textElement ID="S" KEY="P_SECRET" ENTRY="D       ." LENGTH="23 "/>
+   </language>
+  </textPool>
+  <source>*&amp;---------------------------------------------------------------------*
+*&amp; Report  Z_OAUTH_SETUP_1_API_KEY
+*&amp;
+*&amp;---------------------------------------------------------------------*
+
+*--------------------------------------------------------------------*
+*
+* The OAuth library (Part of &quot;Twibap: The ABAP Twitter API&quot;)
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: http://twibap.googlecode.com
+*
+* Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*--------------------------------------------------------------------*
+
+*&amp;---------------------------------------------------------------------*
+*&amp;
+*&amp; Step 1:
+*&amp; - register your application (e.g. at http://dev.twitter.com/apps)
+*&amp; - store consumer keys in SAP (this report)
+*&amp;
+*&amp;---------------------------------------------------------------------*
+
+REPORT  z_oauth_setup_1_api_key.
+
+*--------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE text-b01.
+PARAMETERS: p_key    TYPE zoauth_consumer_key LOWER CASE OBLIGATORY
+          , p_secret TYPE zoauth_consumer_secret LOWER CASE OBLIGATORY
+          , p_host   TYPE zoauth_api_host LOWER CASE OBLIGATORY
+          .
+
+SELECTION-SCREEN SKIP.
+
+&quot;*--- in case of multiple consumer per system (unique consumer name) ---*
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-b02.
+PARAMETERS: p_name   TYPE zoauth_consumer_name.
+SELECTION-SCREEN END OF BLOCK b2.
+
+&quot;*--- API protocol ---*
+SELECTION-SCREEN BEGIN OF BLOCK b3 WITH FRAME TITLE text-b03.
+PARAMETERS: p_http  RADIOBUTTON GROUP b3
+          , p_https RADIOBUTTON GROUP b3
+          .
+SELECTION-SCREEN END OF BLOCK b3.
+
+&quot;*--- Signature Method ---*
+SELECTION-SCREEN BEGIN OF BLOCK b4 WITH FRAME TITLE text-b04.
+PARAMETERS: p_hmac   RADIOBUTTON GROUP b4
+          , p_plain  RADIOBUTTON GROUP b4
+          .
+SELECTION-SCREEN END OF BLOCK b4.
+
+SELECTION-SCREEN END OF BLOCK b1.
+*--------------------------------------------------------------------*
+
+DATA: api_protocol     TYPE zoauth_api_protocol
+    , signature_method TYPE zoauth_signature_method
+    .
+
+*--- transform values ---*
+CASE &apos;X&apos;.
+  WHEN p_http.
+    api_protocol = 1.
+  WHEN p_https.
+    api_protocol = 2.
+ENDCASE.
+
+CASE &apos;X&apos;.
+  WHEN p_plain.
+    signature_method = 0.
+  WHEN p_hmac.
+    signature_method = 1.
+ENDCASE.
+
+*--- set consumer key and secret persistant ---*
+zcl_oauth=&gt;set_consumer_pers(
+  consumer_name         = p_name
+  oauth_consumer_key    = p_key
+  oauth_consumer_secret = p_secret
+  signature_method      = signature_method
+  api_host              = p_host
+  api_protocol          = api_protocol
+  ).
+
+MESSAGE &apos;Keys stored successfully&apos;(m01) TYPE &apos;I&apos;.</source>
+ </PROG>
+ <PROG NAME="Z_OAUTH_SETUP_2_REGISTER_USER" VARCL="X" SUBC="1" CNAM="SE38_UWE" CDAT="20100819" UNAM="SE38_UWE" UDAT="20100826" VERN="000048" RMAND="001" RLOAD="E" FIXPT="X" SDATE="20100901" STIME="173646" IDATE="20100826" ITIME="230234" UCCHECK="X">
+  <textPool>
+   <language SPRAS="D">
+    <textElement ID="I" KEY="B01" ENTRY="Please enter PIN" LENGTH="16 "/>
+    <textElement ID="I" KEY="B02" ENTRY="For which consumer you want to register a user?" LENGTH="47 "/>
+    <textElement ID="I" KEY="T01" ENTRY="Please enter a unique user name" LENGTH="31 "/>
+    <textElement ID="S" KEY="P_CNAME" ENTRY="D       ." LENGTH="21 "/>
+   </language>
+   <language SPRAS="E">
+    <textElement ID="I" KEY="B01" ENTRY="Please enter PIN" LENGTH="16 "/>
+    <textElement ID="I" KEY="B02" ENTRY="For which consumer you want to register a user?" LENGTH="47 "/>
+    <textElement ID="I" KEY="T01" ENTRY="Please enter a unique user name" LENGTH="31 "/>
+    <textElement ID="R" LENGTH="33 "/>
+    <textElement ID="S" KEY="P_CNAME" ENTRY="D       ." LENGTH="21 "/>
+   </language>
+  </textPool>
+  <dynpros>
+   <dynpro PROG="Z_OAUTH_SETUP_2_REGISTER_USER" DNUM="9000" TYPE="M" FNUM="9000" BZMX="5 " BZBR="59 " MILI="192 " MICO="37 " MALI="0 " MACO="0 " NOLI="27 " NOCO="120 " VALP="0 " CUAN="G" SPRA="E" DGEN="20100826" TGEN="140909" DTEXT="">
+    <dynprofield FNAM="%#AUTOTEXT001" DIDX="0005" FLG1="00" FLG2="00" FLG3="00" FILL="R" FMB1="30" FMB2="00" LENG="3B" LINE="01" COLN="02" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AUTH="101" AGLT="00" ADEZ="00" STXT="Please enter the PIN you received from the OAuth Provider"/>
+    <dynprofield FNAM="%#AUTOTEXT002" DIDX="0017" FLG1="00" FLG2="00" FLG3="00" FMB1="30" FMB2="00" LENG="17" LINE="02" COLN="03" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="PIN / Verification Code" RES1="                                                                                                                                                                                                                                                        X"/>
+    <dynprofield FNAM="PIN" DIDX="0019" FLG1="80" FLG2="02" FLG3="A8" FMB1="00" FMB2="00" LENG="19" LINE="02" COLN="1C" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="?________________________"/>
+    <dynprofield FNAM="%#AUTOTEXT003" DIDX="0000" FLG1="00" FLG2="00" FLG3="00" FMB1="30" FMB2="00" LENG="08" LINE="03" COLN="03" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="Password" RES1="                                                                                                                                                                                                                                                        X"/>
+    <dynprofield FNAM="PASSWORD" DIDX="0019" FLG1="80" FLG2="02" FLG3="88" FMB1="04" FMB2="00" LENG="19" LINE="03" COLN="1C" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="_________________________"/>
+    <dynprofield FNAM="%#AUTOTEXT004" DIDX="0000" FLG1="00" FLG2="00" FLG3="00" FMB1="30" FMB2="00" LENG="2C" LINE="04" COLN="0C" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="(optional, to protect your user credentials)"/>
+    <dynprofield DIDX="0000" FLG1="80" FLG2="10" FLG3="00" FMB1="00" FMB2="00" LENG="14" LINE="FF" COLN="01" LTYP="O" LANF="00" LBLK="00" LREP="00" TYPE="CHAR" AGLT="00" ADEZ="00" STXT="____________________"/>
+    <dynproflowsource>PROCESS BEFORE OUTPUT.
+  MODULE status_9000.
+*
+PROCESS AFTER INPUT.
+  MODULE exit_command_9000 AT EXIT-COMMAND.
+  MODULE user_command_9000.</dynproflowsource>
+   </dynpro>
+  </dynpros>
+  <pfstatus>
+   <pfstatus_sta CODE="9000" MODAL="P" PFKCODE="000001" BUTCODE="0001" INT_NOTE="PIN"/>
+   <pfstatus_fun CODE="CANCEL" TEXTNO="001" TYPE="E" TEXT_TYPE="S" TEXT_NAME="ICON_CANCEL" ICON_ID="@0W@" FUN_TEXT="Cancel"/>
+   <pfstatus_fun CODE="SAVE" TEXTNO="001" TEXT_TYPE="S" TEXT_NAME="ICON_SYSTEM_SAVE" ICON_ID="@2L@" FUN_TEXT="Save" INFO_TEXT="Save PIN"/>
+   <pfstatus_but PFK_CODE="000001" CODE="0001" NO="01" PFNO="11"/>
+   <pfstatus_but PFK_CODE="000001" CODE="0001" NO="02" PFNO="12"/>
+   <pfstatus_pfk CODE="000001" PFNO="11" FUNCODE="SAVE" FUNNO="001"/>
+   <pfstatus_pfk CODE="000001" PFNO="12" FUNCODE="CANCEL" FUNNO="001"/>
+   <pfstatus_set STATUS="9000" FUNCTION="CANCEL"/>
+   <pfstatus_set STATUS="9000" FUNCTION="SAVE"/>
+   <pfstatus_doc OBJ_TYPE="P" OBJ_CODE="000001" MODAL="P" INT_NOTE="PIN"/>
+   <pfstatus_doc OBJ_TYPE="B" OBJ_CODE="000001" SUB_CODE="0001" MODAL="P" INT_NOTE="PIN"/>
+   <pfstatus_tit CODE="9000" TEXT="PIN"/>
+  </pfstatus>
+  <source>*&amp;---------------------------------------------------------------------*
+*&amp; Report  Z_OAUTH_SETUP_2_REGISTER_USER
+*&amp;
+*&amp;---------------------------------------------------------------------*
+
+*--------------------------------------------------------------------*
+*
+* The OAuth library (Part of &quot;Twibap: The ABAP Twitter API&quot;)
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: http://twibap.googlecode.com
+*
+* Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*--------------------------------------------------------------------*
+
+*&amp;---------------------------------------------------------------------*
+*&amp;
+*&amp; Step 2:
+*&amp; - Register user (run once per user)
+*&amp;
+*&amp;---------------------------------------------------------------------*
+
+REPORT  z_oauth_setup_2_register_user.
+
+*--- please adjust if not suits the APIs requirements ---*
+CONSTANTS: request_token_url TYPE string
+             VALUE &apos;/oauth/request_token&apos;
+         , authorize_url TYPE string
+             VALUE &apos;/oauth/authorize&apos;
+         , access_token_url TYPE string
+             VALUE &apos;/oauth/access_token&apos;
+         .
+
+*--------------------------------------------------------------------*
+DATA: pin      TYPE string
+    , password TYPE string
+    .
+
+*--------------------------------------------------------------------*
+* selection screen only used in case there exists multiple consumer  *
+*--------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF SCREEN 9010.
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE text-b02.
+PARAMETERS: p_cname TYPE zoauth_consumer_name.
+SELECTION-SCREEN END OF BLOCK b2.
+
+SELECTION-SCREEN END OF SCREEN 9010.
+
+*----------------------------------------------------------------------*
+*       CLASS lcl_user_setup DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS lcl_user_setup DEFINITION.
+
+  PUBLIC SECTION.
+    METHODS: constructor
+           , request_token
+           , access_token
+           .
+
+  PRIVATE SECTION.
+    DATA: oauth             TYPE REF TO zcl_oauth
+        , parameters        TYPE zoauth_key_value_t
+        , oauth_error       TYPE REF TO zcx_oauth_error
+        , error_text        TYPE string
+        , api_host          TYPE zoauth_api_host
+        , api_protocol      TYPE string
+        , signature_method  TYPE zoauth_signature_method
+        .
+
+    METHODS: set_token
+               IMPORTING response_data TYPE string
+           , authorize
+           , save_user_credentials
+              IMPORTING response_data TYPE string
+           , get_screen_name
+              RETURNING value(screen_name) TYPE string
+           .
+
+ENDCLASS.                    &quot;lcl_user_setup DEFINITION
+
+*----------------------------------------------------------------------*
+*       CLASS screen_handler DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS screen_handler DEFINITION FINAL.
+
+  PUBLIC SECTION.
+    CLASS-DATA: user_setup TYPE REF TO lcl_user_setup.
+
+    CLASS-METHODS: status_9000
+                 , exit_command_9000
+                 , user_command_9000
+                 .
+
+ENDCLASS.                    &quot;screen_handler DEFINITION
+
+*
+*******************
+START-OF-SELECTION.
+*******************
+*
+
+  &quot;*--- selection screen only in case there are multiple consumer registered ---*
+  SELECT COUNT( * )
+    INTO sy-dbcnt
+    FROM zoauth_consumer.
+
+  IF sy-dbcnt &gt; 1.
+    CALL SELECTION-SCREEN 9010.
+  ENDIF.
+
+  CALL SCREEN 9000
+    STARTING AT 10 10.
+
+*----------------------------------------------------------------------*
+*       CLASS lcl_user_setup IMPLEMENTATION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS lcl_user_setup IMPLEMENTATION.
+
+*--------------------------------------------------------------------*
+  METHOD constructor.
+
+    TRY .
+        oauth = zcl_oauth=&gt;get_instance( ).
+        oauth-&gt;read_consumer_pers( p_cname ).
+      CATCH zcx_oauth_error INTO oauth_error.
+        error_text = oauth_error-&gt;get_text( ).
+        MESSAGE error_text TYPE &apos;E&apos;.
+    ENDTRY.
+
+    &quot;*--- get API parameters ---*
+    api_host             = oauth-&gt;get_api_host( ).
+
+    CASE oauth-&gt;get_api_protocol( ).
+      WHEN 1.
+        api_protocol = &apos;http://&apos;.
+      WHEN 2.
+        api_protocol = &apos;https://&apos;.
+    ENDCASE.
+
+    signature_method = oauth-&gt;get_signature_method( ).
+
+  ENDMETHOD.                    &quot;constructor
+
+*--------------------------------------------------------------------*
+  METHOD request_token.
+
+    DATA: url             TYPE string
+        , secret          TYPE string
+        , response_data   TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE LINE OF zoauth_key_value_t.
+
+    &quot;*--- create new secret ---*
+    secret = oauth-&gt;get_consumer_secret( ).
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set oauth parameters ---*
+    CLEAR parameters.
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_consumer_key&apos;.
+    &lt;parameter&gt;-value = oauth-&gt;get_consumer_key( ).
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_nonce&apos;.
+    &lt;parameter&gt;-value = oauth-&gt;create_nonce( 8 ).
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_signature_method&apos;.
+
+    CASE signature_method.
+      WHEN 0.
+        &lt;parameter&gt;-value = &apos;PLAINTEXT&apos;.
+
+        &quot;*--- add plaintext signature ---*
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        &lt;parameter&gt;-key = &apos;oauth_signature&apos;.
+        &lt;parameter&gt;-value = oauth-&gt;percent_encode( secret ).
+
+        &quot;*--- only needed for streamwork atm ---*
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        &lt;parameter&gt;-key = &apos;oauth_callback&apos;.
+        &lt;parameter&gt;-value = &apos;oob&apos;.
+
+      WHEN 1.
+        &lt;parameter&gt;-value = &apos;HMAC-SHA1&apos;.
+    ENDCASE.
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_timestamp&apos;.
+    &lt;parameter&gt;-value = oauth-&gt;create_timestamp( ).
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_version&apos;.
+    &lt;parameter&gt;-value = &apos;1.0&apos;.
+
+    oauth-&gt;set_parameters( parameters ).
+
+    &quot;*--- sign message ---*
+    IF signature_method = 1.     &quot;with HMAC-SHA1 signature
+
+      CONCATENATE
+        api_protocol
+        api_host
+        request_token_url
+      INTO url.
+
+      oauth-&gt;set_oauth_url( url ).
+      oauth-&gt;sign_message( ).
+    ENDIF.
+
+    &quot;*--- send request and recieve token ---*
+    url = request_token_url.
+
+    TRY .
+        response_data = oauth-&gt;fetchurl( url ).
+      CATCH zcx_oauth_error INTO oauth_error.
+        error_text = oauth_error-&gt;get_text( ).
+        MESSAGE error_text TYPE &apos;E&apos;.
+    ENDTRY.
+
+    set_token( response_data ).
+
+    &quot;*--- logon to OAuth app and recieve PIN code ---*
+    authorize( ).
+
+  ENDMETHOD.                    &quot;request_token
+
+*--------------------------------------------------------------------*
+  METHOD set_token.
+
+    DATA: data_t             TYPE string_table
+        , dummy              TYPE string
+        , oauth_token        TYPE string
+        , oauth_token_secret TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;data&gt; TYPE string.
+
+    SPLIT response_data AT &apos;&amp;&apos; INTO TABLE data_t.
+
+    LOOP AT data_t
+      ASSIGNING &lt;data&gt;.
+
+      IF &lt;data&gt; CS &apos;oauth_token=&apos;.                          &quot;#EC NOTEXT
+        SPLIT &lt;data&gt; AT &apos;=&apos; INTO dummy oauth_token.
+      ENDIF.
+
+      IF &lt;data&gt; CS &apos;oauth_token_secret=&apos;.                   &quot;#EC NOTEXT
+        SPLIT &lt;data&gt; AT &apos;=&apos; INTO dummy oauth_token_secret.
+      ENDIF.
+
+    ENDLOOP.
+
+    IF oauth_token IS INITIAL OR oauth_token_secret IS INITIAL.
+      WRITE:/ &apos;OAuth token is initial&apos;                      &quot;#EC NOTEXT
+           ,/ &apos;Status: error in API, please try again later&apos; &quot;#EC NOTEXT
+           .
+      RETURN.
+    ENDIF.
+
+    oauth-&gt;set_oauth_token( oauth_token ).
+    oauth-&gt;set_oauth_token_secret( oauth_token_secret ).
+
+  ENDMETHOD.                    &quot;set_token
+
+*--------------------------------------------------------------------*
+  METHOD authorize.
+
+    DATA: oauth_token TYPE string
+        , url         TYPE string
+        .
+
+    oauth_token = oauth-&gt;get_oauth_token( ).
+
+    &quot;*--- authorize always with SSL ---*
+    CONCATENATE
+      &apos;https://&apos;                                            &quot;#EC NOTEXT
+      api_host
+      authorize_url
+      &apos;?oauth_token=&apos;
+      oauth_token
+    INTO url.
+
+    cl_gui_frontend_services=&gt;execute(
+      EXPORTING
+        document               = url
+      EXCEPTIONS
+        cntl_error             = 1
+        error_no_gui           = 2
+        bad_parameter          = 3
+        file_not_found         = 4
+        path_not_found         = 5
+        file_extension_unknown = 6
+        error_execute_failed   = 7
+        synchronous_failed     = 8
+        not_supported_by_gui   = 9
+        OTHERS                 = 10
+        ).
+
+    IF sy-subrc &lt;&gt; 0.
+      WRITE:/ &apos;Probs at execute&apos;.                           &quot;#EC NOTEXT
+      RETURN.
+    ENDIF.
+
+  ENDMETHOD.                    &quot;authorize
+
+*--------------------------------------------------------------------*
+  METHOD access_token.
+
+    DATA: consumer_secret TYPE string
+        , token_secret    TYPE string
+        , token           TYPE string
+        , secret          TYPE string
+        , url             TYPE string
+        , response_data   TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE LINE OF zoauth_key_value_t.
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set oauth parameters ---*
+    CLEAR parameters.
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_consumer_key&apos;.                 &quot;#EC NOTEXT
+    &lt;parameter&gt;-value = oauth-&gt;get_consumer_key( ).
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_nonce&apos;.                        &quot;#EC NOTEXT
+    &lt;parameter&gt;-value = oauth-&gt;create_nonce( 8 ).
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_signature_method&apos;.             &quot;#EC NOTEXT
+    CASE signature_method.
+      WHEN 0.
+        &lt;parameter&gt;-value = &apos;PLAINTEXT&apos;.
+
+        &quot;*--- add plaintext signature ---*
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        &lt;parameter&gt;-key = &apos;oauth_signature&apos;.
+        &lt;parameter&gt;-value = oauth-&gt;percent_encode( secret ).
+
+      WHEN 1.
+        &lt;parameter&gt;-value = &apos;HMAC-SHA1&apos;.
+    ENDCASE.
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_timestamp&apos;.                    &quot;#EC NOTEXT
+    &lt;parameter&gt;-value = oauth-&gt;create_timestamp( ).
+
+    token = oauth-&gt;get_oauth_token( ).
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_token&apos;.                        &quot;#EC NOTEXT
+    &lt;parameter&gt;-value = token.
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_verifier&apos;.                     &quot;#EC NOTEXT
+    &lt;parameter&gt;-value = pin.
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_version&apos;.                      &quot;#EC NOTEXT
+    &lt;parameter&gt;-value = &apos;1.0&apos;.                              &quot;#EC NOTEXT
+
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;oauth_callback&apos;.
+    &lt;parameter&gt;-value = &apos;oob&apos;.
+
+    oauth-&gt;set_parameters( parameters ).
+
+    &quot;*--- sign message ---*
+    IF signature_method = 1.     &quot;with HMAC-SHA1 signature
+
+      CONCATENATE
+        api_protocol
+        api_host
+        request_token_url
+      INTO url.
+
+      oauth-&gt;set_oauth_url( url ).
+      oauth-&gt;sign_message( ).
+    ENDIF.
+
+    &quot;*--- send request and recieve token ---*
+    url = access_token_url.
+
+    TRY .
+        response_data = oauth-&gt;fetchurl( url ).
+      CATCH zcx_oauth_error INTO oauth_error.
+        error_text = oauth_error-&gt;get_text( ).
+        MESSAGE error_text TYPE &apos;E&apos;.
+    ENDTRY.
+
+    &quot;*--- save user credentials --*
+    save_user_credentials( response_data ).
+
+  ENDMETHOD.                    &quot;access_token
+
+*--------------------------------------------------------------------*
+  METHOD save_user_credentials.
+
+    DATA: data_t             TYPE string_table
+        , dummy              TYPE string
+        , oauth_token        TYPE string
+        , oauth_token_secret TYPE string
+        , screen_name        TYPE string
+        , message            TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;data&gt; TYPE string.
+
+    SPLIT response_data AT &apos;&amp;&apos; INTO TABLE data_t.
+
+    LOOP AT data_t
+      ASSIGNING &lt;data&gt;.
+
+      IF &lt;data&gt; CS &apos;oauth_token=&apos;.                          &quot;#EC NOTEXT
+        SPLIT &lt;data&gt; AT &apos;=&apos; INTO dummy oauth_token.
+      ENDIF.
+
+      IF &lt;data&gt; CS &apos;oauth_token_secret=&apos;.                   &quot;#EC NOTEXT
+        SPLIT &lt;data&gt; AT &apos;=&apos; INTO dummy oauth_token_secret.
+      ENDIF.
+
+      IF &lt;data&gt; CS &apos;screen_name=&apos;.                          &quot;#EC NOTEXT
+        SPLIT &lt;data&gt; AT &apos;=&apos; INTO dummy screen_name.
+      ENDIF.
+
+    ENDLOOP.
+
+    IF oauth_token IS INITIAL
+    OR oauth_token_secret IS INITIAL.
+      MESSAGE &apos;API error: OAuth token is initial&apos; TYPE &apos;E&apos;.
+    ENDIF.
+
+    &quot;*--- some providers (e.g. Streamwork) don&apos;t deliver the user name ---*
+    IF screen_name IS INITIAL.
+      screen_name = get_screen_name( ).
+
+      IF screen_name IS INITIAL.  &quot;still initial
+        MESSAGE &apos;Values cannot be saved: User name not entered&apos; TYPE &apos;E&apos;.
+      ENDIF.
+    ENDIF.
+
+    oauth-&gt;set_user_pers(
+      consumer_name      = p_cname
+      screen_name        = screen_name
+      password           = password
+      oauth_token        = oauth_token
+      oauth_token_secret = oauth_token_secret
+      ).
+
+    CONCATENATE
+      &apos;Credentials for User&apos;                                &quot;#EC NOTEXT
+      screen_name
+      &apos;successfully saved&apos;                                  &quot;#EC NOTEXT
+    INTO message SEPARATED BY space.
+
+    MESSAGE message TYPE &apos;I&apos;.
+
+  ENDMETHOD.                    &quot;save_user_credentials
+
+*--------------------------------------------------------------------*
+  METHOD get_screen_name.
+
+    DATA: fields TYPE TABLE OF sval
+        , title  TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;field&gt; TYPE sval.
+
+    title = &apos;Please enter a unique user name&apos;(t01).
+
+    INSERT INITIAL LINE INTO TABLE fields ASSIGNING &lt;field&gt;.
+    &lt;field&gt;-tabname     = &apos;ZOAUTH_USER&apos;.                    &quot;#EC NOTEXT
+    &lt;field&gt;-fieldname   = &apos;USER_NAME&apos;.                      &quot;#EC NOTEXT
+    &lt;field&gt;-field_attr  = &apos;00&apos;.                      &quot;input &quot;#EC NOTEXT
+
+    CALL FUNCTION &apos;POPUP_GET_VALUES&apos;
+      EXPORTING
+        popup_title = title
+      TABLES
+        fields      = fields
+      EXCEPTIONS
+        OTHERS      = 0.
+
+    READ TABLE fields INDEX 1
+      ASSIGNING &lt;field&gt;.
+
+    IF &lt;field&gt; IS ASSIGNED.
+      screen_name = &lt;field&gt;-value.
+    ENDIF.
+
+  ENDMETHOD.                    &quot;get_screen_name
+
+ENDCLASS.                    &quot;lcl_user_setup IMPLEMENTATION
+
+*----------------------------------------------------------------------*
+*       CLASS screen_handler IMPLEMENTATION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS screen_handler IMPLEMENTATION.
+
+*--------------------------------------------------------------------*
+  METHOD status_9000.
+
+    IF sy-pfkey &lt;&gt; &apos;9000&apos;.
+
+      CREATE OBJECT user_setup.
+      user_setup-&gt;request_token( ).
+
+      SET PF-STATUS &apos;9000&apos;.
+      SET TITLEBAR &apos;9000&apos;.
+    ENDIF.
+
+  ENDMETHOD.                    &quot;status_9000
+
+*--------------------------------------------------------------------*
+  METHOD exit_command_9000.
+
+    LEAVE TO SCREEN 0.
+
+  ENDMETHOD.                    &quot;EXIT_COMMAND_9000
+
+*--------------------------------------------------------------------*
+  METHOD user_command_9000.
+
+    DATA: lv_ucomm TYPE syucomm.
+
+    lv_ucomm = sy-ucomm.
+    CLEAR sy-ucomm.
+
+    IF lv_ucomm = &apos;SAVE&apos;.
+      user_setup-&gt;access_token( ).
+      LEAVE TO SCREEN 0.
+    ENDIF.
+
+  ENDMETHOD.                    &quot;user_command_9000
+
+ENDCLASS.                    &quot;screen_handler IMPLEMENTATION
+
+*&amp;---------------------------------------------------------------------*
+*&amp;      Module  STATUS_9000  OUTPUT
+*&amp;---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE status_9000 OUTPUT.
+
+  screen_handler=&gt;status_9000( ).
+
+ENDMODULE.                 &quot; STATUS_9000  OUTPUT
+*&amp;---------------------------------------------------------------------*
+*&amp;      Module  EXIT_COMMAND_9000  INPUT
+*&amp;---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE exit_command_9000 INPUT.
+
+  screen_handler=&gt;exit_command_9000( ).
+
+ENDMODULE.                 &quot; EXIT_COMMAND_9000  INPUT
+*&amp;---------------------------------------------------------------------*
+*&amp;      Module  USER_COMMAND_9000  INPUT
+*&amp;---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+MODULE user_command_9000 INPUT.
+
+  screen_handler=&gt;user_command_9000( ).
+
+ENDMODULE.                 &quot; USER_COMMAND_9000  INPUT</source>
+ </PROG>
+ <TABL TABNAME="ZOAUTH_CONSUMER" DDLANGUAGE="E" TABCLASS="TRANSP" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" CLIDEP="X" DDTEXT="OAuth: Consumer keys" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="235549" CONTFLAG="A" PROZPUFF="000" EXCLASS="4">
+  <dd09l TABNAME="ZOAUTH_CONSUMER" AS4LOCAL="A" AS4VERS="0000" TABKAT="0" TABART="APPL0" SCHFELDANZ="000" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="235549" BUFALLOW="N"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="MANDT" DDLANGUAGE="E" POSITION="0001" KEYFLAG="X" ROLLNAME="MANDT" ADMINFIELD="0" INTTYPE="C" INTLEN="000006" NOTNULL="X" DOMNAME="MANDT" ROUTPUTLEN="000000" HEADLEN="03" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CLNT" LENG="000003" OUTPUTLEN="000003" DECIMALS="000000" ENTITYTAB="T000" MASK="  CLNTE" MASKLEN="0000" DDTEXT="Client" REPTEXT="Cl." SCRTEXT_S="Client" SCRTEXT_M="Client" SCRTEXT_L="Client" DOMNAME3L="MANDT" DEPTH="00" COMPTYPE="E" DEFFDNAME="CLIENT" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="CONSUMER_NAME" DDLANGUAGE="E" POSITION="0002" KEYFLAG="X" ROLLNAME="ZOAUTH_CONSUMER_NAME" ADMINFIELD="0" INTTYPE="C" INTLEN="000060" NOTNULL="X" DOMNAME="ZOAUTH_CONSUMER_NAME" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" ENTITYTAB="ZOAUTH_CONSUMER" MASK="  CHARE" MASKLEN="0000" DDTEXT="OAuth: Consumer Name" REPTEXT="Consumer Name" SCRTEXT_S="Consumer" SCRTEXT_M="Consumer Name" SCRTEXT_L="Consumer Name" DOMNAME3L="ZOAUTH_CONSUMER_NAME" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="CONSUMER_KEY" DDLANGUAGE="E" POSITION="0003" ROLLNAME="ZOAUTH_CONSUMER_KEY" ADMINFIELD="0" INTTYPE="g" INTLEN="000008" ROUTPUTLEN="000000" HEADLEN="12" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="STRG" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="  STRGE" MASKLEN="0000" DDTEXT="OAuth: Consumer Key" REPTEXT="Consumer Key" SCRTEXT_S="Key" SCRTEXT_M="Consumer Key" SCRTEXT_L="Consumer Key" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="CONSUMER_SECRET" DDLANGUAGE="E" POSITION="0004" ROLLNAME="ZOAUTH_CONSUMER_SECRET" ADMINFIELD="0" INTTYPE="g" INTLEN="000008" ROUTPUTLEN="000000" HEADLEN="15" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="STRG" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="  STRGE" MASKLEN="0000" DDTEXT="OAuth: Consumer Secret" REPTEXT="Consumer Secret" SCRTEXT_S="Secret" SCRTEXT_M="Consumer Secret" SCRTEXT_L="Consumer Secret" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="SIGNATURE_METHOD" DDLANGUAGE="E" POSITION="0005" ROLLNAME="ZOAUTH_SIGNATURE_METHOD" ADMINFIELD="0" INTTYPE="N" INTLEN="000002" DOMNAME="ZOAUTH_SIGNATURE_METHOD" ROUTPUTLEN="000000" HEADLEN="16" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="NUMC" LENG="000001" OUTPUTLEN="000001" DECIMALS="000000" VALEXI="X" MASK="  NUMCE" MASKLEN="0000" DDTEXT="OAuth: Signature Method" REPTEXT="Signature Method" SCRTEXT_S="SigMeth" SCRTEXT_M="Sig. Method" SCRTEXT_L="Signature Method" DOMNAME3L="ZOAUTH_SIGNATURE_METHOD" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="API_HOST" DDLANGUAGE="E" POSITION="0006" ROLLNAME="ZOAUTH_API_HOST" ADMINFIELD="0" INTTYPE="g" INTLEN="000008" ROUTPUTLEN="000000" HEADLEN="08" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="STRG" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="  STRGE" MASKLEN="0000" DDTEXT="OAuth: API host" REPTEXT="API host" SCRTEXT_S="API host" SCRTEXT_M="API host" SCRTEXT_L="API host" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_CONSUMER" FIELDNAME="API_PROTOCOL" DDLANGUAGE="E" POSITION="0007" ROLLNAME="ZOAUTH_API_PROTOCOL" ADMINFIELD="0" INTTYPE="X" INTLEN="000004" DOMNAME="ZOAUTH_API_PROTOCOL" ROUTPUTLEN="000000" HEADLEN="12" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="INT4" LENG="000010" OUTPUTLEN="000011" DECIMALS="000000" VALEXI="X" MASK="  INT4E" MASKLEN="0000" DDTEXT="OAuth: API protocol" REPTEXT="API Protocol" SCRTEXT_S="Protocol" SCRTEXT_M="API Protocol" SCRTEXT_L="API Protocol" DOMNAME3L="ZOAUTH_API_PROTOCOL" SHLPORIGIN="F" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+ </TABL>
+ <TABL TABNAME="ZOAUTH_USER" DDLANGUAGE="E" TABCLASS="TRANSP" DATMIN="0000000000" DATMAX="0000000000" DATAVG="0000000000" CLIDEP="X" DDTEXT="OAuth: User Credentials" AUTHCLASS="00" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="235630" CONTFLAG="A" PROZPUFF="000" EXCLASS="4">
+  <dd09l TABNAME="ZOAUTH_USER" AS4LOCAL="A" AS4VERS="0000" TABKAT="0" TABART="APPL0" SCHFELDANZ="000" AS4USER="SE38_UWE" AS4DATE="20100826" AS4TIME="235630" BUFALLOW="N"/>
+  <dd03p TABNAME="ZOAUTH_USER" FIELDNAME="MANDT" DDLANGUAGE="E" POSITION="0001" KEYFLAG="X" ROLLNAME="MANDT" ADMINFIELD="0" INTTYPE="C" INTLEN="000006" NOTNULL="X" DOMNAME="MANDT" ROUTPUTLEN="000000" HEADLEN="03" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="D" DATATYPE="CLNT" LENG="000003" OUTPUTLEN="000003" DECIMALS="000000" ENTITYTAB="T000" MASK="  CLNTE" MASKLEN="0000" DDTEXT="Client" REPTEXT="Cl." SCRTEXT_S="Client" SCRTEXT_M="Client" SCRTEXT_L="Client" DOMNAME3L="MANDT" DEPTH="00" COMPTYPE="E" DEFFDNAME="CLIENT" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_USER" FIELDNAME="CONSUMER_NAME" DDLANGUAGE="E" POSITION="0002" KEYFLAG="X" ROLLNAME="ZOAUTH_CONSUMER_NAME" CHECKTABLE="ZOAUTH_CONSUMER" ADMINFIELD="0" INTTYPE="C" INTLEN="000060" NOTNULL="X" DOMNAME="ZOAUTH_CONSUMER_NAME" ROUTPUTLEN="000000" HEADLEN="13" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" ENTITYTAB="ZOAUTH_CONSUMER" MASK="  CHARE" MASKLEN="0000" DDTEXT="OAuth: Consumer Name" REPTEXT="Consumer Name" SCRTEXT_S="Consumer" SCRTEXT_M="Consumer Name" SCRTEXT_L="Consumer Name" DOMNAME3L="ZOAUTH_CONSUMER_NAME" SHLPORIGIN="P" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_USER" FIELDNAME="USER_NAME" DDLANGUAGE="E" POSITION="0003" KEYFLAG="X" ROLLNAME="ZOAUTH_USER_NAME" ADMINFIELD="0" INTTYPE="C" INTLEN="000060" NOTNULL="X" ROUTPUTLEN="000000" HEADLEN="30" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="CHAR" LENG="000030" OUTPUTLEN="000030" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="OAuth: User Name" REPTEXT="User Name" SCRTEXT_S="User" SCRTEXT_M="User Name" SCRTEXT_L="User Name" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_USER" FIELDNAME="PASSWORD_HASH" DDLANGUAGE="E" POSITION="0004" ROLLNAME="HASH160" ADMINFIELD="0" INTTYPE="C" INTLEN="000080" ROUTPUTLEN="000000" HEADLEN="60" SCRLEN1="10" SCRLEN2="20" SCRLEN3="40" DTELMASTER="D" DATATYPE="CHAR" LENG="000040" OUTPUTLEN="000040" DECIMALS="000000" MASK="  CHARE" MASKLEN="0000" DDTEXT="Hash Value (160 Bits)" REPTEXT="Hash Value (160 Bits)" SCRTEXT_S="Hash Value" SCRTEXT_M="Hash Value" SCRTEXT_L="Hash Value (160 Bits)" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_USER" FIELDNAME="TOKEN" DDLANGUAGE="E" POSITION="0005" ROLLNAME="ZOAUTH_TOKEN" ADMINFIELD="0" INTTYPE="g" INTLEN="000008" ROUTPUTLEN="000000" HEADLEN="05" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="STRG" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="  STRGE" MASKLEN="0000" DDTEXT="OAuth: Token" REPTEXT="Token" SCRTEXT_S="Token" SCRTEXT_M="Token" SCRTEXT_L="Token" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd03p TABNAME="ZOAUTH_USER" FIELDNAME="TOKEN_SECRET" DDLANGUAGE="E" POSITION="0006" ROLLNAME="ZOAUTH_TOKEN_SECRET" ADMINFIELD="0" INTTYPE="g" INTLEN="000008" ROUTPUTLEN="000000" HEADLEN="12" SCRLEN1="10" SCRLEN2="15" SCRLEN3="20" DTELMASTER="E" DATATYPE="STRG" LENG="000000" OUTPUTLEN="000000" DECIMALS="000000" MASK="  STRGE" MASKLEN="0000" DDTEXT="OAuth: Token Secret" REPTEXT="Token Secret" SCRTEXT_S="Secret" SCRTEXT_M="Token Secret" SCRTEXT_L="Token Secret" DEPTH="00" COMPTYPE="E" EXCLASS="0" DBPOSITION="0000"/>
+  <dd05m TABNAME="ZOAUTH_USER" FIELDNAME="CONSUMER_NAME" FORTABLE="ZOAUTH_USER" FORKEY="MANDT" CHECKTABLE="ZOAUTH_CONSUMER" CHECKFIELD="MANDT" PRIMPOS="0001" DOMNAME="MANDT" DATATYPE="CLNT" LENG="000003"/>
+  <dd05m TABNAME="ZOAUTH_USER" FIELDNAME="CONSUMER_NAME" FORTABLE="ZOAUTH_USER" FORKEY="CONSUMER_NAME" CHECKTABLE="ZOAUTH_CONSUMER" CHECKFIELD="CONSUMER_NAME" PRIMPOS="0002" DOMNAME="ZOAUTH_CONSUMER_NAME" DATATYPE="CHAR" LENG="000030"/>
+  <dd08v TABNAME="ZOAUTH_USER" FIELDNAME="CONSUMER_NAME" DDLANGUAGE="E" CHECKTABLE="ZOAUTH_CONSUMER"/>
+ </TABL>
+ <TTYP TYPENAME="ZOAUTH_KEY_VALUE_T" DDLANGUAGE="E" ROWTYPE="ZJSON_KEY_VALUE" ROWKIND="S" DATATYPE="STRU" LENG="000000" DECIMALS="000000" ACCESSMODE="T" KEYDEF="D" KEYKIND="N" KEYFDCOUNT="0000" AS4USER="SE38_UWE" AS4DATE="20100819" AS4TIME="142929" DDTEXT="OAuth: HTTP Parameter table" TYPELEN="000016" CTLENG="000000" CTDECIMALS="000000" OCCURS="00000"/>
+</nugget>

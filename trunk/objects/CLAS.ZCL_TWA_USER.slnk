@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" UUID="000C293B231B1EE28D94CF3B9DCFF1ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_USER DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_user DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_USER
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor
+      IMPORTING
+        !id TYPE string OPTIONAL
+        !name TYPE string OPTIONAL
+        !screen_name TYPE string OPTIONAL
+        !location TYPE string OPTIONAL
+        !description TYPE string OPTIONAL
+        !profile_image_url TYPE string OPTIONAL
+        !profile_background_tile TYPE string OPTIONAL
+        !profile_background_image_url TYPE string OPTIONAL
+        !profile_sidebar_fill_color TYPE string OPTIONAL
+        !profile_background_color TYPE string OPTIONAL
+        !profile_link_color TYPE string OPTIONAL
+        !profile_text_color TYPE string OPTIONAL
+        !protected TYPE string OPTIONAL
+        !utc_offset TYPE i OPTIONAL
+        !time_zone TYPE string OPTIONAL
+        !followers_count TYPE i OPTIONAL
+        !friends_count TYPE i OPTIONAL
+        !statuses_count TYPE i OPTIONAL
+        !favourites_count TYPE i OPTIONAL
+        !url TYPE string OPTIONAL
+        !status TYPE REF TO zcl_twa_status OPTIONAL .
+    CLASS-METHODS newfromjson
+      IMPORTING
+        !json TYPE string
+      RETURNING
+        value(user) TYPE REF TO zcl_twa_user .
+    METHODS getid
+      RETURNING
+        value(id) TYPE string .
+    METHODS setid
+      IMPORTING
+        !id TYPE string .
+    METHODS getname
+      RETURNING
+        value(name) TYPE string .
+    METHODS setname
+      IMPORTING
+        !name TYPE string .
+    METHODS getscreenname
+      RETURNING
+        value(screen_name) TYPE string .
+    METHODS setscreenname
+      IMPORTING
+        !screen_name TYPE string .
+    METHODS getlocation
+      RETURNING
+        value(location) TYPE string .
+    METHODS setlocation
+      IMPORTING
+        !location TYPE string .
+    METHODS getdescription
+      RETURNING
+        value(description) TYPE string .
+    METHODS setdescription
+      IMPORTING
+        !description TYPE string .
+    METHODS geturl
+      RETURNING
+        value(url) TYPE string .
+    METHODS seturl
+      IMPORTING
+        !url TYPE string .
+    METHODS getprofileimageurl
+      RETURNING
+        value(profile_image_url) TYPE string .
+    METHODS setprofileimageurl
+      IMPORTING
+        !profile_image_url TYPE string .
+    METHODS getprofilebackgroundtile
+      RETURNING
+        value(profile_background_tile) TYPE string .
+    METHODS setprofilebackgroundtile
+      IMPORTING
+        !profile_background_tile TYPE string .
+    METHODS getprofilebackgroundimageurl
+      RETURNING
+        value(profile_background_image_url) TYPE string .
+    METHODS setprofilebackgroundimageurl
+      IMPORTING
+        !profile_background_image_url TYPE string .
+    METHODS getprofilesidebarfillcolor
+      RETURNING
+        value(profile_sidebar_fill_color) TYPE string .
+    METHODS setprofilesidebarfillcolor
+      IMPORTING
+        !profile_sidebar_fill_color TYPE string .
+    METHODS getprofilebackgroundcolor
+      RETURNING
+        value(profile_background_color) TYPE string .
+    METHODS setprofilebackgroundcolor
+      IMPORTING
+        !profile_background_color TYPE string .
+    METHODS getprofilelinkcolor
+      RETURNING
+        value(profile_link_color) TYPE string .
+    METHODS setprofilelinkcolor
+      IMPORTING
+        !profile_link_color TYPE string .
+    METHODS getprofiletextcolor
+      RETURNING
+        value(profile_text_color) TYPE string .
+    METHODS setprofiletextcolor
+      IMPORTING
+        !profile_text_color TYPE string .
+    METHODS getprotected
+      RETURNING
+        value(protected) TYPE string .
+    METHODS setprotected
+      IMPORTING
+        !protected TYPE string .
+    METHODS getutcoffset
+      RETURNING
+        value(utc_offset) TYPE i .
+    METHODS setutcoffset
+      IMPORTING
+        !utc_offset TYPE i .
+    METHODS gettimezone
+      RETURNING
+        value(time_zone) TYPE string .
+    METHODS settimezone
+      IMPORTING
+        !time_zone TYPE string .
+    METHODS getstatus
+      RETURNING
+        value(status) TYPE REF TO zcl_twa_status .
+    METHODS setstatus
+      IMPORTING
+        !status TYPE REF TO zcl_twa_status .
+    METHODS getfriendscount
+      RETURNING
+        value(friends_count) TYPE i .
+    METHODS setfriendscount
+      IMPORTING
+        !friends_count TYPE i .
+    METHODS getfollowerscount
+      RETURNING
+        value(followers_count) TYPE i .
+    METHODS setfollowerscount
+      IMPORTING
+        !followers_count TYPE i .
+    METHODS getstatusescount
+      RETURNING
+        value(statuses_count) TYPE i .
+    METHODS setstatusescount
+      IMPORTING
+        !statuses_count TYPE i .
+    METHODS getfavouritescount
+      RETURNING
+        value(favourites_count) TYPE i .
+    METHODS setfavouritescount
+      IMPORTING
+        !favourites_count TYPE i .
+*&quot;* protected components of class ZCL_TWA_USER
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_USER
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA id TYPE string .
+    DATA name TYPE string .
+    DATA screen_name TYPE string .
+    DATA location TYPE string .
+    DATA description TYPE string .
+    DATA profile_image_url TYPE string .
+    DATA profile_background_tile TYPE string .
+    DATA profile_background_image_url TYPE string .
+    DATA profile_sidebar_fill_color TYPE string .
+    DATA profile_background_color TYPE string .
+    DATA profile_link_color TYPE string .
+    DATA profile_text_color TYPE string .
+    DATA protected TYPE string .
+    DATA utc_offset TYPE string .
+    DATA time_zone TYPE string .
+    DATA followers_count TYPE i .
+    DATA friends_count TYPE i .
+    DATA statuses_count TYPE i .
+    DATA favourites_count TYPE i .
+    DATA url TYPE string .
+    DATA status TYPE REF TO zcl_twa_status .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="DESCRIPTION" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="5 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="FAVOURITES_COUNT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="19 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="I" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="FOLLOWERS_COUNT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="16 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="I" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="FRIENDS_COUNT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="17 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="I" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="LOCATION" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="4 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="NAME" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="2 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_BACKGROUND_COLOR" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="10 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_BACKGROUND_IMAGE_URL" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="8 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_BACKGROUND_TILE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="7 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_IMAGE_URL" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="6 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_LINK_COLOR" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="11 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_SIDEBAR_FILL_COLOR" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="9 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROFILE_TEXT_COLOR" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="12 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="PROTECTED" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="13 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="SCREEN_NAME" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="3 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" EXPOSURE="0" STATE="1" EDITORDER="21 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_TWA_STATUS" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="STATUSES_COUNT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="18 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="I" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="TIME_ZONE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="15 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="URL" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="20 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_USER" CMPNAME="UTC_OFFSET" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="14 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="LOCATION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="DESCRIPTION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_IMAGE_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="6 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_BACKGROUND_TILE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="7 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_BACKGROUND_IMAGE_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="8 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_SIDEBAR_FILL_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="9 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_BACKGROUND_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="10 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_LINK_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="11 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROFILE_TEXT_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="12 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="PROTECTED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="13 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="UTC_OFFSET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="14 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="TIME_ZONE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="15 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="FOLLOWERS_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="16 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="FRIENDS_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="17 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="STATUSES_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="18 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="FAVOURITES_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="19 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="20 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="CONSTRUCTOR" SCONAME="STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" CMPTYPE="1" MTDTYPE="2" EDITORDER="21 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_STATUS" PAROPTIONL="X"/>
+  <source>METHOD constructor.
+
+    me-&gt;id = id.
+    me-&gt;name = name.
+    me-&gt;screen_name = screen_name.
+    me-&gt;location = location.
+    me-&gt;description = description.
+    me-&gt;profile_image_url = profile_image_url.
+    me-&gt;profile_background_tile = profile_background_tile.
+    me-&gt;profile_background_image_url = profile_background_image_url.
+    me-&gt;profile_sidebar_fill_color = profile_sidebar_fill_color.
+    me-&gt;profile_background_color = profile_background_color.
+    me-&gt;profile_link_color = profile_link_color.
+    me-&gt;profile_text_color = profile_text_color.
+    me-&gt;protected = protected.
+    me-&gt;utc_offset = utc_offset.
+    me-&gt;time_zone = time_zone.
+    me-&gt;followers_count = followers_count.
+    me-&gt;friends_count = friends_count.
+    me-&gt;statuses_count = statuses_count.
+    me-&gt;favourites_count = favourites_count.
+    me-&gt;url = url.
+    me-&gt;status = status.
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETDESCRIPTION" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="11 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETDESCRIPTION" SCONAME="DESCRIPTION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getdescription.
+
+    description = me-&gt;description.
+
+  ENDMETHOD.                    &quot;GETDESCRIPTION</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETFAVOURITESCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="43 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETFAVOURITESCOUNT" SCONAME="FAVOURITES_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getfavouritescount.
+
+    favourites_count = me-&gt;favourites_count.
+
+  ENDMETHOD.                    &quot;GETFAVOURITESCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETFOLLOWERSCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="39 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETFOLLOWERSCOUNT" SCONAME="FOLLOWERS_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getfollowerscount.
+
+    followers_count = me-&gt;followers_count.
+
+  ENDMETHOD.                    &quot;GETFOLLOWERSCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETFRIENDSCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="37 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETFRIENDSCOUNT" SCONAME="FRIENDS_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getfriendscount.
+
+    friends_count = me-&gt;friends_count.
+
+  ENDMETHOD.                    &quot;GETFRIENDSCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETID" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getid.
+
+    id = me-&gt;id.
+
+  ENDMETHOD.                    &quot;GETID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETLOCATION" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="9 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETLOCATION" SCONAME="LOCATION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getlocation.
+
+    location = me-&gt;location.
+
+  ENDMETHOD.                    &quot;GETLOCATION</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETNAME" SCONAME="NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getname.
+
+    name = me-&gt;name.
+
+  ENDMETHOD.                    &quot;GETNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEBACKGROUNDCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="23 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEBACKGROUNDCOLOR" SCONAME="PROFILE_BACKGROUND_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofilebackgroundcolor.
+
+    profile_background_color = me-&gt;profile_background_color.
+
+  ENDMETHOD.                    &quot;GETPROFILEBACKGROUNDCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEBACKGROUNDIMAGEURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="19 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEBACKGROUNDIMAGEURL" SCONAME="PROFILE_BACKGROUND_IMAGE_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofilebackgroundimageurl.
+
+    profile_background_image_url = me-&gt;profile_background_image_url.
+
+  ENDMETHOD.                    &quot;GETPROFILEBACKGROUNDIMAGEURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEBACKGROUNDTILE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="17 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEBACKGROUNDTILE" SCONAME="PROFILE_BACKGROUND_TILE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofilebackgroundtile.
+
+    profile_background_tile = me-&gt;profile_background_tile.
+
+  ENDMETHOD.                    &quot;GETPROFILEBACKGROUNDTILE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEIMAGEURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="15 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILEIMAGEURL" SCONAME="PROFILE_IMAGE_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofileimageurl.
+
+    profile_image_url = me-&gt;profile_image_url.
+
+  ENDMETHOD.                    &quot;GETPROFILEIMAGEURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILELINKCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="25 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILELINKCOLOR" SCONAME="PROFILE_LINK_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofilelinkcolor.
+
+    profile_link_color = me-&gt;profile_link_color.
+
+  ENDMETHOD.                    &quot;GETPROFILELINKCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILESIDEBARFILLCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="21 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILESIDEBARFILLCOLOR" SCONAME="PROFILE_SIDEBAR_FILL_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofilesidebarfillcolor.
+
+    profile_sidebar_fill_color = me-&gt;profile_sidebar_fill_color.
+
+  ENDMETHOD.                    &quot;GETPROFILESIDEBARFILLCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILETEXTCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="27 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROFILETEXTCOLOR" SCONAME="PROFILE_TEXT_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprofiletextcolor.
+
+    profile_text_color = me-&gt;profile_text_color.
+
+  ENDMETHOD.                    &quot;GETPROFILETEXTCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROTECTED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="29 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETPROTECTED" SCONAME="PROTECTED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getprotected.
+
+    protected = me-&gt;protected.
+
+  ENDMETHOD.                    &quot;GETPROTECTED</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETSCREENNAME" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getscreenname.
+
+    screen_name = me-&gt;screen_name.
+
+  ENDMETHOD.                    &quot;GETSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETSTATUS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="35 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETSTATUS" SCONAME="STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_STATUS"/>
+  <source>METHOD getstatus.
+
+    status = me-&gt;status.
+
+  ENDMETHOD.                    &quot;GETSTATUS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETSTATUSESCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="41 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETSTATUSESCOUNT" SCONAME="STATUSES_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getstatusescount.
+
+    statuses_count = me-&gt;statuses_count.
+
+  ENDMETHOD.                    &quot;GETSTATUSESCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETTIMEZONE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="33 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETTIMEZONE" SCONAME="TIME_ZONE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD gettimezone.
+
+    time_zone = me-&gt;time_zone.
+
+  ENDMETHOD.                    &quot;GETTIMEZONE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="13 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETURL" SCONAME="URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD geturl.
+
+    url = me-&gt;url.
+
+  ENDMETHOD.                    &quot;GETURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="GETUTCOFFSET" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="31 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="GETUTCOFFSET" SCONAME="UTC_OFFSET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getutcoffset.
+
+    utc_offset = me-&gt;utc_offset.
+
+  ENDMETHOD.                    &quot;GETUTCOFFSET</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="NEWFROMJSON" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="NEWFROMJSON" SCONAME="JSON" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="NEWFROMJSON" SCONAME="USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD newfromjson.
+
+    DATA: json_doc                     TYPE REF TO zcl_json_document
+        , id                           TYPE string
+        , name                         TYPE string
+        , screen_name                  TYPE string
+        , location                     TYPE string
+        , description                  TYPE string
+        , profile_image_url            TYPE string
+        , profile_background_tile      TYPE string
+        , profile_background_image_url TYPE string
+        , profile_sidebar_fill_color   TYPE string
+        , profile_background_color     TYPE string
+        , profile_link_color           TYPE string
+        , profile_text_color           TYPE string
+        , protected                    TYPE string
+        , utc_offset                   TYPE i
+        , time_zone                    TYPE string
+        , followers_count              TYPE i
+        , friends_count                TYPE i
+        , statuses_count               TYPE i
+        , favourites_count             TYPE i
+        , url                          TYPE string
+        , status                       TYPE REF TO zcl_twa_status
+        , status_json                  TYPE string
+        .
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    id                           = json_doc-&gt;get_value( &apos;id&apos; ).
+    name                         = json_doc-&gt;get_value( &apos;name&apos; ).
+    screen_name                  = json_doc-&gt;get_value( &apos;screen_name&apos; ).
+    location                     = json_doc-&gt;get_value( &apos;location&apos; ).
+    description                  = json_doc-&gt;get_value( &apos;description&apos; ).
+    profile_image_url            = json_doc-&gt;get_value( &apos;profile_image_url&apos; ).
+    profile_background_tile      = json_doc-&gt;get_value( &apos;profile_background_tile&apos; ).
+    profile_background_image_url = json_doc-&gt;get_value( &apos;profile_background_image_url&apos; ).
+    profile_sidebar_fill_color   = json_doc-&gt;get_value( &apos;profile_sidebar_fill_color&apos; ).
+    profile_background_color     = json_doc-&gt;get_value( &apos;profile_background_color&apos; ).
+    profile_link_color           = json_doc-&gt;get_value( &apos;profile_link_color&apos; ).
+    profile_text_color           = json_doc-&gt;get_value( &apos;profile_text_color&apos; ).
+    protected                    = json_doc-&gt;get_value( &apos;protected&apos; ).
+    utc_offset                   = json_doc-&gt;get_value_int( &apos;utc_offset&apos; ).
+    time_zone                    = json_doc-&gt;get_value( &apos;time_zone&apos; ).
+    followers_count              = json_doc-&gt;get_value_int( &apos;followers_count&apos; ).
+    friends_count                = json_doc-&gt;get_value_int( &apos;friends_count&apos; ).
+    statuses_count               = json_doc-&gt;get_value_int( &apos;statuses_count&apos; ).
+    favourites_count             = json_doc-&gt;get_value_int( &apos;favourites_count&apos; ).
+    url                          = json_doc-&gt;get_value( &apos;url&apos; ).
+
+    &quot;*--- create status object ---*
+    status_json = json_doc-&gt;get_value( &apos;status&apos; ).
+
+    IF status_json IS NOT INITIAL.
+      status = zcl_twa_status=&gt;newfromjson( status_json ).
+    ENDIF.
+
+    CREATE OBJECT user
+      EXPORTING
+        id                           = id
+        name                         = name
+        screen_name                  = screen_name
+        location                     = location
+        description                  = description
+        profile_image_url            = profile_image_url
+        profile_background_tile      = profile_background_tile
+        profile_background_image_url = profile_background_image_url
+        profile_sidebar_fill_color   = profile_sidebar_fill_color
+        profile_background_color     = profile_background_color
+        profile_link_color           = profile_link_color
+        profile_text_color           = profile_text_color
+        protected                    = protected
+        utc_offset                   = utc_offset
+        time_zone                    = time_zone
+        followers_count              = followers_count
+        friends_count                = friends_count
+        statuses_count               = statuses_count
+        favourites_count             = favourites_count
+        url                          = url
+        status                       = status.
+
+  ENDMETHOD.                    &quot;NEWFROMJSON</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETDESCRIPTION" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="12 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETDESCRIPTION" SCONAME="DESCRIPTION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setdescription.
+
+    me-&gt;description = description.
+
+  ENDMETHOD.                    &quot;SETDESCRIPTION</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETFAVOURITESCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="44 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETFAVOURITESCOUNT" SCONAME="FAVOURITES_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setfavouritescount.
+
+    me-&gt;favourites_count = favourites_count.
+
+  ENDMETHOD.                    &quot;SETFAVOURITESCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETFOLLOWERSCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="40 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETFOLLOWERSCOUNT" SCONAME="FOLLOWERS_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setfollowerscount.
+
+    me-&gt;followers_count = followers_count.
+
+  ENDMETHOD.                    &quot;SETFOLLOWERSCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETFRIENDSCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="38 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETFRIENDSCOUNT" SCONAME="FRIENDS_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setfriendscount.
+
+    me-&gt;friends_count = friends_count.
+
+  ENDMETHOD.                    &quot;SETFRIENDSCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETID" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setid.
+
+    me-&gt;id = id.
+
+  ENDMETHOD.                    &quot;SETID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETLOCATION" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="10 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETLOCATION" SCONAME="LOCATION" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setlocation.
+
+    me-&gt;location = location.
+
+  ENDMETHOD.                    &quot;SETLOCATION</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETNAME" SCONAME="NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setname.
+
+    me-&gt;name = name.
+
+  ENDMETHOD.                    &quot;SETNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEBACKGROUNDCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="24 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEBACKGROUNDCOLOR" SCONAME="PROFILE_BACKGROUND_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofilebackgroundcolor.
+
+    me-&gt;profile_background_color = profile_background_color.
+
+  ENDMETHOD.                    &quot;SETPROFILEBACKGROUNDCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEBACKGROUNDIMAGEURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="20 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEBACKGROUNDIMAGEURL" SCONAME="PROFILE_BACKGROUND_IMAGE_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofilebackgroundimageurl.
+
+    me-&gt;profile_background_image_url = profile_background_image_url.
+
+  ENDMETHOD.                    &quot;SETPROFILEBACKGROUNDIMAGEURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEBACKGROUNDTILE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="18 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEBACKGROUNDTILE" SCONAME="PROFILE_BACKGROUND_TILE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofilebackgroundtile.
+
+    me-&gt;profile_background_tile = profile_background_tile.
+
+  ENDMETHOD.                    &quot;SETPROFILEBACKGROUNDTILE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEIMAGEURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="16 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILEIMAGEURL" SCONAME="PROFILE_IMAGE_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofileimageurl.
+
+    me-&gt;profile_image_url = profile_image_url.
+
+  ENDMETHOD.                    &quot;SETPROFILEIMAGEURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILELINKCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="26 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILELINKCOLOR" SCONAME="PROFILE_LINK_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofilelinkcolor.
+
+    me-&gt;profile_link_color = profile_link_color.
+
+  ENDMETHOD.                    &quot;SETPROFILELINKCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILESIDEBARFILLCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="22 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILESIDEBARFILLCOLOR" SCONAME="PROFILE_SIDEBAR_FILL_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofilesidebarfillcolor.
+
+    me-&gt;profile_sidebar_fill_color = profile_sidebar_fill_color.
+
+  ENDMETHOD.                    &quot;SETPROFILESIDEBARFILLCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILETEXTCOLOR" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="28 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROFILETEXTCOLOR" SCONAME="PROFILE_TEXT_COLOR" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprofiletextcolor.
+
+    me-&gt;profile_text_color = profile_text_color.
+
+  ENDMETHOD.                    &quot;SETPROFILETEXTCOLOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROTECTED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="30 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETPROTECTED" SCONAME="PROTECTED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setprotected.
+
+    me-&gt;protected = protected.
+
+  ENDMETHOD.                    &quot;SETPROTECTED</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETSCREENNAME" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setscreenname.
+
+    me-&gt;screen_name = screen_name.
+
+  ENDMETHOD.                    &quot;SETSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETSTATUS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="36 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETSTATUS" SCONAME="STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_STATUS"/>
+  <source>METHOD setstatus.
+
+    me-&gt;status = status.
+
+  ENDMETHOD.                    &quot;SETSTATUS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETSTATUSESCOUNT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="42 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETSTATUSESCOUNT" SCONAME="STATUSES_COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setstatusescount.
+
+    me-&gt;statuses_count = statuses_count.
+
+  ENDMETHOD.                    &quot;SETSTATUSESCOUNT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETTIMEZONE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="34 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETTIMEZONE" SCONAME="TIME_ZONE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD settimezone.
+
+    me-&gt;time_zone = time_zone.
+
+  ENDMETHOD.                    &quot;SETTIMEZONE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="14 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETURL" SCONAME="URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD seturl.
+
+    me-&gt;url = url.
+
+  ENDMETHOD.                    &quot;SETURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER" CMPNAME="SETUTCOFFSET" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="32 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER" CMPNAME="SETUTCOFFSET" SCONAME="UTC_OFFSET" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setutcoffset.
+
+    me-&gt;utc_offset = utc_offset.
+
+  ENDMETHOD.                    &quot;SETUTCOFFSET</source>
+ </method>
+</CLAS>

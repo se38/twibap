@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_DM" VERSION="1" LANGU="E" DESCRIPT="Twitter Direct Message" UUID="000C293B231B1EE28D94CFFBD769D1ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_DM  DEFINITIO
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_dm DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_DM
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor
+      IMPORTING
+        !created_at TYPE string OPTIONAL
+        !sender_screen_name TYPE string OPTIONAL
+        !sender TYPE REF TO zcl_twa_user OPTIONAL
+        !text TYPE string OPTIONAL
+        !recipient_screen_name TYPE string OPTIONAL
+        !id TYPE string OPTIONAL
+        !recipient TYPE REF TO zcl_twa_user OPTIONAL
+        !recipient_id TYPE string OPTIONAL
+        !sender_id TYPE string OPTIONAL .
+    CLASS-METHODS newfromjson
+      IMPORTING
+        !json TYPE string
+      RETURNING
+        value(dm) TYPE REF TO zcl_twa_dm .
+    METHODS getcreatedat
+      RETURNING
+        value(created_at) TYPE string.
+    METHODS setcreatedat
+    IMPORTING
+      !created_at TYPE string .
+    METHODS getsenderscreenname
+  RETURNING
+    value(sender_screen_name) TYPE string.
+    METHODS setsenderscreenname
+    IMPORTING
+      !sender_screen_name TYPE string .
+    METHODS getsender
+  RETURNING
+    value(sender) TYPE REF TO zcl_twa_user.
+    METHODS setsender
+    IMPORTING
+      !sender TYPE REF TO zcl_twa_user.
+    METHODS gettext
+  RETURNING
+    value(text) TYPE string.
+    METHODS settext
+    IMPORTING
+      !text TYPE string .
+    METHODS getrecipientscreenname
+  RETURNING
+    value(recipient_screen_name) TYPE string.
+    METHODS setrecipientscreenname
+    IMPORTING
+      !recipient_screen_name TYPE string .
+    METHODS getid
+  RETURNING
+    value(id) TYPE string.
+    METHODS setid
+    IMPORTING
+      !id TYPE string .
+    METHODS getrecipient
+  RETURNING
+    value(recipient) TYPE REF TO zcl_twa_user.
+    METHODS setrecipient
+    IMPORTING
+      !recipient TYPE REF TO zcl_twa_user.
+    METHODS getrecipientid
+  RETURNING
+    value(recipient_id) TYPE string.
+    METHODS setrecipientid
+    IMPORTING
+      !recipient_id TYPE string .
+    METHODS getsenderid
+  RETURNING
+    value(sender_id) TYPE string.
+    METHODS setsenderid
+    IMPORTING
+      !sender_id TYPE string .</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_DM
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA created_at TYPE string .
+    DATA sender_screen_name TYPE string .
+    DATA sender TYPE REF TO zcl_twa_user .
+    DATA text TYPE string .
+    DATA recipient_screen_name TYPE string .
+    DATA id TYPE string .
+    DATA recipient TYPE REF TO zcl_twa_user .
+    DATA recipient_id TYPE string .
+    DATA sender_id TYPE string .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="CREATED_AT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="6 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="RECIPIENT" VERSION="1" LANGU="E" DESCRIPT="Twitter User" EXPOSURE="0" STATE="1" EDITORDER="7 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_TWA_USER" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="RECIPIENT_ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="8 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="RECIPIENT_SCREEN_NAME" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="5 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="SENDER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" EXPOSURE="0" STATE="1" EDITORDER="3 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_TWA_USER" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="SENDER_ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="9 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="SENDER_SCREEN_NAME" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="2 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_DM" CMPNAME="TEXT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="4 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="SENDER_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="SENDER" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_USER" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="RECIPIENT_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="6 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="RECIPIENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="7 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_USER" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="RECIPIENT_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="8 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="CONSTRUCTOR" SCONAME="SENDER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="9 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <source>METHOD constructor.
+
+    me-&gt;created_at            = created_at.
+    me-&gt;sender_screen_name    = sender_screen_name.
+    me-&gt;sender                = sender.
+    me-&gt;text                  = text.
+    me-&gt;recipient_screen_name = recipient_screen_name.
+    me-&gt;id                    = id.
+    me-&gt;recipient             = recipient.
+    me-&gt;recipient_id          = recipient_id.
+    me-&gt;sender_id             = sender_id.
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETCREATEDAT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETCREATEDAT" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getcreatedat.
+
+    created_at = me-&gt;created_at.
+
+  ENDMETHOD.                    &quot;GETCREATEDAT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="13 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETID" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getid.
+
+    id = me-&gt;id.
+
+  ENDMETHOD.                    &quot;GETID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETRECIPIENT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="15 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETRECIPIENT" SCONAME="RECIPIENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD getrecipient.
+
+    recipient = me-&gt;recipient.
+
+  ENDMETHOD.                    &quot;GETRECIPIENT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETRECIPIENTID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="17 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETRECIPIENTID" SCONAME="RECIPIENT_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getrecipientid.
+
+    recipient_id = me-&gt;recipient_id.
+
+  ENDMETHOD.                    &quot;GETRECIPIENTID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETRECIPIENTSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="11 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETRECIPIENTSCREENNAME" SCONAME="RECIPIENT_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getrecipientscreenname.
+
+    recipient_screen_name = me-&gt;recipient_screen_name.
+
+  ENDMETHOD.                    &quot;GETRECIPIENTSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETSENDER" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETSENDER" SCONAME="SENDER" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD getsender.
+
+    sender = me-&gt;sender.
+
+  ENDMETHOD.                    &quot;GETSENDER</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETSENDERID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="19 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETSENDERID" SCONAME="SENDER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getsenderid.
+
+    sender_id = me-&gt;sender_id.
+
+  ENDMETHOD.                    &quot;GETSENDERID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETSENDERSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETSENDERSCREENNAME" SCONAME="SENDER_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getsenderscreenname.
+
+    sender_screen_name = me-&gt;sender_screen_name.
+
+  ENDMETHOD.                    &quot;GETSENDERSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="GETTEXT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="9 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="GETTEXT" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD gettext.
+
+    text = me-&gt;text.
+
+  ENDMETHOD.                    &quot;GETTEXT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="NEWFROMJSON" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="NEWFROMJSON" SCONAME="JSON" VERSION="1" LANGU="E" DESCRIPT="JSON string" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="NEWFROMJSON" SCONAME="DM" VERSION="1" LANGU="E" DESCRIPT="Twitter Direct Message" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_DM"/>
+  <source>METHOD newfromjson.
+
+    DATA: json_doc                TYPE REF TO zcl_json_document,
+          created_at              TYPE string,
+          sender_screen_name      TYPE string,
+          sender                  TYPE REF TO zcl_twa_user,
+          text                    TYPE string,
+          recipient_screen_name   TYPE string,
+          id                      TYPE string,
+          recipient               TYPE REF TO zcl_twa_user,
+          recipient_id            TYPE string,
+          sender_id               TYPE string,
+          sender_json             TYPE string,
+          recipient_json          TYPE string.
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    created_at            = json_doc-&gt;get_value( &apos;created_at&apos; ).
+    sender_screen_name    = json_doc-&gt;get_value( &apos;sender_screen_name&apos; ).
+    sender_json           = json_doc-&gt;get_value( &apos;sender&apos; ).
+    text                  = json_doc-&gt;get_value( &apos;text&apos; ).
+    recipient_screen_name = json_doc-&gt;get_value( &apos;recipient_screen_name&apos; ).
+    id                    = json_doc-&gt;get_value( &apos;id&apos; ).
+    recipient_json        = json_doc-&gt;get_value( &apos;recipient&apos; ).
+    recipient_id          = json_doc-&gt;get_value( &apos;recipient_id&apos; ).
+    sender_id             = json_doc-&gt;get_value( &apos;sender_id&apos; ).
+
+    IF sender_json IS NOT INITIAL.
+      sender = zcl_twa_user=&gt;newfromjson( sender_json ).
+    ENDIF.
+
+    IF recipient_json IS NOT INITIAL.
+      recipient = zcl_twa_user=&gt;newfromjson( recipient_json ).
+    ENDIF.
+
+    CREATE OBJECT dm
+      EXPORTING
+        created_at            = created_at
+        sender_screen_name    = sender_screen_name
+        sender                = sender
+        text                  = text
+        recipient_screen_name = recipient_screen_name
+        id                    = id
+        recipient             = recipient
+        recipient_id          = recipient_id
+        sender_id             = sender_id.
+
+  ENDMETHOD.                    &quot;NEWFROMJSON</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETCREATEDAT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETCREATEDAT" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setcreatedat.
+
+    me-&gt;created_at = created_at.
+
+  ENDMETHOD.                    &quot;SETCREATEDAT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="14 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETID" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setid.
+
+    me-&gt;id = id.
+
+  ENDMETHOD.                    &quot;SETID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETRECIPIENT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="16 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETRECIPIENT" SCONAME="RECIPIENT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD setrecipient.
+
+    me-&gt;recipient = recipient.
+
+  ENDMETHOD.                    &quot;SETRECIPIENT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETRECIPIENTID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="18 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETRECIPIENTID" SCONAME="RECIPIENT_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setrecipientid.
+
+    me-&gt;recipient_id = recipient_id.
+
+  ENDMETHOD.                    &quot;SETRECIPIENTID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETRECIPIENTSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="12 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETRECIPIENTSCREENNAME" SCONAME="RECIPIENT_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setrecipientscreenname.
+
+    me-&gt;recipient_screen_name = recipient_screen_name.
+
+  ENDMETHOD.                    &quot;SETRECIPIENTSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETSENDER" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETSENDER" SCONAME="SENDER" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD setsender.
+
+    me-&gt;sender = sender.
+
+  ENDMETHOD.                    &quot;SETSENDER</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETSENDERID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="20 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETSENDERID" SCONAME="SENDER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setsenderid.
+
+    me-&gt;sender_id = sender_id.
+
+  ENDMETHOD.                    &quot;SETSENDERID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETSENDERSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETSENDERSCREENNAME" SCONAME="SENDER_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setsenderscreenname.
+
+    me-&gt;sender_screen_name = sender_screen_name.
+
+  ENDMETHOD.                    &quot;SETSENDERSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM" CMPNAME="SETTEXT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="10 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM" CMPNAME="SETTEXT" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD settext.
+
+    me-&gt;text = text.
+
+  ENDMETHOD.                    &quot;SETTEXT</source>
+ </method>
+</CLAS>

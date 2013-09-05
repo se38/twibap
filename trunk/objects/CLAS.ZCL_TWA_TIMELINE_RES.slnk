@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_TIMELINE_RES" VERSION="1" LANGU="E" DESCRIPT="Twitter API Timeline Resources" UUID="000C293B231B1EE28D94CF3B9DD171ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_TIMELINE_RES DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_timeline_res DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_TIMELINE_RES
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor .
+    METHODS public_timeline
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS home_timeline
+      IMPORTING
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS friends_timeline
+      IMPORTING
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS user_timeline
+      IMPORTING
+        !screen_name TYPE string OPTIONAL
+        !user_id TYPE string OPTIONAL
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS mentions
+      IMPORTING
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS retweeted_by_me
+      IMPORTING
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS retweeted_to_me
+      IMPORTING
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+    METHODS retweeted_of_me
+      IMPORTING
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+      RETURNING
+        value(statuses) TYPE zcl_twa_status_t
+      RAISING
+        zcx_oauth_error .
+*&quot;* protected components of class ZCL_TWA_USER_RES
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_TIMELINE_RES
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA oauth TYPE REF TO zcl_oauth .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="OAUTH" VERSION="1" LANGU="E" DESCRIPT="Twitter API OAuth helper class" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OAUTH" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="A! = auth required" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD constructor.
+
+    me-&gt;oauth = zcl_oauth=&gt;get_instance( ).        &quot;OAuth helper
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/statuses/friends_timeline" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="FRIENDS_TIMELINE" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD friends_timeline.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/friends_timeline.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/friends_timeline.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;FRIENDS_TIMELINE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/statuses/home_timeline" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="HOME_TIMELINE" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD home_timeline.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/home_timeline.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/home_timeline.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;HOME_TIMELINE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/statuses/mentions" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="MENTIONS" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD mentions.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/mentions.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/mentions.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;MENTIONS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="PUBLIC_TIMELINE" VERSION="1" LANGU="E" DESCRIPT="http://dev.twitter.com/doc/get/statuses/public_timeline" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="PUBLIC_TIMELINE" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="PUBLIC_TIMELINE" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD public_timeline.
+
+*    DATA: url        TYPE string
+*        , json       TYPE string
+*        , json_doc   TYPE REF TO zcl_json_document
+*        .
+*
+*    FIELD-SYMBOLS: &lt;status&gt; TYPE REF TO zcl_twa_status.
+*
+*    url = &apos;/statuses/public_timeline.json&apos;.
+*
+*    json = oauth-&gt;fetchurl( url = url method = &apos;GET&apos; ).
+*    json_doc = zcl_json_document=&gt;create_with_json( json ).
+*
+*    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+*
+*      json = json_doc-&gt;get_json( ).
+*
+*      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+*      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+*
+*    ENDWHILE.
+
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid           = zcx_oauth_error=&gt;api_error
+        oauth_error_text = &apos;public_timeline not supported in v1.1 anymore&apos;.
+
+  ENDMETHOD.                    &quot;PUBLIC_TIMELINE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/statuses/retweeted_by_me" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_BY_ME" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD retweeted_by_me.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/retweeted_by_me.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/retweeted_by_me.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;RETWEETED_BY_ME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/statuses/retweeted_of_me" EXPOSURE="2" STATE="1" EDITORDER="9 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_OF_ME" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD retweeted_of_me.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/retweeted_of_me.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/retweeted_of_me.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;RETWEETED_OF_ME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/statuses/retweeted_to_me" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="RETWEETED_TO_ME" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD retweeted_to_me.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/retweeted_to_me.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/retweeted_to_me.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;RETWEETED_TO_ME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" VERSION="1" LANGU="E" DESCRIPT="(A!) http://dev.twitter.com/doc/get/statuses/user_timeline" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="USER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="6 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="STATUSES" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="7 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <exception CLSNAME="ZCL_TWA_TIMELINE_RES" CMPNAME="USER_TIMELINE" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD user_timeline.
+
+    DATA: parameters      TYPE zoauth_key_value_t
+        , url             TYPE string
+        , json            TYPE string
+        , json_doc        TYPE REF TO zcl_json_document
+        , token_secret    TYPE string
+        , consumer_secret TYPE string
+        , secret          TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value
+                 , &lt;status&gt;    TYPE REF TO zcl_twa_status
+                 .
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL
+    AND screen_name IS INITIAL
+    AND user_id IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- optional parameters ---*
+    IF screen_name IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;screen_name&apos;.                      &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = screen_name.
+    ENDIF.
+
+    IF user_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;user_id&apos;.                          &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = user_id.
+    ENDIF.
+
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+
+    IF oauth-&gt;is_authorized( ) IS NOT INITIAL.
+
+      oauth-&gt;append_oauth_parameters( ).
+
+      &quot;*--- create new secret ---*
+      consumer_secret = oauth-&gt;get_consumer_secret( ).
+      token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+      CONCATENATE
+        consumer_secret
+        token_secret
+      INTO secret.
+
+      oauth-&gt;set_oauth_secret( secret ).
+    ENDIF.
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/user_timeline.json&apos;
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    IF oauth-&gt;is_authorized( ) IS NOT INITIAL.
+      &quot;*--- sign message ---*
+      oauth-&gt;sign_message( &apos;GET&apos; ).
+    ENDIF.
+
+    &quot;*--- send request ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/statuses/user_timeline.json&apos;
+    INTO url.
+
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE statuses ASSIGNING &lt;status&gt;.
+      &lt;status&gt; = zcl_twa_status=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;USER_TIMELINE</source>
+ </method>
+</CLAS>

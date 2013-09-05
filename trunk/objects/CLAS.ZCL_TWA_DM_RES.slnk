@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_DM_RES" VERSION="1" LANGU="E" DESCRIPT="Twitter API Direct Messages" UUID="000C293B231B1EE28D94CFFBD76911ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_DM_RES DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_dm_res DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_DM_RES
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor .
+    METHODS direct_messages
+      IMPORTING
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !include_entities TYPE string OPTIONAL
+      RETURNING
+        value(dms) TYPE zcl_twa_dm_t
+      RAISING
+        zcx_oauth_error .
+    METHODS sent
+      IMPORTING
+        !since_id TYPE string OPTIONAL
+        !max_id TYPE string OPTIONAL
+        !count TYPE string OPTIONAL
+        !page TYPE string OPTIONAL
+        !include_entities TYPE string OPTIONAL
+      RETURNING
+        value(dms) TYPE zcl_twa_dm_t
+      RAISING
+        zcx_oauth_error .
+    METHODS new
+      IMPORTING
+        !screen_name TYPE string OPTIONAL
+        !user_id TYPE string OPTIONAL
+        !text TYPE string
+        !include_entities TYPE string OPTIONAL
+      RETURNING
+        value(dm) TYPE REF TO zcl_twa_dm
+      RAISING
+        zcx_oauth_error .
+    METHODS destroy
+      IMPORTING
+        !id TYPE string
+      RAISING
+        zcx_oauth_error .
+*&quot;* protected components of class ZCL_TWA_DIRECT_MES
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_DIRECT_MES
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA oauth TYPE REF TO zcl_oauth .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_DM_RES" CMPNAME="OAUTH" VERSION="1" LANGU="E" DESCRIPT="Twitter API OAuth helper class" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OAUTH" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="A! = Requires authentication" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD constructor.
+
+    me-&gt;oauth = zcl_oauth=&gt;get_instance( ).        &quot;OAuth helper
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DESTROY" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/post/direct_messages/destroy/:" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DESTROY" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <exception CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DESTROY" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="OAuth library Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD destroy.
+
+    DATA: url             TYPE string,
+        appendix        TYPE string,
+        json            TYPE string,
+        parameters      TYPE zoauth_key_value_t,
+        token_secret    TYPE string,
+        consumer_secret TYPE string,
+        secret          TYPE string.
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value.
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/direct_messages/destroy/&apos;
+      id
+      &apos;.json&apos;
+    INTO appendix.
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      appendix
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( ).
+
+    &quot;*--- send request ---*
+    json = oauth-&gt;fetchurl( appendix ).
+
+  ENDMETHOD.                    &quot;DESTROY</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/direct_messages" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="INCLUDE_ENTITIES" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="DMS" VERSION="1" LANGU="E" DESCRIPT="Direct Message Table" CMPTYPE="1" MTDTYPE="0" EDITORDER="6 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_DM_T"/>
+  <exception CLSNAME="ZCL_TWA_DM_RES" CMPNAME="DIRECT_MESSAGES" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="OAuth library Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD direct_messages.
+
+    DATA: parameters      TYPE zoauth_key_value_t,
+          url             TYPE string,
+          appendix        TYPE string,
+          json            TYPE string,
+          json_doc        TYPE REF TO zcl_json_document,
+          token_secret    TYPE string,
+          consumer_secret TYPE string,
+          secret          TYPE string.
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value,
+                   &lt;dm&gt;        TYPE REF TO zcl_twa_dm.
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/direct_messages.json&apos;
+    INTO appendix.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    IF include_entities IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;include_entities&apos;.                 &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = include_entities.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      appendix
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = appendix ).
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE dms ASSIGNING &lt;dm&gt;.
+      &lt;dm&gt; = zcl_twa_dm=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;DIRECT_MESSAGES</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/post/direct_messages/new" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" SCONAME="SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" SCONAME="USER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" SCONAME="INCLUDE_ENTITIES" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" SCONAME="DM" VERSION="1" LANGU="E" DESCRIPT="Direct Message Table" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_DM"/>
+  <exception CLSNAME="ZCL_TWA_DM_RES" CMPNAME="NEW" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="OAuth library Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD new.
+
+    DATA: url             TYPE string,
+          appendix        TYPE string,
+          json            TYPE string,
+          parameters      TYPE zoauth_key_value_t,
+          token_secret    TYPE string,
+          consumer_secret TYPE string,
+          secret          TYPE string.
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value.
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    &quot;*--- OAuth parameters must be set before status parameters              ---*
+    &quot;*--- (else &quot;Wrong signature&quot;, don&apos;t know why, no clear reason for that) ---*
+    oauth-&gt;append_oauth_parameters( ).
+    parameters = oauth-&gt;get_parameters( ).
+
+    &quot;*--- status parameter ---*
+    INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+    &lt;parameter&gt;-key = &apos;text&apos;.
+    &lt;parameter&gt;-value = oauth-&gt;percent_encode( text ).
+
+    IF screen_name IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+*    &lt;parameter&gt;-key = &apos;screen_name&apos;.  &quot;&lt;- we get an &apos;Incorrect signature&apos; error
+      &lt;parameter&gt;-key = &apos;user&apos;.          &quot;&lt;- but not with &apos;user&apos; (??)
+      &lt;parameter&gt;-value = screen_name.
+    ENDIF.
+
+    IF user_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;user_id&apos;.
+      &lt;parameter&gt;-value = user_id.
+    ENDIF.
+
+    IF include_entities IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;include_entities&apos;.
+      &lt;parameter&gt;-value = include_entities.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/direct_messages/new.json&apos;
+    INTO appendix.
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      appendix
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( ).
+
+    &quot;*--- send request ---*
+    json = oauth-&gt;fetchurl( appendix ).
+    dm = zcl_twa_dm=&gt;newfromjson( json ).
+
+  ENDMETHOD.                    &quot;NEW</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" VERSION="1" LANGU="E" DESCRIPT="A! http://dev.twitter.com/doc/get/direct_messages/sent" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="COUNT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="INCLUDE_ENTITIES" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="DMS" VERSION="1" LANGU="E" DESCRIPT="Direct Message Table" CMPTYPE="1" MTDTYPE="0" EDITORDER="6 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_DM_T"/>
+  <exception CLSNAME="ZCL_TWA_DM_RES" CMPNAME="SENT" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="OAuth library Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD sent.
+
+    DATA: parameters      TYPE zoauth_key_value_t,
+          url             TYPE string,
+          appendix        TYPE string,
+          json            TYPE string,
+          json_doc        TYPE REF TO zcl_json_document,
+          token_secret    TYPE string,
+          consumer_secret TYPE string,
+          secret          TYPE string.
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE zjson_key_value,
+                   &lt;dm&gt;        TYPE REF TO zcl_twa_dm.
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/direct_messages/sent.json&apos;
+    INTO appendix.
+
+    &quot;*--- optional parameters ---*
+    IF count IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;count&apos;.                            &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = count.
+    ENDIF.
+
+    IF page IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;page&apos;.                             &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = page.
+    ENDIF.
+
+    IF since_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;since_id&apos;.                         &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = since_id.
+    ENDIF.
+
+    IF max_id IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;max_id&apos;.                           &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = max_id.
+    ENDIF.
+
+    IF include_entities IS NOT INITIAL.
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;include_entities&apos;.                 &quot;#EC NOTEXT
+      &lt;parameter&gt;-value = include_entities.
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      appendix
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = appendix ).
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+      json = json_doc-&gt;get_json( ).
+
+      INSERT INITIAL LINE INTO TABLE dms ASSIGNING &lt;dm&gt;.
+      &lt;dm&gt; = zcl_twa_dm=&gt;newfromjson( json ).
+
+    ENDWHILE.
+
+  ENDMETHOD.                    &quot;SENT</source>
+ </method>
+</CLAS>

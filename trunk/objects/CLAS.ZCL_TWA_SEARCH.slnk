@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_SEARCH" VERSION="1" LANGU="E" DESCRIPT="Twitter Search result" UUID="000C293B231B1EE28D94CFFBD76851ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_SEARCH DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_search DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_SEARCH
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor
+      IMPORTING
+        !max_id TYPE string OPTIONAL
+        !since_id TYPE string OPTIONAL
+        !refresh_url TYPE string OPTIONAL
+        !next_page TYPE string OPTIONAL
+        !results_per_page TYPE i OPTIONAL
+        !page TYPE i OPTIONAL
+        !completed_in TYPE string OPTIONAL
+        !query TYPE string OPTIONAL
+        !results TYPE zcl_twa_status_t OPTIONAL .
+    CLASS-METHODS newfromjson
+      IMPORTING
+        !json TYPE string
+      RETURNING
+        value(search) TYPE REF TO zcl_twa_search .
+    METHODS getmaxid
+      RETURNING
+        value(max_id) TYPE string .
+    METHODS getsinceid
+      RETURNING
+        value(since_id) TYPE string .
+    METHODS getrefreshurl
+      RETURNING
+        value(refresh_url) TYPE string .
+    METHODS getresultsperpage
+      RETURNING
+        value(results_per_page) TYPE i .
+    METHODS getpage
+      RETURNING
+        value(page) TYPE i .
+    METHODS getcompletedin
+      RETURNING
+        value(completed_in) TYPE string .
+    METHODS getquery
+      RETURNING
+        value(query) TYPE string .
+    METHODS getresults
+      RETURNING
+        value(results) TYPE zcl_twa_status_t .
+    METHODS setmaxid
+      IMPORTING
+        !max_id TYPE string .
+    METHODS setsinceid
+      IMPORTING
+        !since_id TYPE string .
+    METHODS setrefreshurl
+      IMPORTING
+        !refresh_url TYPE string .
+    METHODS setresultsperpage
+      IMPORTING
+        !results_per_page TYPE i .
+    METHODS setpage
+      IMPORTING
+        !page TYPE i .
+    METHODS setcompletedin
+      IMPORTING
+        !completed_in TYPE string .
+    METHODS setquery
+      IMPORTING
+        !query TYPE string .
+    METHODS setresults
+      IMPORTING
+        !results TYPE zcl_twa_status_t .
+    METHODS setnextpage
+      IMPORTING
+        !next_page TYPE string .
+    METHODS getnextpage
+      RETURNING
+        value(next_page) TYPE string .
+*&quot;* protected components of class ZCL_TWA_SEARCH
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_SEARCH
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA max_id TYPE string .
+    DATA since_id TYPE string .
+    DATA refresh_url TYPE string .
+    DATA next_page TYPE string .
+    DATA results_per_page TYPE i .
+    DATA page TYPE i .
+    DATA completed_in TYPE string .
+    DATA query TYPE string .
+    DATA results TYPE zcl_twa_status_t .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="COMPLETED_IN" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="7 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="MAX_ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="NEXT_PAGE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="4 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="PAGE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="6 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="I" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="QUERY" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="8 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="REFRESH_URL" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="3 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="RESULTS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" EXPOSURE="0" STATE="1" EDITORDER="9 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="RESULTS_PER_PAGE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="5 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="I" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SINCE_ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="2 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="REFRESH_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="NEXT_PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="RESULTS_PER_PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="6 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="COMPLETED_IN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="7 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="QUERY" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="8 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="CONSTRUCTOR" SCONAME="RESULTS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="2" EDITORDER="9 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T" PAROPTIONL="X"/>
+  <source>METHOD constructor.
+
+    me-&gt;max_id = max_id.
+    me-&gt;since_id = since_id.
+    me-&gt;refresh_url = refresh_url.
+    me-&gt;next_page = next_page.
+    me-&gt;results_per_page = results_per_page.
+    me-&gt;page = page.
+    me-&gt;completed_in = completed_in.
+    me-&gt;query = query.
+    me-&gt;results = results.
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETCOMPLETEDIN" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETCOMPLETEDIN" SCONAME="COMPLETED_IN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getcompletedin.
+
+    completed_in = me-&gt;completed_in.
+
+  ENDMETHOD.                    &quot;GETCOMPLETEDIN</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETMAXID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETMAXID" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getmaxid.
+
+    max_id = me-&gt;max_id.
+
+  ENDMETHOD.                    &quot;GETMAXID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETNEXTPAGE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="20 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETNEXTPAGE" SCONAME="NEXT_PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getnextpage.
+
+    next_page = me-&gt;next_page.
+
+  ENDMETHOD.                    &quot;GETNEXTPAGE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETPAGE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETPAGE" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getpage.
+
+    page = me-&gt;page.
+
+  ENDMETHOD.                    &quot;GETPAGE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETQUERY" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="9 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETQUERY" SCONAME="QUERY" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getquery.
+
+    query = me-&gt;query.
+
+  ENDMETHOD.                    &quot;GETQUERY</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETREFRESHURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETREFRESHURL" SCONAME="REFRESH_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getrefreshurl.
+
+    refresh_url = me-&gt;refresh_url.
+
+  ENDMETHOD.                    &quot;GETREFRESHURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETRESULTS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="10 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETRESULTS" SCONAME="RESULTS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <source>METHOD getresults.
+
+    results = me-&gt;results.
+
+  ENDMETHOD.                    &quot;GETRESULTS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETRESULTSPERPAGE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETRESULTSPERPAGE" SCONAME="RESULTS_PER_PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD getresultsperpage.
+
+    results_per_page = me-&gt;results_per_page.
+
+  ENDMETHOD.                    &quot;GETRESULTSPERPAGE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETSINCEID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="GETSINCEID" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getsinceid.
+
+    since_id = me-&gt;since_id.
+
+  ENDMETHOD.                    &quot;GETSINCEID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="NEWFROMJSON" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="NEWFROMJSON" SCONAME="JSON" VERSION="1" LANGU="E" DESCRIPT="JSON string" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="NEWFROMJSON" SCONAME="SEARCH" VERSION="1" LANGU="E" DESCRIPT="Twitter Search result" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_SEARCH"/>
+  <source>METHOD newfromjson.
+
+    DATA: json_doc         TYPE REF TO zcl_json_document
+        , max_id           TYPE string
+        , since_id         TYPE string
+        , refresh_url      TYPE string
+        , next_page        TYPE string
+        , results_per_page TYPE i
+        , page             TYPE i
+        , completed_in     TYPE string
+        , query            TYPE string
+        , results          TYPE zcl_twa_status_t
+        , result_json      TYPE string
+        , status_json      TYPE string
+        .
+
+    FIELD-SYMBOLS: &lt;status&gt; TYPE REF TO zcl_twa_status.
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    max_id           = json_doc-&gt;get_value( &apos;max_id&apos; ).
+    since_id         = json_doc-&gt;get_value( &apos;since_id&apos; ).
+    refresh_url      = json_doc-&gt;get_value( &apos;refresh_url&apos; ).
+    results_per_page = json_doc-&gt;get_value_int( &apos;results_per_page&apos; ).
+    next_page        = json_doc-&gt;get_value( &apos;next_page&apos; ).
+    page             = json_doc-&gt;get_value_int( &apos;page&apos; ).
+    completed_in     = json_doc-&gt;get_value( &apos;completed_in&apos; ).
+    query            = json_doc-&gt;get_value( &apos;query&apos; ).
+
+    &quot;*--- create status objects ---*
+    result_json = json_doc-&gt;get_value( &apos;results&apos; ).
+
+    IF result_json IS NOT INITIAL.
+      json_doc-&gt;set_json( result_json ).
+
+      WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+
+        status_json = json_doc-&gt;get_json( ).
+
+        INSERT INITIAL LINE INTO TABLE results ASSIGNING &lt;status&gt;.
+        &lt;status&gt; = zcl_twa_status=&gt;newfromjson( status_json ).
+
+      ENDWHILE.
+    ENDIF.
+
+    CREATE OBJECT search
+      EXPORTING
+        max_id           = max_id
+        since_id         = since_id
+        refresh_url      = refresh_url
+        next_page        = next_page
+        results_per_page = results_per_page
+        page             = page
+        completed_in     = completed_in
+        query            = query
+        results          = results.
+
+  ENDMETHOD.                    &quot;NEWFROMJSON</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETCOMPLETEDIN" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="16 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETCOMPLETEDIN" SCONAME="COMPLETED_IN" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setcompletedin.
+
+    me-&gt;completed_in = completed_in.
+
+  ENDMETHOD.                    &quot;SETCOMPLETEDIN</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETMAXID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="11 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETMAXID" SCONAME="MAX_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setmaxid.
+
+    me-&gt;max_id = max_id.
+
+  ENDMETHOD.                    &quot;SETMAXID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETNEXTPAGE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="19 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETNEXTPAGE" SCONAME="NEXT_PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setnextpage.
+
+    me-&gt;next_page = next_page.
+
+  ENDMETHOD.                    &quot;SETNEXTPAGE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETPAGE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="15 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETPAGE" SCONAME="PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setpage.
+
+    me-&gt;page = page.
+
+  ENDMETHOD.                    &quot;SETPAGE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETQUERY" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="17 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETQUERY" SCONAME="QUERY" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setquery.
+
+    me-&gt;query = query.
+
+  ENDMETHOD.                    &quot;SETQUERY</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETREFRESHURL" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="13 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETREFRESHURL" SCONAME="REFRESH_URL" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setrefreshurl.
+
+    me-&gt;refresh_url = refresh_url.
+
+  ENDMETHOD.                    &quot;SETREFRESHURL</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETRESULTS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="18 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETRESULTS" SCONAME="RESULTS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status table" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="ZCL_TWA_STATUS_T"/>
+  <source>METHOD setresults.
+
+    me-&gt;results = results.
+
+  ENDMETHOD.                    &quot;SETRESULTS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETRESULTSPERPAGE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="14 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETRESULTSPERPAGE" SCONAME="RESULTS_PER_PAGE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I"/>
+  <source>METHOD setresultsperpage.
+
+    me-&gt;results_per_page = results_per_page.
+
+  ENDMETHOD.                    &quot;SETRESULTSPERPAGE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETSINCEID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="12 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH" CMPNAME="SETSINCEID" SCONAME="SINCE_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setsinceid.
+
+    me-&gt;since_id = since_id.
+
+  ENDMETHOD.                    &quot;SETSINCEID</source>
+ </method>
+</CLAS>

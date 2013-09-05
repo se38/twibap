@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PROG NAME="Z_TWA_DEMO" VARCL="X" SUBC="1" RMAND="001" RLOAD="E" FIXPT="X" UCCHECK="X">
+ <textPool>
+  <language SPRAS="E">
+   <textElement ID="R" ENTRY="Twibap: Demo" LENGTH="12 "/>
+  </language>
+ </textPool>
+ <source>*&amp;---------------------------------------------------------------------*
+*&amp; Report  Z_TWA_DEMO
+*&amp;
+*&amp;---------------------------------------------------------------------*
+*&amp;
+*&amp;
+*&amp;---------------------------------------------------------------------*
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+REPORT  z_twa_demo.
+
+WRITE:/ &apos;No anonymous calls allowed anymore with Twitter API V1.1&apos;.
+
+*DATA: twitter_api   TYPE REF TO zcl_twa_api
+*    , statuses      TYPE zcl_twa_status_t
+*    , text          TYPE string
+*    , id            TYPE string
+*    , user          TYPE REF TO zcl_twa_user
+*    , screen_name   TYPE string
+*    , twitter_error TYPE REF TO zcx_oauth_error
+*    , error_text    TYPE string
+*    .
+*
+*FIELD-SYMBOLS: &lt;status&gt; TYPE REF TO zcl_twa_status.
+*
+*TRY.
+*    twitter_api = zcl_twa_api=&gt;getapi( ).
+*    statuses = twitter_api-&gt;timeline_res-&gt;public_timeline( ).
+*
+*  CATCH zcx_oauth_error INTO twitter_error.
+*
+*    error_text = twitter_error-&gt;get_text( ).
+*    WRITE:/ error_text.
+*    RETURN.
+*
+*ENDTRY.
+*
+*LOOP AT statuses
+*  ASSIGNING &lt;status&gt;.
+*
+*  text = &lt;status&gt;-&gt;gettext( ).
+*  id   = &lt;status&gt;-&gt;getid( ).
+*  user = &lt;status&gt;-&gt;getuser( ).
+*  screen_name = user-&gt;getscreenname( ).
+*  WRITE:/ id, screen_name, 25 text.
+*
+*ENDLOOP.</source>
+</PROG>

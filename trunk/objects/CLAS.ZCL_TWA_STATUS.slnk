@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" UUID="000C293B231B1EE28D94CFFBD766D1ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_STATUS DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_status DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_STATUS
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor
+      IMPORTING
+        !coordinates TYPE string OPTIONAL
+        !truncated TYPE string OPTIONAL
+        !contributors TYPE string OPTIONAL
+        !source TYPE string OPTIONAL
+        !created_at TYPE string OPTIONAL
+        !geo TYPE string OPTIONAL
+        !in_reply_to_screen_name TYPE string OPTIONAL
+        !favorited TYPE string OPTIONAL
+        !in_reply_to_status_id TYPE string OPTIONAL
+        !place TYPE string OPTIONAL
+        !id TYPE string OPTIONAL
+        !in_reply_to_user_id TYPE string OPTIONAL
+        !text TYPE string OPTIONAL
+        !user TYPE REF TO zcl_twa_user OPTIONAL .
+    CLASS-METHODS newfromjson
+      IMPORTING
+        !json TYPE string
+      RETURNING
+        value(status) TYPE REF TO zcl_twa_status .
+    METHODS getcoordinates
+      RETURNING
+        value(coordinates) TYPE string .
+    METHODS setcoordinates
+      IMPORTING
+        !coordinates TYPE string .
+    METHODS gettruncated
+      RETURNING
+        value(truncated) TYPE string .
+    METHODS settruncated
+      IMPORTING
+        !truncated TYPE string .
+    METHODS getcontributors
+      RETURNING
+        value(contributors) TYPE string .
+    METHODS setcontributors
+      IMPORTING
+        !contributors TYPE string .
+    METHODS getsource
+      RETURNING
+        value(source) TYPE string .
+    METHODS setsource
+      IMPORTING
+        !source TYPE string .
+    METHODS getcreatedat
+      RETURNING
+        value(created_at) TYPE string .
+    METHODS setcreatedat
+      IMPORTING
+        !created_at TYPE string .
+    METHODS getgeo
+      RETURNING
+        value(geo) TYPE string .
+    METHODS setgeo
+      IMPORTING
+        !geo TYPE string .
+    METHODS getinreplytoscreenname
+      RETURNING
+        value(in_reply_to_screen_name) TYPE string .
+    METHODS setinreplytoscreenname
+      IMPORTING
+        !in_reply_to_screen_name TYPE string .
+    METHODS getfavorited
+      RETURNING
+        value(favorited) TYPE string .
+    METHODS setfavorited
+      IMPORTING
+        !favorited TYPE string .
+    METHODS getinreplytostatusid
+      RETURNING
+        value(in_reply_to_status_id) TYPE string .
+    METHODS setinreplytostatusid
+      IMPORTING
+        !in_reply_to_status_id TYPE string .
+    METHODS getplace
+      RETURNING
+        value(place) TYPE string .
+    METHODS setplace
+      IMPORTING
+        !place TYPE string .
+    METHODS getid
+      RETURNING
+        value(id) TYPE string .
+    METHODS setid
+      IMPORTING
+        !id TYPE string .
+    METHODS getinreplytouserid
+      RETURNING
+        value(in_reply_to_user_id) TYPE string .
+    METHODS setinreplytouserid
+      IMPORTING
+        !in_reply_to_user_id TYPE string .
+    METHODS gettext
+      RETURNING
+        value(text) TYPE string .
+    METHODS settext
+      IMPORTING
+        !text TYPE string .
+    METHODS getuser
+      RETURNING
+        value(user) TYPE REF TO zcl_twa_user .
+    METHODS setuser
+      IMPORTING
+        !user TYPE REF TO zcl_twa_user .
+*&quot;* protected components of class ZCL_TWA_STATUS
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_STATUS
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA coordinates TYPE string .
+    DATA truncated TYPE string .
+    DATA contributors TYPE string .
+    DATA source TYPE string .
+    DATA created_at TYPE string .
+    DATA geo TYPE string .
+    DATA in_reply_to_screen_name TYPE string .
+    DATA favorited TYPE string .
+    DATA in_reply_to_status_id TYPE string .
+    DATA place TYPE string .
+    DATA id TYPE string .
+    DATA in_reply_to_user_id TYPE string .
+    DATA text TYPE string .
+    DATA user TYPE REF TO zcl_twa_user .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONTRIBUTORS" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="3 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="COORDINATES" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="CREATED_AT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="5 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="FAVORITED" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="8 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="GEO" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="6 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="11 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="IN_REPLY_TO_SCREEN_NAME" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="7 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="IN_REPLY_TO_STATUS_ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="9 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="IN_REPLY_TO_USER_ID" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="12 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="PLACE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="10 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="SOURCE" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="4 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="TEXT" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="13 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="TRUNCATED" VERSION="1" LANGU="E" EXPOSURE="0" STATE="1" EDITORDER="2 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="1" TYPE="STRING" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <attribute CLSNAME="ZCL_TWA_STATUS" CMPNAME="USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" EXPOSURE="0" STATE="1" EDITORDER="14 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_TWA_USER" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="COORDINATES" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="TRUNCATED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="CONTRIBUTORS" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="SOURCE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="GEO" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="6 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="IN_REPLY_TO_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="7 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="FAVORITED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="8 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="IN_REPLY_TO_STATUS_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="9 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="PLACE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="10 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="11 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="IN_REPLY_TO_USER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="12 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="2" EDITORDER="13 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="CONSTRUCTOR" SCONAME="USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" CMPTYPE="1" MTDTYPE="2" EDITORDER="14 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_USER" PAROPTIONL="X"/>
+  <source>METHOD constructor.
+
+    me-&gt;coordinates = coordinates.
+    me-&gt;truncated = truncated.
+    me-&gt;contributors = contributors.
+    me-&gt;source = source.
+    me-&gt;created_at = created_at.
+    me-&gt;geo = geo.
+    me-&gt;in_reply_to_screen_name = in_reply_to_screen_name.
+    me-&gt;favorited = favorited.
+    me-&gt;in_reply_to_status_id = in_reply_to_status_id.
+    me-&gt;place = place.
+    me-&gt;id = id.
+    me-&gt;in_reply_to_user_id = in_reply_to_user_id.
+    me-&gt;text = text.
+    me-&gt;user = user.
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCONTRIBUTORS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCONTRIBUTORS" SCONAME="CONTRIBUTORS" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getcontributors.
+
+    contributors = me-&gt;contributors.
+
+  ENDMETHOD.                    &quot;GETCONTRIBUTORS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCOORDINATES" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCOORDINATES" SCONAME="COORDINATES" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getcoordinates.
+
+    coordinates = me-&gt;coordinates.
+
+  ENDMETHOD.                    &quot;GETCOORDINATES</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCREATEDAT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="11 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETCREATEDAT" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getcreatedat.
+
+    created_at = me-&gt;created_at.
+
+  ENDMETHOD.                    &quot;GETCREATEDAT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETFAVORITED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="17 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETFAVORITED" SCONAME="FAVORITED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getfavorited.
+
+    favorited = me-&gt;favorited.
+
+  ENDMETHOD.                    &quot;GETFAVORITED</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETGEO" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="13 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETGEO" SCONAME="GEO" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getgeo.
+
+    geo = me-&gt;geo.
+
+  ENDMETHOD.                    &quot;GETGEO</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="23 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETID" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getid.
+
+    id = me-&gt;id.
+
+  ENDMETHOD.                    &quot;GETID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETINREPLYTOSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="15 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETINREPLYTOSCREENNAME" SCONAME="IN_REPLY_TO_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getinreplytoscreenname.
+
+    in_reply_to_screen_name = me-&gt;in_reply_to_screen_name.
+
+  ENDMETHOD.                    &quot;GETINREPLYTOSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETINREPLYTOSTATUSID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="19 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETINREPLYTOSTATUSID" SCONAME="IN_REPLY_TO_STATUS_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getinreplytostatusid.
+
+    in_reply_to_status_id = me-&gt;in_reply_to_status_id.
+
+  ENDMETHOD.                    &quot;GETINREPLYTOSTATUSID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETINREPLYTOUSERID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="25 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETINREPLYTOUSERID" SCONAME="IN_REPLY_TO_USER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getinreplytouserid.
+
+    in_reply_to_user_id = me-&gt;in_reply_to_user_id.
+
+  ENDMETHOD.                    &quot;GETINREPLYTOUSERID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETPLACE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="21 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETPLACE" SCONAME="PLACE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getplace.
+
+    place = me-&gt;place.
+
+  ENDMETHOD.                    &quot;GETPLACE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETSOURCE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="9 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETSOURCE" SCONAME="SOURCE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD getsource.
+
+    source = me-&gt;source.
+
+  ENDMETHOD.                    &quot;GETSOURCE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETTEXT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="27 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETTEXT" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD gettext.
+
+    text = me-&gt;text.
+
+  ENDMETHOD.                    &quot;GETTEXT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETTRUNCATED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETTRUNCATED" SCONAME="TRUNCATED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD gettruncated.
+
+    truncated = me-&gt;truncated.
+
+  ENDMETHOD.                    &quot;GETTRUNCATED</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETUSER" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="29 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="GETUSER" SCONAME="USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD getuser.
+
+    user = me-&gt;user.
+
+  ENDMETHOD.                    &quot;GETUSER</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="NEWFROMJSON" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="NEWFROMJSON" SCONAME="JSON" VERSION="1" LANGU="E" DESCRIPT="JSON string" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="NEWFROMJSON" SCONAME="STATUS" VERSION="1" LANGU="E" DESCRIPT="Twitter Status" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_STATUS"/>
+  <source>METHOD newfromjson.
+
+    DATA: json_doc                TYPE REF TO zcl_json_document
+        , coordinates             TYPE string
+        , truncated               TYPE string
+        , contributors            TYPE string
+        , source                  TYPE string
+        , created_at              TYPE string
+        , geo                     TYPE string
+        , in_reply_to_screen_name TYPE string
+        , favorited               TYPE string
+        , in_reply_to_status_id   TYPE string
+        , place                   TYPE string
+        , id                      TYPE string
+        , in_reply_to_user_id     TYPE string
+        , text                    TYPE string
+        , user                    TYPE REF TO zcl_twa_user
+        , user_json               TYPE string
+        .
+
+    json_doc = zcl_json_document=&gt;create_with_json( json ).
+
+    coordinates             = json_doc-&gt;get_value( &apos;coordinates&apos; ).
+    truncated               = json_doc-&gt;get_value( &apos;truncated&apos; ).
+    contributors            = json_doc-&gt;get_value( &apos;contributors&apos; ).
+    source                  = json_doc-&gt;get_value( &apos;source&apos; ).
+    created_at              = json_doc-&gt;get_value( &apos;created_at&apos; ).
+    geo                     = json_doc-&gt;get_value( &apos;geo&apos; ).
+    in_reply_to_screen_name = json_doc-&gt;get_value( &apos;in_reply_to_screen_name&apos; ).
+    favorited               = json_doc-&gt;get_value( &apos;favorited&apos; ).
+    in_reply_to_status_id   = json_doc-&gt;get_value( &apos;in_reply_to_status_id&apos; ).
+    place                   = json_doc-&gt;get_value( &apos;place&apos; ).
+    id                      = json_doc-&gt;get_value( &apos;id&apos; ).
+    in_reply_to_user_id     = json_doc-&gt;get_value( &apos;in_reply_to_user_id&apos; ).
+    text                    = json_doc-&gt;get_value( &apos;text&apos; ).
+
+    &quot;*--- create user object ---*
+    user_json = json_doc-&gt;get_value( &apos;user&apos; ).
+
+    IF user_json IS NOT INITIAL.
+      user = zcl_twa_user=&gt;newfromjson( user_json ).
+    ENDIF.
+
+    CREATE OBJECT status
+      EXPORTING
+        coordinates             = coordinates
+        truncated               = truncated
+        contributors            = contributors
+        source                  = source
+        created_at              = created_at
+        geo                     = geo
+        in_reply_to_screen_name = in_reply_to_screen_name
+        favorited               = favorited
+        in_reply_to_status_id   = in_reply_to_status_id
+        place                   = place
+        id                      = id
+        in_reply_to_user_id     = in_reply_to_user_id
+        text                    = text
+        user                    = user.
+
+  ENDMETHOD.                    &quot;NEWFROMJSON</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETCONTRIBUTORS" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="8 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETCONTRIBUTORS" SCONAME="CONTRIBUTORS" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setcontributors.
+
+    me-&gt;contributors = contributors.
+
+  ENDMETHOD.                    &quot;SETCONTRIBUTORS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETCOORDINATES" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETCOORDINATES" SCONAME="COORDINATES" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setcoordinates.
+
+    me-&gt;coordinates = coordinates.
+
+  ENDMETHOD.                    &quot;SETCOORDINATES</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETCREATEDAT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="12 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETCREATEDAT" SCONAME="CREATED_AT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setcreatedat.
+
+    me-&gt;created_at = created_at.
+
+  ENDMETHOD.                    &quot;SETCREATEDAT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETFAVORITED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="18 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETFAVORITED" SCONAME="FAVORITED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setfavorited.
+
+    me-&gt;favorited = favorited.
+
+  ENDMETHOD.                    &quot;SETFAVORITED</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETGEO" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="14 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETGEO" SCONAME="GEO" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setgeo.
+
+    me-&gt;geo = geo.
+
+  ENDMETHOD.                    &quot;SETGEO</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="24 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETID" SCONAME="ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setid.
+
+    me-&gt;id = id.
+
+  ENDMETHOD.                    &quot;SETID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETINREPLYTOSCREENNAME" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="16 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETINREPLYTOSCREENNAME" SCONAME="IN_REPLY_TO_SCREEN_NAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setinreplytoscreenname.
+
+    me-&gt;in_reply_to_screen_name = in_reply_to_screen_name.
+
+  ENDMETHOD.                    &quot;SETINREPLYTOSCREENNAME</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETINREPLYTOSTATUSID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="20 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETINREPLYTOSTATUSID" SCONAME="IN_REPLY_TO_STATUS_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setinreplytostatusid.
+
+    me-&gt;in_reply_to_status_id = in_reply_to_status_id.
+
+  ENDMETHOD.                    &quot;SETINREPLYTOSTATUSID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETINREPLYTOUSERID" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="26 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETINREPLYTOUSERID" SCONAME="IN_REPLY_TO_USER_ID" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setinreplytouserid.
+
+    me-&gt;in_reply_to_user_id = in_reply_to_user_id.
+
+  ENDMETHOD.                    &quot;SETINREPLYTOUSERID</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETPLACE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="22 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETPLACE" SCONAME="PLACE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setplace.
+
+    me-&gt;place = place.
+
+  ENDMETHOD.                    &quot;SETPLACE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETSOURCE" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="10 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETSOURCE" SCONAME="SOURCE" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD setsource.
+
+    me-&gt;source = source.
+
+  ENDMETHOD.                    &quot;SETSOURCE</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETTEXT" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="28 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETTEXT" SCONAME="TEXT" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD settext.
+
+    me-&gt;text = text.
+
+  ENDMETHOD.                    &quot;SETTEXT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETTRUNCATED" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETTRUNCATED" SCONAME="TRUNCATED" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <source>METHOD settruncated.
+
+    me-&gt;truncated = truncated.
+
+  ENDMETHOD.                    &quot;SETTRUNCATED</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETUSER" VERSION="1" LANGU="E" EXPOSURE="2" STATE="1" EDITORDER="30 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_STATUS" CMPNAME="SETUSER" SCONAME="USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <source>METHOD setuser.
+
+    me-&gt;user = user.
+
+  ENDMETHOD.                    &quot;SETUSER</source>
+ </method>
+</CLAS>

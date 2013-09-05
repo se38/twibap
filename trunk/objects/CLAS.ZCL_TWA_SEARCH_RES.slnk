@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_SEARCH_RES" VERSION="1" LANGU="E" DESCRIPT="Twitter API Search Resources" UUID="000C293B231B1EE28D94CFFBD76791ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_SEARCH_RES DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_search_res DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_SEARCH_RES
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor .
+    METHODS search
+      IMPORTING
+        !q TYPE string OPTIONAL
+        !lang TYPE string OPTIONAL
+        !rpp TYPE i OPTIONAL
+        !page TYPE i OPTIONAL
+        !next_page TYPE string OPTIONAL
+      RETURNING
+        value(result) TYPE REF TO zcl_twa_search
+      RAISING
+        zcx_oauth_error .
+*&quot;* protected components of class ZCL_TWA_SEARCH_RES
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_SEARCH_RES
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA oauth TYPE REF TO zcl_oauth .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="OAUTH" VERSION="1" LANGU="E" DESCRIPT="Twitter API OAuth helper class" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OAUTH" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="CONSTRUCTOR" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD constructor.
+
+    me-&gt;oauth = zcl_oauth=&gt;get_instance( ).        &quot;OAuth helper
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" VERSION="1" LANGU="E" DESCRIPT="http://dev.twitter.com/doc/get/search" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="Q" VERSION="1" LANGU="E" DESCRIPT="Query string" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="LANG" VERSION="1" LANGU="E" DESCRIPT="Language" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="RPP" VERSION="1" LANGU="E" DESCRIPT="Tweets per page (max. 100)" CMPTYPE="1" MTDTYPE="0" EDITORDER="3 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="PAGE" VERSION="1" LANGU="E" DESCRIPT="Page" CMPTYPE="1" MTDTYPE="0" EDITORDER="4 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="I" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="NEXT_PAGE" VERSION="1" LANGU="E" DESCRIPT="Query for next page" CMPTYPE="1" MTDTYPE="0" EDITORDER="5 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="RESULT" VERSION="1" LANGU="E" DESCRIPT="Twitter Search result" CMPTYPE="1" MTDTYPE="0" EDITORDER="6 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_SEARCH"/>
+  <exception CLSNAME="ZCL_TWA_SEARCH_RES" CMPNAME="SEARCH" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD search.
+
+    DATA: json       TYPE string
+        , parameters TYPE zoauth_key_value_t
+        , np         TYPE string
+        , np_t       TYPE TABLE OF string
+        .
+
+    FIELD-SYMBOLS: &lt;parameter&gt; TYPE LINE OF zoauth_key_value_t
+                 , &lt;np&gt;        TYPE string
+                 .
+
+    IF next_page IS NOT INITIAL.
+
+      &quot;something like &apos;?page=2&amp;max_id=1480307926&amp;q=%40twitterapi&apos;
+      np = next_page.
+      SHIFT np LEFT DELETING LEADING &apos;?&apos;.
+      SPLIT np AT &apos;&amp;&apos; INTO TABLE np_t.
+
+      LOOP AT np_t
+        ASSIGNING &lt;np&gt;.
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        SPLIT &lt;np&gt; AT &apos;=&apos; INTO &lt;parameter&gt;-key &lt;parameter&gt;-value.
+      ENDLOOP.
+
+    ELSE.
+
+      &quot;*--- create parameters ---*
+      INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+      &lt;parameter&gt;-key = &apos;q&apos;.
+      &lt;parameter&gt;-value = oauth-&gt;percent_encode( q ).
+
+      &quot;*--- language ---*
+      IF lang IS NOT INITIAL.
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        &lt;parameter&gt;-key = &apos;lang&apos;.
+        &lt;parameter&gt;-value = lang.
+      ENDIF.
+
+      &quot;*--- tweets per page ---*
+      IF rpp IS NOT INITIAL.
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        &lt;parameter&gt;-key = &apos;rpp&apos;.
+        &lt;parameter&gt;-value = rpp.
+        CONDENSE &lt;parameter&gt;-value NO-GAPS.
+      ENDIF.
+
+      &quot;*--- page ---*
+      IF page IS NOT INITIAL.
+        INSERT INITIAL LINE INTO TABLE parameters ASSIGNING &lt;parameter&gt;.
+        &lt;parameter&gt;-key = &apos;page&apos;.
+        &lt;parameter&gt;-value = page.
+        CONDENSE &lt;parameter&gt;-value NO-GAPS.
+      ENDIF.
+
+    ENDIF.
+
+    oauth-&gt;set_parameters( parameters ).
+
+    &quot;*--- send request ---*
+    json = oauth-&gt;fetchurl(
+      host   = &apos;search.twitter.com&apos;
+      url    = &apos;/search.json&apos;
+      ).
+
+    result = zcl_twa_search=&gt;newfromjson( json ).
+
+  ENDMETHOD.                    &quot;SEARCH</source>
+ </method>
+</CLAS>

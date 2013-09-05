@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CLAS CLSNAME="ZCL_TWA_USER_RES" VERSION="1" LANGU="E" DESCRIPT="Twitter API User Resources" UUID="000C293B231B1EE28D94CF3B9DCF31ED" CATEGORY="00" EXPOSURE="2" STATE="1" RELEASE="0" CLSFINAL="X" CLSCCINCL="X" FIXPT="X" UNICODE="X" CLSBCCAT="00" DURATION_TYPE="0 " RISK_LEVEL="0 ">
+ <publicSection>*----------------------------------------------------------------------*
+*       CLASS ZCL_TWA_USER_RES DEFINITION
+*----------------------------------------------------------------------*
+*
+*----------------------------------------------------------------------*
+CLASS zcl_twa_user_res DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+*&quot;* public components of class ZCL_TWA_USER_RES
+*&quot;* do not include other source files here!!!
+  PUBLIC SECTION.
+
+    METHODS constructor .
+    METHODS show
+      IMPORTING
+        !username TYPE string
+      RETURNING
+        value(user) TYPE REF TO zcl_twa_user
+      RAISING
+        zcx_oauth_error .
+    METHODS lookup .
+    METHODS search .
+    METHODS suggestions .
+    METHODS friends
+      IMPORTING
+        !username TYPE string
+      RETURNING
+        value(users) TYPE zcl_twa_user_t
+      RAISING
+        zcx_oauth_error .
+    METHODS followers
+      IMPORTING
+        !username TYPE string OPTIONAL
+      RETURNING
+        value(users) TYPE zcl_twa_user_t
+      RAISING
+        zcx_oauth_error .
+*&quot;* protected components of class ZCL_TWA_USER_RES
+*&quot;* do not include other source files here!!!</publicSection>
+ <protectedSection>PROTECTED SECTION.
+*&quot;* private components of class ZCL_TWA_USER_RES
+*&quot;* do not include other source files here!!!</protectedSection>
+ <privateSection>PRIVATE SECTION.
+
+    DATA oauth TYPE REF TO zcl_oauth .
+
+    CLASS-METHODS copyright .</privateSection>
+ <localImplementation>*&quot;* local class implementation for public class
+*&quot;* use this source file for the implementation part of
+*&quot;* local helper classes</localImplementation>
+ <localTypes>*&quot;* use this source file for any type declarations (class
+*&quot;* definitions, interfaces or data types) you need for method
+*&quot;* implementation or private method&apos;s signature</localTypes>
+ <localMacros>*&quot;* use this source file for any macro definitions you need
+*&quot;* in the implementation part of the class</localMacros>
+ <attribute CLSNAME="ZCL_TWA_USER_RES" CMPNAME="OAUTH" VERSION="1" LANGU="E" DESCRIPT="Twitter API OAuth helper class" EXPOSURE="0" STATE="1" EDITORDER="1 " ATTDECLTYP="0" ATTEXPVIRT="0" TYPTYPE="3" TYPE="ZCL_OAUTH" SRCROW1="0 " SRCCOLUMN1="0 " SRCROW2="0 " SRCCOLUMN2="0 " TYPESRC_LENG="0 "/>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="CONSTRUCTOR" VERSION="1" LANGU="E" DESCRIPT="* = not implemented yet / A! = auth required" EXPOSURE="2" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="2" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD constructor.
+
+    me-&gt;oauth = zcl_oauth=&gt;get_instance( ).        &quot;OAuth helper
+
+  ENDMETHOD.                    &quot;CONSTRUCTOR</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="COPYRIGHT" VERSION="1" LANGU="E" DESCRIPT="Readme: Copyright" EXPOSURE="0" STATE="1" EDITORDER="1 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="1" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD copyright.
+
+*--------------------------------------------------------------------*
+*
+* Twibap: The ABAP Twitter API
+* Copyright (C) 2010 Uwe Fetzer + SAP Developer Network members
+*
+* Project home: https://cw.sdn.sap.com/cw/groups/twibap
+*
+* Published under the Terms of use of SAP Code Exchange:
+* http://www.sdn.sap.com/irj/sdn/code-exchange
+*
+*--------------------------------------------------------------------*
+
+  ENDMETHOD.                    &quot;COPYRIGHT</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FOLLOWERS" VERSION="1" LANGU="E" DESCRIPT="http://dev.twitter.com/doc/get/statuses/followers" EXPOSURE="2" STATE="1" EDITORDER="7 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FOLLOWERS" SCONAME="USERNAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING" PAROPTIONL="X"/>
+  <parameter CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FOLLOWERS" SCONAME="USERS" VERSION="1" LANGU="E" DESCRIPT="Twitter User table" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_USER_T"/>
+  <exception CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FOLLOWERS" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD followers.
+
+*    DATA: url        TYPE string
+*        , json       TYPE string
+*        , user_json  TYPE string
+*        , json_doc   TYPE REF TO zcl_json_document
+*        .
+*
+*    FIELD-SYMBOLS: &lt;user&gt; TYPE REF TO zcl_twa_user.
+*
+*    IF username IS NOT INITIAL.
+*      CONCATENATE
+*        zcl_twa_api=&gt;api_version
+*        &apos;/statuses/followers/&apos;
+*        username
+*        &apos;.json&apos;
+*      INTO url.
+*    ELSE.
+*      CONCATENATE
+*        zcl_twa_api=&gt;api_version
+*        &apos;/statuses/followers.json&apos;
+*      INTO url.
+*    ENDIF.
+*
+*    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+*    json_doc = zcl_json_document=&gt;create_with_json( json ).
+*
+*    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+*
+*      user_json = json_doc-&gt;get_json( ).
+*
+*      INSERT INITIAL LINE INTO TABLE users ASSIGNING &lt;user&gt;.
+*      &lt;user&gt; = zcl_twa_user=&gt;newfromjson( user_json ).
+*
+*    ENDWHILE.
+
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid           = zcx_oauth_error=&gt;api_error
+        oauth_error_text = &apos;not implemented yet (changed in API V1.1)&apos;.
+
+  ENDMETHOD.                    &quot;FOLLOWERS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FRIENDS" VERSION="1" LANGU="E" DESCRIPT="http://dev.twitter.com/doc/get/statuses/friends" EXPOSURE="2" STATE="1" EDITORDER="6 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FRIENDS" SCONAME="USERNAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FRIENDS" SCONAME="USERS" VERSION="1" LANGU="E" DESCRIPT="Twitter User table" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="1" TYPE="ZCL_TWA_USER_T"/>
+  <exception CLSNAME="ZCL_TWA_USER_RES" CMPNAME="FRIENDS" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD friends.
+
+*    DATA: url        TYPE string
+*        , json       TYPE string
+*        , json_doc   TYPE REF TO zcl_json_document
+*        , user_json  TYPE string
+*        .
+*
+*    FIELD-SYMBOLS: &lt;user&gt; TYPE REF TO zcl_twa_user.
+*
+*    CONCATENATE
+*      zcl_twa_api=&gt;api_version
+*      &apos;/statuses/friends/&apos;
+*      username
+*      &apos;.json&apos;
+*    INTO url.
+*
+*    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = url ).
+*    json_doc = zcl_json_document=&gt;create_with_json( json ).
+*
+*    WHILE json_doc-&gt;get_next( ) IS NOT INITIAL.
+*
+*      user_json = json_doc-&gt;get_json( ).
+*
+*      INSERT INITIAL LINE INTO TABLE users ASSIGNING &lt;user&gt;.
+*      &lt;user&gt; = zcl_twa_user=&gt;newfromjson( user_json ).
+*
+*    ENDWHILE.
+
+    RAISE EXCEPTION TYPE zcx_oauth_error
+      EXPORTING
+        textid           = zcx_oauth_error=&gt;api_error
+        oauth_error_text = &apos;not implemented yet (changed in API V1.1)&apos;.
+
+  ENDMETHOD.                    &quot;FRIENDS</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="LOOKUP" VERSION="1" LANGU="E" DESCRIPT="* A! http://dev.twitter.com/doc/get/users/lo" EXPOSURE="2" STATE="1" EDITORDER="3 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD lookup.
+  ENDMETHOD.                    &quot;LOOKUP</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="SEARCH" VERSION="1" LANGU="E" DESCRIPT="* A! http://dev.twitter.com/doc/get/users/se" EXPOSURE="2" STATE="1" EDITORDER="4 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD search.
+  ENDMETHOD.                    &quot;SEARCH</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="SHOW" VERSION="1" LANGU="E" DESCRIPT="http://dev.twitter.com/doc/get/users/show" EXPOSURE="2" STATE="1" EDITORDER="2 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" MTDNEWEXC="X" BCMTDCAT="00" BCMTDSYN="0">
+  <parameter CLSNAME="ZCL_TWA_USER_RES" CMPNAME="SHOW" SCONAME="USERNAME" VERSION="1" LANGU="E" CMPTYPE="1" MTDTYPE="0" EDITORDER="1 " DISPID="0 " PARDECLTYP="0" PARPASSTYP="1" TYPTYPE="1" TYPE="STRING"/>
+  <parameter CLSNAME="ZCL_TWA_USER_RES" CMPNAME="SHOW" SCONAME="USER" VERSION="1" LANGU="E" DESCRIPT="Twitter User" CMPTYPE="1" MTDTYPE="0" EDITORDER="2 " DISPID="0 " PARDECLTYP="3" PARPASSTYP="0" TYPTYPE="3" TYPE="ZCL_TWA_USER"/>
+  <exception CLSNAME="ZCL_TWA_USER_RES" CMPNAME="SHOW" SCONAME="ZCX_OAUTH_ERROR" VERSION="1" LANGU="E" DESCRIPT="Twitter API Error" MTDTYPE="0" EDITORDER="1 "/>
+  <source>METHOD show.
+
+    DATA url             TYPE string.
+    DATA appendix        TYPE string.
+    DATA json            TYPE string.
+    DATA token_secret    TYPE string.
+    DATA consumer_secret TYPE string.
+    DATA secret          TYPE string.
+
+    &quot;*--- method needs authorization ---*
+    IF oauth-&gt;is_authorized( ) IS INITIAL.
+      RAISE EXCEPTION TYPE zcx_oauth_error
+        EXPORTING
+          textid = zcx_oauth_error=&gt;authorization_required.
+    ENDIF.
+
+    oauth-&gt;append_oauth_parameters( ).
+
+    &quot;*--- create new secret ---*
+    consumer_secret = oauth-&gt;get_consumer_secret( ).
+    token_secret    = oauth-&gt;get_oauth_token_secret( ).
+
+    CONCATENATE
+      consumer_secret
+      token_secret
+    INTO secret.
+
+    oauth-&gt;set_oauth_secret( secret ).
+
+    CONCATENATE
+      zcl_twa_api=&gt;api_version
+      &apos;/users/show/&apos;
+      username
+      &apos;.json&apos;
+    INTO appendix.
+
+    &quot;*--- set url ---*
+    CONCATENATE
+      zcl_twa_api=&gt;api_protocol
+      zcl_twa_api=&gt;api_host
+      appendix
+    INTO url.
+
+    oauth-&gt;set_oauth_url( url ).
+
+    &quot;*--- sign message ---*
+    oauth-&gt;sign_message( &apos;GET&apos; ).
+
+    &quot;*--- send request ---*
+    json = oauth-&gt;fetchurl( method = &apos;GET&apos; url = appendix ).
+
+    user = zcl_twa_user=&gt;newfromjson( json ).
+
+  ENDMETHOD.                    &quot;SHOW</source>
+ </method>
+ <method CLSNAME="ZCL_TWA_USER_RES" CMPNAME="SUGGESTIONS" VERSION="1" LANGU="E" DESCRIPT="* http://dev.twitter.com/doc/get/users/suggestions" EXPOSURE="2" STATE="1" EDITORDER="5 " DISPID="0 " MTDTYPE="0" MTDDECLTYP="0" BCMTDCAT="00" BCMTDSYN="0">
+  <source>METHOD suggestions.
+  ENDMETHOD.                    &quot;SUGGESTIONS</source>
+ </method>
+</CLAS>
