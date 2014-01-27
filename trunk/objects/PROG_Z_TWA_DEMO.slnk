@@ -28,8 +28,41 @@
 
 REPORT  z_twa_demo.
 
-WRITE:/ &apos;No anonymous calls allowed anymore with Twitter API V1.1&apos;.
+DATA: twitter_api TYPE REF TO zcl_twa_api
+    , twitter_error TYPE REF TO zcx_oauth_error
+    , statuses  TYPE zcl_twa_status_t
+    , text      TYPE string
+    , id        TYPE string
+    , user      TYPE REF TO zcl_twa_user
+    , screen_name TYPE string
+    , error_text  TYPE string
+    .
 
+FIELD-SYMBOLS: &lt;status&gt; TYPE REF TO zcl_twa_status.
+
+TRY .
+    twitter_api = zcl_twa_api=&gt;getapi(
+      consumer_name = &apos;yourconsumernamehere&apos;
+      screen_name   = &apos;yourtwitterhandle&apos; ).
+    statuses = twitter_api-&gt;timeline_res-&gt;home_timeline( ).
+  CATCH zcx_oauth_error INTO twitter_error.
+    error_text = twitter_error-&gt;get_text( ).
+    WRITE:/ error_text.
+    RETURN.
+ENDTRY.
+
+LOOP AT statuses
+  ASSIGNING &lt;status&gt;.
+  text = &lt;status&gt;-&gt;gettext( ).
+  id   = &lt;status&gt;-&gt;getid( ).
+  user = &lt;status&gt;-&gt;getuser( ).
+  screen_name = user-&gt;getscreenname( ).
+  WRITE:/ id, screen_name, 25 text.
+ENDLOOP.
+
+*--------------------------------------------------------------------*
+* No anonymous calls allowed anymore with Twitter API V1.1           *
+*--------------------------------------------------------------------*
 *DATA: twitter_api   TYPE REF TO zcl_twa_api
 *    , statuses      TYPE zcl_twa_status_t
 *    , text          TYPE string
