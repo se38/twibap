@@ -17,6 +17,7 @@ URL Shortener Service (by @roelvdberge)
 ## Installation
 * Download Nugged (incl. required packages) and import with [SAPlink](http://www.saplink.org)
 * Activate all inactive objects (ignore errors, there are recursive implementations)
+* **since end of 2013 SSL is mandatory** (preparation: see Installation section of [ZOAuth](https://github.com/se38/ZOAuth))
 
 ## Usage
 see wiki ( https://github.com/se38/twibap/wiki )
